@@ -1,0 +1,22 @@
+<div class="list">
+  <label class="item item-input">
+    	<span class="input-label">Substance Name</span>
+    	<input type="text">
+  </label>
+  <label class="item item-input item-select">
+    	<div class="input-label">
+      		Water Solubility
+    	</div>
+    <select>
+
+     <option selected>Non</option>
+        
+         		<ion-item ng-repeat="solubility in solubilies">
+  				 	<option>{{solubility.type}}</option>
+  				</ion-item>
+      	
+    </select>
+  </label>
+    
+  </label>
+</div>

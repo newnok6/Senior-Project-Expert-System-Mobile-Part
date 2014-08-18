@@ -1,0 +1,14 @@
+<ion-view title="The List of Substance">
+	<ion-content has-header="true" has-tabs="true" padding="true">
+		<div ng-show="substances.length == 0">
+              No Substance in the database
+    	</div>
+    	<div ng-show="substances.length > 0">
+			<ion-list>
+  				<ion-item ng-repeat="substance in substances" class="item-thumbnail-left">
+  				 	<h2>{{substance.name}}</h2>
+  			</ion-item>
+		</ion-list>
+		</div>
+	</ion-content>
+</ion-view>
