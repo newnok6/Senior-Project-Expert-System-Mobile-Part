@@ -1,3 +1,8 @@
+'use strict';
+/**
+ * Controllers
+ * @constructor
+ */
 angular.module('drugExpertSystem.controllers', [])
 
   .controller('MenuCtrl', function ($scope) {
@@ -11,12 +16,17 @@ angular.module('drugExpertSystem.controllers', [])
 
    .controller('solubilityCtrl',function($scope,solubilityService) {
 
-    $scope.solubilies = [];
+    $scope.solubilities = [];
 
 	solubilityService.getSolubilityList().success(function (response) {
         //Digging into the response to get the relevant data
-         $scope.solubilies = response;
+         $scope.solubilities = response;
     });
+
+   $scope.addSolubility = function (solubility) {
+        solubilityService.addSolubility($scope.solubility);
+        
+    }
 
   })
 
