@@ -2,39 +2,70 @@
 <ion-view title="Add New Substance">
 <ion-content has-header="true" has-tabs="true" padding="true" scroll="true">
 
-<div ng-controller="solubilityCtrl">
-<form ng-submit="addSolubility(solubility)">
+<div ng-controller="substanceCtrl">
+<form ng-submit="addSubstance(substance)">
 
 <ion-list>
   <label class="item item-input">
     <span class="input-label">Substance Name :</span>
-    <input type="text" ng-model="solubility.type">
+    <input type="text" ng-model="substance.name">
     
   </label>
-   <label class="item item-input">
-    <span class="input-label">Number :</span>
-   
-  </label>
-  <label class="item item-input item-select">
-    	<div class="input-label">
-      		Water Solubility
-    	</div>
-      <select>
-  				 	<option>PracticallyInsoluble</option>
-  				  <option>VerySoluble</option>
-            <option>SlightlySoluble</option>
-            <option>SparinglySoluble</option>
-            <option>Soluble</option>
-            <option>VerySlightlySoluble</option>
-            <option>FreelySoluble</option>
-      </select>
-     
-  </label>
+   <a class="item item-icon-left" ng-click="modal.show()">
+    <i class="icon ion-mic-a"></i>
+    Water Solubility
+    <span class="item-note" ng-repeat="waterSolubility in waterSolubilities" ng-model = "substance.waterSolubility">
+    <div ng-show="waterSolubilities.length == 0">
+        tt
+    </div>
+    <div ng-show="waterSolubilities.length > 0">
+       {{solubility.type}}
+    </div>
+    </span>
+  </a>
+
   </ion-list>
      <div class="padding">
           <button type="submit" class="button button-block button-positive">Create Substance</button>
       </div>
   </form>
 </div>
+<script id="waterSolubilityModal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Water Solubility Selection</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+             <ion-radio ng-repeat="solubility in solubilities" ng-value = "solubility.type" ng-model="waterSolubility.type">
+                  {{solubility.type}}
+              </ion-radio>
+              
+            <button class="button button-full button-positive" ng-click="addWaterSolubility(waterSolubility)">Add Water Solubility</button>
+        </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+<script id="stabilityModal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Water Solubility Selection</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+             <label class="item item-input">
+              <span class="input-label">Stability Name</span>
+              <input ng-model="stability.name" type="text">
+            </label>
+            <button class="button button-full button-positive" ng-click="addStability(stability)">Add Stability</button>
+        </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
   </ion-content>
 </ion-view>
+
+

@@ -1,55 +1,4 @@
-angular.module('drugExpertSystemApp.services', [])
-  .factory('substancePropservice', function($http) {
 
-    var substanceProp = {};
-
-    substanceProp.getSolubilityList = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solubilityList.json'
-      });
-    }
-
-    substanceProp.getSolidstateList = function() {
-      return $http({
-       // url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
-    }
-    return substanceProp;
-  }).
-
-  factory('solubilityService', function($http) {
-
-    var solubility = {};
-
-    solubility.addSolubility = function(solubility) {
-      return $http({
-        method : "POST",
-        data : solubility,
-        url : 'http://localhost:8081/solubility/add-solubility'
-      });
-    }
-
-    solubility.updateSolubility = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
-    }
-
-    solubility.deleteSolubility = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
-    }
-
-    solubility.getSolubilityList = function() {
-      return $http({
-        url: 'http://localhost:8081/solubility/solubilities.json'
-      });
-    }
-    return solubility;
-});
-
-/*
 angular.module('drugExpertSystem.services', [])
 
   .factory('substancePropservice', function($http) {
@@ -96,10 +45,7 @@ angular.module('drugExpertSystem.services', [])
     }
 
     solubility.getSolubilityList = function() {
-      return $http({
-    
-        url: 'http://localhost:8081/solubility/solubilities.json'
-      });
+     
     }
     return solubility;
 })
@@ -137,4 +83,3 @@ angular.module('drugExpertSystem.services', [])
     }
     return substance;
 });
-*/
