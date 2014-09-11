@@ -1,0 +1,54 @@
+<div ng-controller="substanceCtrl">
+<ion-header-bar class="bar-positive">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios7-minus-outline" 
+          ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+      <h1 class="title">Stability</h1>
+      <button class="button button-icon icon ion-ios7-plus-outline"
+          ng-click="openModal(2)">
+        </button>
+      </div>
+    </ion-header-bar>
+
+    <ion-content>
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+      
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="stability in stabilities" 
+                  item="stability"
+                  href="#/item/{{stability.type}}">
+          	 {{ stability.type}}
+          <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(stability)">
+          </ion-delete-button>
+          <ion-option-button class="button-assertive"
+                             ng-click="edit(item)">
+            Edit
+          </ion-option-button>
+
+        </ion-item>
+      </ion-list>
+
+  <script id="stabilityModal.html" type="text/ng-template">
+  <ion-modal-view>
+  	<ion-header-bar class="bar bar-header bar-positive">
+  	<h1 class="title">Craete the stability</h1>
+  	<button class="button button-clear button-primary" ng-click="hideModal(2)">Cancel</button>
+	</ion-header-bar>
+		<ion-content class="padding">
+			<div class="list">
+ 				<label class="item item-input">
+  				<span class="input-label">Stability Name :</span>
+  			<input ng-model="stability.type" type="text">
+				</label>
+		<button class="button button-full button-positive" ng-click="addStability(stability)">Create Stability</button>
+			</div>
+	</ion-content>
+	</ion-modal-view>
+</script>
+
+    </ion-content>
+
+    </div>

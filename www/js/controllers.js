@@ -14,46 +14,91 @@ angular.module('drugExpertSystem.controllers', [])
 
   })
 
-   .controller('solubilityCtrl',function($scope) {
-
-   
+   .controller('solubilityCtrl',function ($scope) {
 
   })
 
-  .controller('substanceCtrl',function ($scope,substanceService,$ionicModal) {
+  .controller('substanceCtrl',function ($scope,solubilityService,substanceService,$ionicModal) {
 
-    $scope.solubilities = [{type : "1"},{type : "2"}];
+    $scope.solubilities = [];
     $scope.substances = [];
-   
+    $scope.waterSolubilities = [];
+    $scope.stabilities = [];
 
+    //Solubility Modal//
+    $ionicModal.fromTemplateUrl('solubilityModal.html', {
+      id : 1,
+      scope: $scope
+        }).then(function(modal) {
+    $scope.oModal1 = modal;
+    });
+
+    //Stability Model//
+    $ionicModal.fromTemplateUrl('stabilityModal.html', {
+      id : 2,
+      scope: $scope
+        }).then(function(modal) {
+    $scope.oModal2 = modal;
+    });
+
+
+    //Open the model//
+
+    $scope.openModal = function(index){
+      if(index == 1) 
+        $scope.oModal1.show();
+      else if (index == 2)
+        $scope.oModal2.show();
+    }
+
+    // hide the model
+    $scope.hideModal = function(index){
+      if(index == 1 )
+        $scope.oModal1.hide();
+      else if(index == 2 )
+        $scope.oModal2.hide();
+    }
+
+   
+//Show SubstanceList// 
 	substanceService.getSubstanceList().success(function (response) {
         //Digging into the response to get the relevant data
          $scope.substances = response;
     });
 
-   $scope.addSubstance = function (substance) {
-        substanceService.addSubstance($scope.substance);
-        
-    }
+//Get Solubility data from the service 
+ solubilityService.getSolubilityList().success(function (response) {
+        $scope.solubilities = response;
+ });
 
-  $ionicModal.fromTemplateUrl('waterSolubilityModal.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.addWaterSolubility = function(data) {        
-    $scope.waterSolubilities = data;
+// Add The WaterSolubility //
+   $scope.addWaterSolubility = function(data) {        
+    $scope.waterSolubilities = [{type : data.type }];
     console.log(data);
     $scope.modal.hide();
   };
 
-  $scope.createContact = function(u) {        
-    $scope.contacts = [{ name: u.firstName + ' ' + u.lastName }];
-    $scope.modal.hide();
-    console.log(u.firstName);
+
+
+  // Add The Stability//
+   $scope.addStability = function(data) {        
+    $scope.stabilities.push({type : data.type });
+    console.log(data);
+    $scope.hideModal(2);
   };
- 
+
+  // remove stability from the list
+  $scope.onItemDelete = function(item) {
+    $scope.stabilities.splice($scope.stabilities.indexOf(item), 1);
+  };
+
+// Add New Substance //
+   $scope.addSubstance = function (substance) {
+        substanceService.addSubstance($scope.substance);  
+    }
+
+
+   
   });
 
 

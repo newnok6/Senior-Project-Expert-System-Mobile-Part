@@ -59,11 +59,27 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
     })
      .state('base.addSubstance', {
-      url: '/content/subMenu',
+      url: '/content/subMenu/addSubstance',
       views: {
+
+        'side-view': {
+          templateUrl: 'templates/subMenu.html',
+          controller: 'SubMenuCtrl'
+        },
           
         'content-view': {
           templateUrl: 'templates/substance/addSubstance.html',
+          
+        }
+      }
+   
+    })
+    .state('base.addStability', {
+      url: '/content/subMenu/addSubstance/addStability',
+      views: {
+          
+        'content-view': {
+          templateUrl: 'templates/substance/stability.html',
           
         }
       }

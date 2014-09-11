@@ -45,7 +45,9 @@ angular.module('drugExpertSystem.services', [])
     }
 
     solubility.getSolubilityList = function() {
-     
+      return $http({
+        url: 'js/solubility.json'
+      });
     }
     return solubility;
 })
