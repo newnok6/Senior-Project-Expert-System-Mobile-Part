@@ -1,64 +1,133 @@
+<ion-view title = "Add New Substance">
 
-<ion-view title="Add New Substance">
-<ion-content has-header="true" has-tabs="true" padding="true" scroll="true">
+ <ion-nav-buttons side="left">
+      <button class="button button-icon icon ion-chevron-left" ui-sref="base.substanceContent.menu">
+       Substance
+      </button>
+    </ion-nav-buttons>
 
-<div ng-controller="substanceCtrl">
-  <form ng-submit="addSubstance(substance)">
+<ion-content>
 
-    <ion-list>
+  <form ng-submit="showConfirm(currentSubstance)">
+  
+    <ion-list list-inset>
     <!--The Substance input form-->
     <label class="item item-input">
       <span class="input-label">Substance Name :</span>
-      <input type="text" ng-model="substance.name">
+      <input type="text" placeholder="Substance A" ng-model="currentSubstance.name">
     </label>
     <!---->
-
     <!-- The Solubility input form -->
     <a class="item " ng-click="openModal(1)">
       Select The Water Solubility
-      <span class="item-note" ng-repeat="waterSolubility in waterSolubilities" ng-model = "substance.waterSolubility">
-        <div ng-show="!!!waterSolubilities.length">
-          Please Select Solubility
-        </div>
-
-        <div ng-show="waterSolubilities.length > 0">
-          {{waterSolubility.type}}
-        </div>
+      <span class="item-note">
+      <div ng-show="getCurrentSolubility()">
+       {{currentSubstance.waterSolubility}}
+       </div>
       </span>
-
     </a>
     <!---->
-
-    <!-- Stability Input form -->
-    <a class="item item-icon-right " ui-sref="base.addStability">
+    <!-- Add Stability -->
+    <a class="item item-icon-right " ui-sref="base.substanceContent.addStability">
     <i class="icon ion-chevron-right"></i>
       Select the Stability
     </a>
-    <!----> 
-</ion-list>
+    <!---->
+
+    <!-- Add the pka -->
+     <label class="item item-input">
+      <span class="input-label">Pka Value :</span>
+      <input type="text" placeholder="2.34" ng-model="currentSubstance.pka">
+    </label>
+
+    <!-- Add the Partition Coeffifient -->
+     <label class="item item-input">
+      <span class="input-label">Partition Coefficient Value :</span>
+      <input type="text" placeholder="6.00" ng-model="currentSubstance.partitionCoefficient">
+    </label>
+
+    <!-- Add the Solid State -->
+     <label class="item item-input">
+      <span class="input-label"> Solid State Type :</span>
+      <input type="text" placeholder="Good" ng-model="currentSubstance.solidState">
+    </label>
+
+    <!-- Add the Hygroscopicity -->
+     <label class="item item-input">
+      <span class="input-label">Hygroscopicity Type :</span>
+      <input type="text" placeholder="Yes" ng-model="currentSubstance.hygroscopicity">
+    </label>
+
+    <!-- Add the Partticle Size -->
+     <label class="item item-input">
+      <span class="input-label">Partticle Size Type :</span>
+      <input type="text" placeholder="Very Small" ng-model="currentSubstance.particleSize">
+    </label>
+
+    <!-- Add the ALcohol Solubility -->
+     <label class="item item-input">
+      <span class="input-label">Alcohol Solubility Type :</span>
+      <input type="text" placeholder="Yes" ng-model="currentSubstance.alcoholSolubility">
+    </label>
+
+    <!-- Add the Flowability -->
+     <label class="item item-input">
+      <span class="input-label">Flowability Type :</span>
+      <input type="text" placeholder="Very Flow" ng-model="currentSubstance.flowability">
+    </label>
+
+    <!-- Add the Density -->
+     <label class="item item-input">
+      <span class="input-label">Desity Value :</span>
+      <input type="text" placeholder="5.67" ng-model="currentSubstance.density">
+    </label>
+
+   
+    <!-- Add the Salt Form -->
+     <label class="item item-input">
+      <span class="input-label">Salt Form Type :</span>
+      <input type="text" placeholder="Bas" ng-model="currentSubstance.saltForm">
+    </label>
+
+    <!-- Add the Molecular Weight -->
+     <label class="item item-input">
+      <span class="input-label">Molecular Weight Value :</span>
+      <input type="text" placeholder="8.34"  ng-model="currentSubstance.mocularWeight">
+    </label>
+
+    <!-- Add the ionicity-->
+     <label class="item item-input">
+      <span class="input-label">ionicity Type :</span>
+      <input type="text" placeholder="Will be" ng-model="currentSubstance.ionicity">
+    </label>
+
 <div class="padding">
   <button type="submit" class="button button-block button-positive">Create Substance</button>
 </div>
-</form>
+</ion-list>
 
-</div>
+</form>
+<!--Solubility Modal, I put it here because it can load -->
 <script id="solubilityModal.html" type="text/ng-template">
   <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-positive">
   <h1 class="title">Water Solubility Selection</h1>
-  <button class="button button-clear button-primary" ng-click="hideModal(1)">Cancel</button>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(1)"></button>
 </ion-header-bar>
 <ion-content class="padding">
 <div class="list">
- <ion-radio ng-repeat="solubility in solubilities" ng-value = "solubility.solubility.type" ng-model="waterSolubility.type" ng-click="addWaterSolubility(waterSolubility)">
+ <ion-radio ng-repeat="solubility in solubilities" ng-value = "solubility.type" ng-model="currentSolubility.type" ng-click="setCurrentSolubility(currentSolubility)">
  {{solubility.type}}
 </ion-radio>
 </div>
 </ion-content>
 </ion-modal-view>
 </script>
+<!---->
 
 </ion-content>
+
 </ion-view>
 
+ 
 

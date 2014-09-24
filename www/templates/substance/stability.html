@@ -1,27 +1,25 @@
-<div ng-controller="substanceCtrl">
-<ion-header-bar class="bar-positive">
-      <div class="buttons">
-        <button class="button button-icon icon ion-ios7-minus-outline" 
-          ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
-      <h1 class="title">Stability</h1>
-      <button class="button button-icon icon ion-ios7-plus-outline"
+<ion-view title = "Add New Stability">
+<ion-nav-buttons side="left">
+      <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete; data.showReorder = false">
+      </button>
+    </ion-nav-buttons>
+<ion-nav-buttons side="right">
+     <button class="button button-icon icon ion-ios7-plus-outline"
           ng-click="openModal(2)">
         </button>
-      </div>
-    </ion-header-bar>
-
+    </ion-nav-buttons>
     <ion-content>
 
       <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
       
-      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+      <ion-list show-delete="data.showDelete">
 
-        <ion-item ng-repeat="stability in stabilities" 
+        <ion-item ng-repeat="stability in currentStabilities track by $index" 
                   item="stability"
-                  href="#/item/{{stability.type}}">
-          	 {{ stability.type}}
+                  href="#/item/{{stability}}">
+          	 {{stability}}
           <ion-delete-button class="ion-minus-circled" 
-                             ng-click="onItemDelete(stability)">
+                             ng-click="deleteStabilityInList(stability)">
           </ion-delete-button>
           <ion-option-button class="button-assertive"
                              ng-click="edit(item)">
@@ -29,6 +27,9 @@
           </ion-option-button>
 
         </ion-item>
+        <div class="padding" ng-show = "currentStabilities.length > 0">
+            <button type="submit" ui-sref="base.substanceContent.addSubstance" class="button button-block button-positive">Finish</button>
+        </div>
       </ion-list>
 
   <script id="stabilityModal.html" type="text/ng-template">
@@ -41,7 +42,7 @@
 			<div class="list">
  				<label class="item item-input">
   				<span class="input-label">Stability Name :</span>
-  			<input ng-model="stability.type" type="text">
+  			<input ng-model="stability" type="text">
 				</label>
 		<button class="button button-full button-positive" ng-click="addStability(stability)">Create Stability</button>
 			</div>
@@ -51,4 +52,5 @@
 
     </ion-content>
 
-    </div>
+</ion-view>
+ 

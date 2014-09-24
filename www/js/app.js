@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','drugExpertSystem.services'])
+angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','drugExpertSystem.services','drugExpertSystem.directives'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,6 +25,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
     .state('base', {
       url: "/base",
+      abstract: true,
       templateUrl: "templates/base.html"
     })
 
@@ -41,46 +42,93 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
         // Main Content
         'content-view': {
-          templateUrl: 'templates/substance/substanceList.html',
+          templateUrl: 'templates/welcome.html'
+          
+        }
+      }
+    })
+
+    //Substance Menu
+    .state('base.substanceContent', {
+      url: '/substance',
+      abstract: true,
+      views: {
+         'side-view': {
+          templateUrl: 'templates/menu.html',
+          controller: 'MenuCtrl'
+        },
+         'content-view': {
+          templateUrl: 'templates/substance/substanceContent.html',
           controller: 'substanceCtrl'
         }
       }
+
     })
 
-    // Sub Menu
-    .state('base.subMenu', {
-      url: '/content/subMenu',
+    .state('base.substanceContent.menu', {
+      url: '/menu',
       views: {
-        'side-view': {
-          templateUrl: 'templates/subMenu.html',
-          controller: 'SubMenuCtrl'
+         'substanceContent-view': {
+          templateUrl: 'templates/substance/substanceMenu.html'
         }
       }
 
     })
-     .state('base.addSubstance', {
-      url: '/content/subMenu/addSubstance',
-      views: {
 
-        'side-view': {
-          templateUrl: 'templates/subMenu.html',
-          controller: 'SubMenuCtrl'
-        },
-          
-        'content-view': {
+     .state('base.substanceContent.addSubstance', {
+      url: '/addSubstance',
+      views: {
+        'substanceContent-view': {
           templateUrl: 'templates/substance/addSubstance.html',
+          controller: 'solubilityCtrl'
           
         }
       }
    
     })
-    .state('base.addStability', {
-      url: '/content/subMenu/addSubstance/addStability',
+    .state('base.substanceContent.addStability', {
+      url: '/addStability',
       views: {
-          
-        'content-view': {
+        'substanceContent-view': {
           templateUrl: 'templates/substance/stability.html',
+          controller: 'stabilityCtrl'
           
+        }
+      }
+   
+    })
+      //Excipient Menu
+    .state('base.excipientContent', {
+      url: '/excipient',
+      abstract: true,
+      views: {
+         'side-view': {
+          templateUrl: 'templates/menu.html',
+          controller: 'MenuCtrl'
+        },
+         'content-view': {
+          templateUrl: 'templates/excipient/excipientContent.html',
+          controller: 'excipientCtrl'
+        }
+      }
+
+    })
+
+    .state('base.excipientContent.menu', {
+      url: '/menu',
+      views: {
+         'excipientContent-view': {
+          templateUrl: 'templates/excipient/excipientMenu.html'
+        }
+      }
+
+    })
+     .state('base.excipientContent.addExcipient', {
+      url: '/addExcipient',
+      views: {
+        'excipientContent-view': {
+          templateUrl: 'templates/excipient/addExcipient.html',
+
         }
       }
    
