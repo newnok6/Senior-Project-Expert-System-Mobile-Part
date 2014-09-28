@@ -1,4 +1,4 @@
-<ion-view title = "Add New Substance">
+<ion-view title = "Edit  Substance">
 
  <ion-nav-buttons side="left">
       <button class="button button-icon " ui-sref="base.substanceContent.showAllSubstance">
@@ -7,7 +7,7 @@
     </ion-nav-buttons>
 <ion-content>
 
-  <form ng-submit="showConfirm(currentSubstance)">
+  <form ng-submit="showConfirmForUpdate(currentSubstance)">
   
     <ion-list list-inset>
     <!--The Substance input form-->
@@ -20,7 +20,7 @@
     <a class="item " ng-click="openModal(1)">
       Select The Water Solubility
       <span class="item-note">
-      <div ng-show="getCurrentSolubility()">
+       <div ng-show="getCurrentSolubility()">
        {{currentSubstance.waterSolubility}}
        </div>
       </span>
@@ -101,7 +101,7 @@
     </label>
 
 <div class="padding">
-  <button type="submit" class="button button-block button-positive">Create Substance</button>
+  <button type="submit" class="button button-block button-positive">Update Substance</button>
 </div>
 </ion-list>
 

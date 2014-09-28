@@ -15,4 +15,7 @@
     .bar-header button.ion-navicon {
         display: none;
     }
+    .slider{
+    height: 100%;
+    }
 }

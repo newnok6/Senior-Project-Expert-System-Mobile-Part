@@ -26,14 +26,14 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
     .state('base', {
       url: "/base",
       abstract: true,
-      templateUrl: "templates/base.html"
+      templateUrl: "templates/base.html",
+      controller: 'MenuCtrl'
     })
 
     // the pet tab has its own child nav-view and history
     .state('base.content', {
       url: '/content',
       views: {
-
         // Side Menu
         'side-view': {
           templateUrl: 'templates/menu.html',
@@ -42,8 +42,8 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
         // Main Content
         'content-view': {
-          templateUrl: 'templates/welcome.html'
-          
+          templateUrl: 'templates/welcome.html',
+           controller: 'MenuCtrl'
         }
       }
     })
@@ -65,6 +65,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
     })
 
+    //Substance Menu //
     .state('base.substanceContent.menu', {
       url: '/menu',
       views: {
@@ -75,6 +76,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
 
     })
 
+    //Substance adding form //
      .state('base.substanceContent.addSubstance', {
       url: '/addSubstance',
       views: {
@@ -86,12 +88,51 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
       }
    
     })
+
+     //Substance add stability component//
     .state('base.substanceContent.addStability', {
       url: '/addStability',
       views: {
         'substanceContent-view': {
           templateUrl: 'templates/substance/stability.html',
           controller: 'stabilityCtrl'
+          
+        }
+      }
+   
+    })
+
+     //Substance add stability component//
+    .state('base.substanceContent.showAllSubstance', {
+      url: '/showSubstance',
+      views: {
+        'substanceContent-view': {
+          templateUrl: 'templates/substance/substanceList.html'
+          
+        }
+      }
+   
+    })
+
+    //Substance detail//
+    .state('base.substanceContent.substanceDetail', {
+      url: '/substanceDetail',
+      views: {
+        'substanceContent-view': {
+          templateUrl: 'templates/substance/substancedetail.html'
+          
+        }
+      }
+   
+    })
+
+    //Edit Substance Form//
+    .state('base.substanceContent.editSubstance', {
+      url: '/editSubstance',
+      views: {
+        'substanceContent-view': {
+          templateUrl: 'templates/substance/editSubstance.html',
+           controller: 'solubilityCtrl'
           
         }
       }
@@ -123,12 +164,79 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers','dru
       }
 
     })
-     .state('base.excipientContent.addExcipient', {
+     .state('base.excipientContent.selectSubstance', {
+      url: '/selectSubstance',
+      views: {
+        'excipientContent-view': {
+          templateUrl: 'templates/excipient/substanceSelection.html',
+
+        }
+      }
+   
+    })
+      .state('base.excipientContent.addExcipient', {
       url: '/addExcipient',
       views: {
         'excipientContent-view': {
-          templateUrl: 'templates/excipient/addExcipient.html',
+          templateUrl: 'templates/excipient/addExcipient.html'
 
+        }
+      }
+   
+    })
+      .state('base.excipientContent.addSubstanceFunction', {
+      url: '/addSubstanceFunction',
+      views: {
+        'excipientContent-view': {
+          templateUrl: 'templates/excipient/addSubstanceFunction.html',
+          controller: 'substanceFnCtrl'
+        }
+      }
+   
+    })
+
+    //Formulation Part (Menu and Content)
+    .state('base.formulationContent', {
+      url: '/formulation',
+      abstract: true,
+      views: {
+         'side-view': {
+          templateUrl: 'templates/menu.html',
+          controller: 'MenuCtrl'
+        },
+         'content-view': {
+          templateUrl: 'templates/formulation/formulationContent.html',
+          controller: 'formulationCtrl'
+        }
+      }
+
+    })
+
+    .state('base.formulationContent.menu', {
+      url: '/menu',
+      views: {
+         'formulationContent-view': {
+          templateUrl: 'templates/formulation/formulationMenu.html'
+        }
+      }
+
+    })
+     .state('base.formulationContent.addFormulation', {
+      url: '/formulation',
+      views: {
+        'formulationContent-view': {
+          templateUrl: 'templates/formulation/addFormulation.html',
+
+        }
+      }
+   
+    })
+      .state('base.formulationContent.selectExcipient', {
+      url: '/addExcipient',
+      views: {
+        'formulationContent-view': {
+          templateUrl: 'templates/formulation/selectExcipient.html',
+          controller: 'excipientCtrl'
         }
       }
    

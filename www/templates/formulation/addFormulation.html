@@ -1,0 +1,49 @@
+<ion-view title = "Add New Formulation">
+
+ <ion-nav-buttons side="left">
+      <button class="button button-icon icon ion-chevron-left" ui-sref="base.formulationContent.menu">
+       Formulation
+      </button>
+    </ion-nav-buttons>
+
+<ion-content>
+
+  <form ng-submit="showConfirm(currentFormulation)">
+  
+    <ion-list list-inset>
+    <!--The Formulation Name input form-->
+    <label class="item item-input">
+      <span class="input-label">Formulation Name :</span>
+      <input type="text" placeholder="Formulation A" ng-model="currentFormulation.name">
+    </label>
+    <!---->
+
+    <!-- The Formulation type input form -->
+    <a class="item " ng-click="openModal(4)">
+      Select the formulation type
+      <span class="item-note">
+          {{currentFormulation.type}}
+      </span>
+    </a>
+    <!---->
+
+    <!-- Add Excipient -->
+    <a class="item" ui-sref="base.formulationContent.selectExcipient">
+      Select the excipient
+    </a>
+    <!---->
+
+<div class="padding">
+  <button type="submit" class="button button-block button-positive">Create Formulation</button>
+</div>
+</ion-list>
+
+</form>
+
+
+</ion-content>
+
+</ion-view>
+
+ 
+

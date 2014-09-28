@@ -1,0 +1,78 @@
+<ion-view title = "Substance Detail">
+ <ion-nav-buttons side="left">
+      <button class="button button-icon ion-chevron-left " ui-sref="base.substanceContent.showAllSubstance">
+       All Substance
+      </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+      <button class="button button-icon ion-more" ng-click="openPopover($event)">
+      </button>
+  </ion-nav-buttons>
+
+
+<ion-content>
+
+<div class="list card">
+  <a class="item">
+      <h2>Substance Name :</h2> <p>{{substanceSelected.name}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Water Solubility Type :</h2> <p>{{substanceSelected.waterSolubility}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Stability : </h2> <p>{{substanceSelected.stability}}</p> 
+  </a>
+
+  <a class="item">
+      <h2>Pka Value :</h2> <p>{{substanceSelected.pka}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Partition Coefficient Value : </h2> <p>{{substanceSelected.partitionCoefficient}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Solid State :</h2> <p>{{substanceSelected.solidState}}</p>
+  </a>
+
+  <a class="item">
+     <h2> Hygroscopicity : </h2> <p>{{substanceSelected.hygroscopicity}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Particle Size : </h2> <p>{{substanceSelected.particleSize}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Alcohol Solubility : </h2> <p>{{substanceSelected.alcoholSolubility}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Flowability : </h2> <p>{{substanceSelected.flowability}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Densit : </h2> <p>{{substanceSelected.density}}</p>
+  </a>
+
+  <a class="item">
+      <h2>SaltForm : </h2> <p>{{substanceSelected.saltForm}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Mocular Weight Value : </h2> <p>{{substanceSelected.mocularWeight}}</p>
+  </a>
+
+  <a class="item">
+      <h2>Ionicity : </h2> <p>{{substanceSelected.ionicity}}</p>
+  </a>
+
+</div>
+
+
+
+ 
+

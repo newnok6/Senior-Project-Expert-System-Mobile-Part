@@ -1,32 +1,36 @@
-<ion-view title = "Add New Excipient">
+<ion-view title = "Create a new Excipient">
  <ion-nav-buttons side="left">
-      <button class="button button-icon icon ion-chevron-left" ui-sref="base.excipientContent.menu">
-       Excipient
+      <button class="button button-icon icon ion-chevron-left" ui-sref="base.excipientContent.selectSubstance">
+       Substance Selection
       </button>
 </ion-nav-buttons>
-      <ion-content>
-       <div class="list list-inset">
-       		<div id="search-bar">
-    			<div class="item item-input-inset">
-      			<label class="item-input-wrapper" id="search-input">
-        				<i class="icon ion-search placeholder-icon"></i>
-        				<input type="text" placeholder="Search" ng-model="searchSubstance">
-        				<button class="button button-clear" ng-click="clearfilter()">X</button>
-      			</label>
-    			</div>
-  			</div>
-      
-     <ion-radio ng-repeat=" substance in substances | filter:searchSubstance" ui-sref="base.excipientContent.addSubstanceFunction" ng-value = "substance" ng-model = "excipient.substance">
-       		<div ng-show="substances.length == 0">
-       			There are no the substance in the database. Please create a new substance.
-       		</div>
+<ion-content>
+  <form ng-submit="showConfirm(currentExcipient)">
+    <div class="list list-inset">
+ 		<div class="item">
+      		Excipient Name : {{currentExcipient.substance.name}}
+    	</div>
+    	<label class="item item-input">
+    	 <span class="input-label">Mininum Weight :</span>
+    		<input type="text" placeholder="3.45" ng-model = "currentExcipient.minWeight">
+  		</label>
+  		<label class="item item-input">
+  		<span class="input-label">Maxinum Weight :</span>
+    		<input type="text" placeholder="7.34" ng-model = "currentExcipient.maxWeight">
+  		</label>
+  		<label class="item item-input">
+  		<span class="input-label">used Weight :</span>
+    		<input type="text" placeholder="5.62" ng-model = "currentExcipient.usedWeight">
+  		</label>
 
-       		<div ng-show="substances.length > 0">
-      				{{substance.name}}
-      		</div>
-    		</ion-radio>
-     
-
+  		 <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
+    		Select Substance Function
+      </a>
+      </div>
+      <div class="padding">
+  <button type="submit" class="button button-block button-positive">Create Excipient</button>
 </div>
-      </ion-content>
+      </form>
+      
+</ion-content>
 </ion-view>
