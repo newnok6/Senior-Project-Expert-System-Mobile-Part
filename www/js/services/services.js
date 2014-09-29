@@ -165,17 +165,18 @@ factory('solubilityService', ['$http',
             });
         }
 
-        excipient.updateExcipient = function() {
+        excipient.updateExcipient = function(excipient) {
             return $http({
                 method: "PUT",
+                data: excipient,
                 url: 'http://localhost:8081/excipient/update-excipient'
             });
         }
 
-        excipient.deleteExcipient = function() {
+        excipient.deleteExcipient = function(excipientId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/excipient/delete-excipient'
+                url: 'http://localhost:8081/excipient/remove-excipient/' + excipientId
             });
         }
 

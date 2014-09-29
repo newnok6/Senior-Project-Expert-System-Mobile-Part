@@ -5,3 +5,22 @@
 	<ion-nav-view name="excipientContent-view">
 
 	</ion-nav-view>
+
+
+<!-- Excipient Option Modal.The Option is "Update Excipient" or "Delete Excipient" -->
+<script id="excipientoption.html" type="text/ng-template">
+<style>.popover { height:110px; width: 400px; }</style>
+      <ion-popover-view>
+          <div class="list">
+           <button class="button button-block button-royal" ng-click="goEditExcipient()">
+                Update Excipient
+           </button>
+           <button class="button button-block button-assertive" ng-click = "showConfirmForDelete()">
+                 Delete Excipient
+          </button>
+          </div>
+      </ion-popover-view>
+    </script>
+
+
+ 

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
+angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -48,7 +48,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
         }
     })
 
-    //Substance Menu
+    //Substance Content template
     .state('base.substanceContent', {
         url: '/substance',
         abstract: true,
@@ -64,18 +64,6 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
         }
 
     })
-
-    //Substance Menu //
-    .state('base.substanceContent.menu', {
-        url: '/menu',
-        views: {
-            'substanceContent-view': {
-                templateUrl: 'templates/substance/substanceMenu.html'
-            }
-        }
-
-    })
-
     //Substance adding form //
     .state('base.substanceContent.addSubstance', {
         url: '/addSubstance',
@@ -102,7 +90,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
 
     })
 
-    //Substance add stability component//
+    //Show All Substance //
     .state('base.substanceContent.showAllSubstance', {
         url: '/showSubstance',
         views: {
@@ -155,45 +143,75 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
 
     })
 
-    .state('base.excipientContent.menu', {
-        url: '/menu',
+
+    // Show All Excipient template // 
+    .state('base.excipientContent.showAllExcipient', {
+        url: '/excipientlist',
         views: {
             'excipientContent-view': {
-                templateUrl: 'templates/excipient/excipientMenu.html'
+                templateUrl: 'templates/excipient/excipientlist.html'
             }
         }
 
     })
-        .state('base.excipientContent.selectSubstance', {
-            url: '/selectSubstance',
-            views: {
-                'excipientContent-view': {
-                    templateUrl: 'templates/excipient/substanceSelection.html',
 
-                }
+    // Show Excipient Detail in each eacipient
+    .state('base.excipientContent.excipientDetail', {
+        url: '/excipientDetail',
+        views: {
+            'excipientContent-view': {
+                templateUrl: 'templates/excipient/excipientdetail.html'
             }
+        }
 
-        })
-        .state('base.excipientContent.addExcipient', {
-            url: '/addExcipient',
-            views: {
-                'excipientContent-view': {
-                    templateUrl: 'templates/excipient/addExcipient.html'
+    })
 
-                }
+    //Show Select Substance Page //    
+    .state('base.excipientContent.selectSubstance', {
+        url: '/selectSubstance',
+        views: {
+            'excipientContent-view': {
+                templateUrl: 'templates/excipient/substanceSelection.html'
+
             }
+        }
 
-        })
-        .state('base.excipientContent.addSubstanceFunction', {
-            url: '/addSubstanceFunction',
-            views: {
-                'excipientContent-view': {
-                    templateUrl: 'templates/excipient/addSubstanceFunction.html',
-                    controller: 'substanceFnCtrl'
-                }
+    })
+
+    // Show Excipient Adding//
+    .state('base.excipientContent.addExcipient', {
+        url: '/addExcipient',
+        views: {
+            'excipientContent-view': {
+                templateUrl: 'templates/excipient/addExcipient.html'
+
             }
+        }
 
-        })
+    })
+
+    // Show Substance Function Adding //
+    .state('base.excipientContent.addSubstanceFunction', {
+        url: '/addSubstanceFunction',
+        views: {
+            'excipientContent-view': {
+                templateUrl: 'templates/excipient/addSubstanceFunction.html',
+                controller: 'substanceFnCtrl'
+            }
+        }
+
+    })
+
+    .state('base.excipientContent.updateExcipient', {
+        url: '/updateExcipient',
+        views: {
+            'excipientContent-view': {
+                templateUrl: 'templates/excipient/editExcipient.html'
+            }
+        }
+
+    })
+
 
     //Formulation Part (Menu and Content)
     .state('base.formulationContent', {
@@ -212,11 +230,24 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
 
     })
 
+    /*
     .state('base.formulationContent.menu', {
         url: '/menu',
         views: {
             'formulationContent-view': {
                 templateUrl: 'templates/formulation/formulationMenu.html'
+            }
+        }
+
+    })
+
+*/
+
+    .state('base.formulationContent.showAllFormulation', {
+        url: '/formulationlist',
+        views: {
+            'formulationContent-view': {
+                templateUrl: 'templates/formulation/formulationlist.html'
             }
         }
 
@@ -235,8 +266,7 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.controllers', 'dr
             url: '/addExcipient',
             views: {
                 'formulationContent-view': {
-                    templateUrl: 'templates/formulation/selectExcipient.html',
-                    controller: 'excipientCtrl'
+                    templateUrl: 'templates/formulation/selectExcipient.html'
                 }
             }
 

@@ -4,11 +4,11 @@
         </button>
     </ion-nav-buttons>
     <ion-header-bar class="bar-subheader item-input-inset">
-        <label class="item-input-wrapper" id="search-input">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
+        <label class="item-input-wrapper">
+            <i class="ion-search placeholder-icon"></i>
             <input type="text" placeholder="Search" ng-model="searchSubstance">
-            <button class="button button-clear" ng-click="clearfilter()">X</button>
         </label>
+        <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
     </ion-header-bar>
     <ion-content>
         <ion-refresher on-refresh="doRefresh()">

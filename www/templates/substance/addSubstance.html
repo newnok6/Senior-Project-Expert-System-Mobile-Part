@@ -1,7 +1,7 @@
 <ion-view title = "Add New Substance">
 
  <ion-nav-buttons side="left">
-      <button class="button button-icon " ui-sref="base.substanceContent.showAllSubstance">
+      <button class="button button-icon " ng-click="goback()">
        Cancel
       </button>
     </ion-nav-buttons>
@@ -20,7 +20,7 @@
     <a class="item " ng-click="openModal(1)">
       Select The Water Solubility
       <span class="item-note">
-      <div ng-show="getCurrentSolubility()">
+      <div>
        {{currentSubstance.waterSolubility}}
        </div>
       </span>

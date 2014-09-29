@@ -1,0 +1,28 @@
+<ion-view title="All Excipient ">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-compose" ui-sref="base.excipientContent.selectSubstance">
+        </button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchExcipient">
+        </label>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()">
+
+        </ion-refresher>
+        <div class="list list-inset">
+            <ion-radio ng-repeat=" (key,value) in excipients | filter:searchExcipient" ng-click="setSelectedExcipient(value)">
+                <div ng-show="excipients.length == 0">
+                    There are no the substance in the database. Please create a new substance.
+                </div>
+                <div ng-show="excipients.length > 0">
+                    <h2>Excipient Name : {{value.substance.name}}</h2>
+                    <p>Min Weight : {{value.minWeight}} , Max Weight : {{value.maxWeight}}</p>
+                </div>
+            </ion-radio>
+        </div>
+    </ion-content>
+</ion-view>
