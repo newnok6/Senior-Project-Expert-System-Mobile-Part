@@ -1,102 +1,84 @@
-
 angular.module('drugExpertSystem.services', [])
 
-  .factory('substancePropservice', function($http) {
+.factory('substancePropservice', function($http) {
 
     var substanceProp = {};
 
     substanceProp.getSolubilityList = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solubilityList.json'
-      });
+        return $http({
+            url: 'http://localhost:8081/subprop/solubilityList.json'
+        });
     }
 
     substanceProp.getSolidstateList = function() {
-      return $http({
-       // url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
+        return $http({
+            // url: 'http://localhost:8081/subprop/solidstateList.json'
+        });
     }
     return substanceProp;
-  }).
+}).
 
-  factory('solubilityService',['$http' , function($http) {
+factory('solubilityService', ['$http',
+    function($http) {
 
-    var solubility = {};
-    var stringSolubility = ''; 
+        var solubility = {};
+        var stringSolubility = '';
 
-/*
-    solubility.addSolubility = function(solubility) {
-      return $http({
-        method : "POST",
-        data : solubility,
-        url : 'http://localhost:8081/solubility/add-solubility',
-       // headers: {'Content-Type': 'application/json;charset=UTF-8'}
-      });
+        solubility.getSolubilityList = function() {
+            return $http({
+                url: 'json/solubility.json'
+            });
+        }
+
+        solubility.setCurrentSolubility = function(solubility) {
+            stringSolubility = solubility;
+            console.log(stringSolubility);
+
+        }
+
+        solubility.resetCurrentSolubility = function() {
+            stringSolubility = '';
+
+        }
+
+        solubility.getCurrentSolubility = function() {
+            console.log(stringSolubility);
+            return stringSolubility;
+        }
+
+        return solubility;
     }
+])
 
-    solubility.updateSolubility = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
+.factory('stabilityService', ['$http',
+    function($http) {
+
+        var stabilities = {};
+        var currentStabilities = [];
+
+        stabilities.setStabilities = function(stability) {
+            currentStabilities.push(stability);
+            console.log(currentStabilities);
+            
+        }
+
+        stabilities.deleteStabilityOnlist = function(stability) {
+            currentStabilities.splice(currentStabilities.indexOf(stability), 1);
+            console.log(currentStabilities);
+        }
+
+        stabilities.resetStability = function() {
+            currentStabilities = [];
+            console.log(currentStabilities);
+        }
+
+        stabilities.getStabilities = function() {
+            console.log(currentStabilities);
+            return currentStabilities;
+        }
+        return stabilities;
     }
-
-    solubility.deleteSolubility = function() {
-      return $http({
-        url: 'http://localhost:8081/subprop/solidstateList.json'
-      });
-    }
-*/
-    solubility.getSolubilityList = function() {
-      return $http({
-        url: 'json/solubility.json'
-      });
-    }
-
-     solubility.setCurrentSolubility = function(solubility) {
-          stringSolubility = solubility;
-          console.log(stringSolubility);
-         
-    }
-
-     solubility.resetCurrentSolubility = function() {
-        stringSolubility = '';
-         
-    }
-
-     solubility.getCurrentSolubility = function() {
-      console.log(stringSolubility);
-        return stringSolubility;      
-    }
-    
-    return solubility;
-}])
-
-.factory('stabilityService',['$http' , function($http) {
-
-    var stabilities = {};
-    var currentStabilities = [];
-
-     stabilities.setStabilities = function(stability) {
-          currentStabilities.push(stability);
-          console.log(currentStabilities);
-    }
-
-    stabilities.deleteStabilityOnlist = function(stability){
-        currentStabilities.splice(currentStabilities.indexOf(stability),1);
-        console.log(currentStabilities);
-      }
-
-    stabilities.resetStability = function(){
-        currentStabilities = [];
-        console.log(currentStabilities);
-      }  
-
-     stabilities.getStabilities = function() {
-      console.log(currentStabilities);
-      return currentStabilities;      
-    }
-    return stabilities;
-}])
+])
 
 
 .factory('substanceService', function($http) {
@@ -104,155 +86,160 @@ angular.module('drugExpertSystem.services', [])
     var substance = {};
 
     substance.addSubstance = function(substance) {
-      return $http({
-        method : "POST",
-        data : substance,
-        url : 'http://localhost:8081/substance/add-substance'
-      });
+        return $http({
+            method: "POST",
+            data: substance,
+            url: 'http://localhost:8081/substance/add-substance'
+        });
     }
 
     substance.updateSubstance = function(substance) {
-      return $http({
-        method : "PUT",
-        data : substance,
-        url: 'http://localhost:8081/substance/update-substance'
-      });
+        return $http({
+            method: "PUT",
+            data: substance,
+            url: 'http://localhost:8081/substance/update-substance'
+        });
     }
 
     substance.deleteSubstance = function(substanceId) {
-      return $http({
-        method : "DELETE",
-        url: 'http://localhost:8081/substance/remove-substance/' + substanceId
-      });
+        return $http({
+            method: "DELETE",
+            url: 'http://localhost:8081/substance/remove-substance/' + substanceId
+        });
     }
 
     substance.getSubstanceList = function() {
-      return $http({
-        url: 'http://localhost:8081/substance/substanceList.json'
-      });
+        return $http({
+            url: 'http://localhost:8081/substance/substanceList.json'
+        });
     }
     return substance;
 })
 
-.factory('substanceFnService',['$http', function($http) {
+.factory('substanceFnService', ['$http',
+    function($http) {
 
-    var substanceFn  = {};
-    var currentsubstanceFnlist = [];
+        var substanceFn = {};
+        var currentsubstanceFnlist = [];
 
-    substanceFn.setSunstanceFn = function(currentSubstanceFn) {
-          currentsubstanceFnlist.push(currentSubstanceFn);
-          console.log(currentsubstanceFnlist);
+        substanceFn.setSunstanceFn = function(currentSubstanceFn) {
+            currentsubstanceFnlist.push(currentSubstanceFn);
+            console.log(currentsubstanceFnlist);
+        }
+
+        substanceFn.deleteSubstanceFnOnlist = function(currentSubstanceFn) {
+            currentsubstanceFnlist.splice(currentsubstanceFnlist.indexOf(currentSubstanceFn), 1);
+            console.log(currentsubstanceFnlist);
+        }
+
+        substanceFn.resetsSubstanceFn = function() {
+            currentsubstanceFnlist = [];
+            console.log(currentsubstanceFnlist);
+        }
+
+        substanceFn.getCurrentSubstanceFnlist = function() {
+            console.log(currentsubstanceFnlist);
+            return currentsubstanceFnlist;
+        }
+
+        substanceFn.getSubstanceFnFromJson = function() {
+            return $http({
+                url: 'json/substanceFunction.json'
+            });
+        }
+        return substanceFn;
     }
+])
 
-    substanceFn.deleteSubstanceFnOnlist = function(currentSubstanceFn){
-         currentsubstanceFnlist.splice(currentsubstanceFnlist.indexOf(currentSubstanceFn),1);
-         console.log(currentsubstanceFnlist);
-      }
+.factory('excipientService', ['$http',
+    function($http) {
 
-    substanceFn.resetsSubstanceFn = function(){
-        currentsubstanceFnlist = [];
-        console.log(currentsubstanceFnlist);
-      }  
+        var excipient = {};
+        var currentExcipientlist = [];
 
-    substanceFn.getCurrentSubstanceFnlist = function() {
-      console.log(currentsubstanceFnlist);
-      return currentsubstanceFnlist;      
+        excipient.addExcipient = function(excipient) {
+            return $http({
+                method: "POST",
+                data: excipient,
+                url: 'http://localhost:8081/excipient/add-excipient'
+            });
+        }
+
+        excipient.updateExcipient = function() {
+            return $http({
+                method: "PUT",
+                url: 'http://localhost:8081/excipient/update-excipient'
+            });
+        }
+
+        excipient.deleteExcipient = function() {
+            return $http({
+                method: "DELETE",
+                url: 'http://localhost:8081/excipient/delete-excipient'
+            });
+        }
+
+        excipient.getExcipientList = function() {
+            return $http({
+                url: 'http://localhost:8081/excipient/excipientList.json'
+            });
+        }
+
+        excipient.setExcipientToList = function(currentExcipient) {
+            currentExcipientlist.push(currentExcipient);
+            console.log(currentExcipientlist);
+        }
+
+        excipient.deleteExcipientOnlist = function(currentExcipient) {
+            currentExcipientlist.splice(currentExcipientlist.indexOf(currentExcipient), 1);
+            console.log(currentExcipientlist);
+        }
+
+        excipient.resetExcipient = function() {
+            currentExcipientlist = [];
+            console.log(currentExcipientlist);
+        }
+
+        excipient.getCurrentExcipientlist = function() {
+            console.log(currentExcipientlist);
+            return currentExcipientlist;
+        }
+        return excipient;
     }
+])
 
-    substanceFn.getSubstanceFnFromJson = function() {
-      return $http({
-        url: 'json/substanceFunction.json'
-      });
+.factory('formulationService', ['$http',
+    function($http) {
+
+        var formulation = {};
+
+        formulation.addFormulation = function(currentformulation) {
+            return $http({
+                method: "POST",
+                data: currentformulation,
+                url: 'http://localhost:8081/formulation/add-formulation'
+            });
+        }
+
+        formulation.updateFormulation = function() {
+            return $http({
+                method: "PUT",
+                url: 'http://localhost:8081/formulation/update-formulation'
+            });
+        }
+
+        formulation.deleteFormulation = function() {
+            return $http({
+                method: "DELETE",
+                url: 'http://localhost:8081/formulation/delete-formulation'
+            });
+        }
+
+        formulation.getFormulationList = function() {
+            return $http({
+                url: 'http://localhost:8081/formulation/formulationList.json'
+            });
+        }
+        return formulation;
     }
-    return substanceFn;
-}])
-
-.factory('excipientService',['$http', function($http) {
-
-    var excipient = {};
-    var currentExcipientlist = [];
-
-    excipient.addExcipient = function(excipient) {
-      return $http({
-        method : "POST",
-        data : excipient,
-        url : 'http://localhost:8081/excipient/add-excipient'
-      });
-    }
-
-    excipient.updateExcipient = function() {
-      return $http({
-        method : "PUT",
-        url: 'http://localhost:8081/excipient/update-excipient'
-      });
-    }
-
-    excipient.deleteExcipient = function() {
-      return $http({
-        method : "DELETE",
-        url: 'http://localhost:8081/excipient/delete-excipient'
-      });
-    }
-
-   excipient.getExcipientList = function() {
-      return $http({
-        url: 'http://localhost:8081/excipient/excipientList.json'
-      });
-    }
-
-    excipient.setExcipientToList = function(currentExcipient) {
-      currentExcipientlist.push(currentExcipient);
-          console.log(currentExcipientlist);
-    }
-
-    excipient.deleteExcipientOnlist = function(currentExcipient){
-         currentExcipientlist.splice(currentExcipientlist.indexOf(currentExcipient),1);
-         console.log(currentExcipientlist);
-      }
-
-    excipient.resetExcipient = function(){
-        currentExcipientlist = [];
-        console.log(currentExcipientlist);
-      }  
-
-    excipient.getCurrentExcipientlist = function() {
-      console.log(currentExcipientlist);
-      return currentExcipientlist;      
-    }
-    return excipient;
-}])
-
-.factory('formulationService',['$http', function($http) {
-
-    var formulation = {};
-
-    formulation.addFormulation = function(currentformulation) {
-      return $http({
-        method : "POST",
-        data : currentformulation,
-        url : 'http://localhost:8081/formulation/add-formulation'
-      });
-    }
-
-    formulation.updateFormulation = function() {
-      return $http({
-        method : "PUT",
-        url: 'http://localhost:8081/formulation/update-formulation'
-      });
-    }
-
-    formulation.deleteFormulation = function() {
-      return $http({
-        method : "DELETE",
-        url: 'http://localhost:8081/formulation/delete-formulation'
-      });
-    }
-
-   formulation.getFormulationList = function() {
-      return $http({
-        url: 'http://localhost:8081/formulation/formulationList.json'
-      });
-    }
-    return formulation;
-}]);
-
+]);

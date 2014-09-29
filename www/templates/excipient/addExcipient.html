@@ -1,36 +1,36 @@
-<ion-view title = "Create a new Excipient">
- <ion-nav-buttons side="left">
-      <button class="button button-icon icon ion-chevron-left" ui-sref="base.excipientContent.selectSubstance">
-       Substance Selection
-      </button>
-</ion-nav-buttons>
-<ion-content>
-  <form ng-submit="showConfirm(currentExcipient)">
-    <div class="list list-inset">
- 		<div class="item">
-      		Excipient Name : {{currentExcipient.substance.name}}
-    	</div>
-    	<label class="item item-input">
-    	 <span class="input-label">Mininum Weight :</span>
-    		<input type="text" placeholder="3.45" ng-model = "currentExcipient.minWeight">
-  		</label>
-  		<label class="item item-input">
-  		<span class="input-label">Maxinum Weight :</span>
-    		<input type="text" placeholder="7.34" ng-model = "currentExcipient.maxWeight">
-  		</label>
-  		<label class="item item-input">
-  		<span class="input-label">used Weight :</span>
-    		<input type="text" placeholder="5.62" ng-model = "currentExcipient.usedWeight">
-  		</label>
+<ion-view title="Create a new Excipient">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-chevron-left" ui-sref="base.excipientContent.selectSubstance">
+            Substance Selection
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form ng-submit="showConfirm(currentExcipient)">
+            <div class="list list-inset">
+                <div class="item">
+                    Excipient Name : {{currentExcipient.substance.name}}
+                </div>
+                <label class="item item-input">
+                    <span class="input-label">Mininum Weight :</span>
+                    <input type="text" placeholder="3.45" ng-model="currentExcipient.minWeight">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Maxinum Weight :</span>
+                    <input type="text" placeholder="7.34" ng-model="currentExcipient.maxWeight">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">used Weight :</span>
+                    <input type="text" placeholder="5.62" ng-model="currentExcipient.usedWeight">
+                </label>
 
-  		 <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
-    		Select Substance Function
-      </a>
-      </div>
-      <div class="padding">
-  <button type="submit" class="button button-block button-positive">Create Excipient</button>
-</div>
-      </form>
-      
-</ion-content>
+                <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
+                    Select Substance Function
+                </a>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Create Excipient</button>
+            </div>
+        </form>
+
+    </ion-content>
 </ion-view>

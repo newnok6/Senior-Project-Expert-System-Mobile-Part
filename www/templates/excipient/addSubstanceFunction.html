@@ -1,36 +1,32 @@
-<ion-view title = "Add Substance Function">
-<ion-nav-buttons side="left">
-      <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete; data.showReorder = false">
-      </button>
+<ion-view title="Add Substance Function">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete; data.showReorder = false">
+        </button>
     </ion-nav-buttons>
-<ion-nav-buttons side="right">
-     <button class="button button-icon icon ion-ios7-plus-outline"
-          ng-click="openModal(3)">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-ios7-plus-outline" ng-click="openModal(3)">
         </button>
     </ion-nav-buttons>
     <ion-content>
 
-      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
-      
-      <ion-list show-delete="data.showDelete">
+        <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
 
-        <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" 
-                  item="substanceFn"
-                  href="#/item/{{substanceFn}}">
-          	 Substance Function Name : {{substanceFn.functionName}} , Substance Function Type : {{substanceFn.functionType}}
-          <ion-delete-button class="ion-minus-circled" 
-                             ng-click="deleteSubstanceFnInList(substanceFn)">
-          </ion-delete-button>
-          <ion-option-button class="button-assertive"
-                             ng-click="edit(item)">
-            Edit
-          </ion-option-button>
+        <ion-list show-delete="data.showDelete">
 
-        </ion-item>
-        <div class="padding" ng-show = "currentSubstanceFnList.length > 0">
-            <button type="submit" ui-sref="base.excipientContent.addExcipient" class="button button-block button-positive">Finish</button>
-        </div>
-      </ion-list>
+            <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" item="substanceFn" href="#/item/{{substanceFn}}">
+                Substance Function Name : {{substanceFn.functionName}} , Substance Function Type : {{substanceFn.functionType}}
+                <ion-delete-button class="ion-minus-circled" ng-click="deleteSubstanceFnInList(substanceFn)">
+                </ion-delete-button>
+                <ion-option-button class="button-assertive" ng-click="edit(item)">
+                    Edit
+                </ion-option-button>
+
+            </ion-item>
+            <div class="padding" ng-show="currentSubstanceFnList.length > 0">
+                <button type="submit" ui-sref="base.excipientContent.addExcipient" class="button button-block button-positive">Finish</button>
+            </div>
+        </ion-list>
+
 
   <script id="substanceFnModal.html" type="text/ng-template">
   <ion-modal-view>
@@ -65,4 +61,5 @@
 </ion-content>
 
 </ion-view>
+
  

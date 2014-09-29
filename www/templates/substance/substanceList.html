@@ -1,28 +1,29 @@
-<ion-view title = "All Substance ">
-<ion-nav-buttons side="right">
-     <button class="button button-icon icon ion-compose" ui-sref="base.substanceContent.addSubstance">
+<ion-view title="All Substance ">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-compose" ui-sref="base.substanceContent.addSubstance">
         </button>
-</ion-nav-buttons>
- <ion-header-bar class="bar-subheader item-input-inset">
-      			<label class="item-input-wrapper" id="search-input">
-        				<i class="icon ion-ios7-search placeholder-icon"></i>
-        				<input type="text" placeholder="Search" ng-model="searchSubstance">
-        				<button class="button button-clear" ng-click="clearfilter()">X</button>
-      			</label>
-      </ion-header-bar>
-      <ion-content>
-       <ion-refresher on-refresh="doRefresh()">
+    </ion-nav-buttons>
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchSubstance">
+            <button class="button button-clear" ng-click="clearfilter()">X</button>
+        </label>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()">
 
-       </ion-refresher>
-    <div class="list list-inset">
-     <ion-radio ng-repeat=" (key,value) in substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
-       		<div ng-show="substances.length == 0">
-       			There are no the substance in the database. Please create a new substance.
-       		</div>
-       		<div ng-show="substances.length > 0">
-      			<h2>{{value.name}}</h2> <p>{{value.waterSolubility}},{{value.pka}}</p>
-      		</div>
-    		</ion-radio>
-    </div>
-      </ion-content>
+        </ion-refresher>
+        <div class="list list-inset">
+            <ion-radio ng-repeat=" (key,value) in substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
+                <div ng-show="substances.length == 0">
+                    There are no the substance in the database. Please create a new substance.
+                </div>
+                <div ng-show="substances.length > 0">
+                    <h2>{{value.name}}</h2>
+                    <p>{{value.waterSolubility}},{{value.pka}}</p>
+                </div>
+            </ion-radio>
+        </div>
+    </ion-content>
 </ion-view>
