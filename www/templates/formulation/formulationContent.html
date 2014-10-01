@@ -58,15 +58,31 @@
         <div class="item item-divider">
               Detail
           </div>
-          <h2> Substance : </h2> <p>{{currentExcipient.substance.name}}</p>
-          <h2> SubstanceFunction Name : </h2> <p>{{currentExcipient.substanceFunctions.substanceFunctions.functionName}}</p>
-          <h2> SubstanceFunction Type : </h2> <p>{{currentExcipient.substanceFunction.substanceFunctions.functionType}}</p>     
+          <h3> Substance : </h3> <p>{{currentExcipient.substance.name}}</p>
+          <h3> SubstanceFunction Name : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionName}}</p>
+          <h3> SubstanceFunction Type : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionType}}</p>
            <button class="button button-block button-positive" ng-click="addExcipientToFormulation(currentExcipient)">Create SubstanceFunction</button>
            </div>
           </ion-slide>
   </ion-slide-box>
   </ion-modal-view>
 </script>
+
+
+<!-- Formulation Option Modal.The Option is "Edit Formulation" or "Delete Formulation" -->
+<script id="formulationoption.html" type="text/ng-template">
+<style>.popover { height:115px; width: 400px; }</style>
+      <ion-popover-view>
+          <div class="list">
+            <a class="item" ng-click="goEditFormulation()">
+                Edit Excipient
+           </a>
+          <a class="item" ng-click = "showConfirmForDelete()">
+                 Delete Excipient
+          </a>
+          </div>
+      </ion-popover-view>
+    </script>
 
 
 

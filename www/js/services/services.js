@@ -209,38 +209,76 @@ factory('solubilityService', ['$http',
     }
 ])
 
-.factory('formulationService', ['$http',
+.factory('tabletFormulationService', ['$http',
     function($http) {
 
-        var formulation = {};
+        var tabletformulation = {};
 
-        formulation.addFormulation = function(currentformulation) {
+        tabletformulation.addFormulation = function(currentformulation) {
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://localhost:8081/formulation/add-formulation'
+                url: 'http://localhost:8081/tablet-formulation/add-tablet-formulation'
             });
         }
 
-        formulation.updateFormulation = function() {
+        tabletformulation.updateFormulation = function(currentformulation) {
             return $http({
                 method: "PUT",
-                url: 'http://localhost:8081/formulation/update-formulation'
+                data : currentformulation,
+                url: 'http://localhost:8081/tablet-formulation/update-tablet-formulation'
             });
         }
 
-        formulation.deleteFormulation = function() {
+        tabletformulation.deleteFormulation = function(currentformulationId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/formulation/delete-formulation'
+                url: 'http://localhost:8081/tablet-formulation/remove-tablet-formulation/'+ currentformulationId
             });
         }
 
-        formulation.getFormulationList = function() {
+        tabletformulation.getFormulationList = function() {
             return $http({
-                url: 'http://localhost:8081/formulation/formulationList.json'
+                url: 'http://localhost:8081/tablet-formulation/tabletformulationList.json'
             });
         }
-        return formulation;
+        return tabletformulation;
+    }
+])
+
+.factory('solutionFormulationService', ['$http',
+    function($http) {
+
+        var solutionformulation = {};
+
+        solutionformulation.addFormulation = function(currentformulation) {
+            return $http({
+                method: "POST",
+                data: currentformulation,
+                url: 'http://localhost:8081/solution-formulation/add-solution-formulation'
+            });
+        }
+
+        solutionformulation.updateFormulation = function(currentformulation) {
+            return $http({
+                method: "PUT",
+                data: currentformulation,
+                url: 'http://localhost:8081/solution-formulation/update-solution-formulation'
+            });
+        }
+
+        solutionformulation.deleteFormulation = function(currentformulationId) {
+            return $http({
+                method: "DELETE",
+                url: 'http://localhost:8081/solution-formulation/remove-solution-formulation/' + currentformulationId
+            });
+        }
+
+        solutionformulation.getFormulationList = function() {
+            return $http({
+                url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
+            });
+        }
+        return solutionformulation;
     }
 ]);

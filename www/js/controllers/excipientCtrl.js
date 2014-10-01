@@ -5,8 +5,8 @@
  */
 angular.module('drugExpertSystem.excipientController', [])
 // Excipient Controller//
-.controller('excipientCtrl', ['$scope', '$timeout', '$state', 'substanceService', 'excipientService', 'substanceFnService', '$ionicModal', '$ionicPopup', '$ionicSlideBoxDelegate', '$ionicPopover', '$ionicLoading','$ionicViewService',
-    function($scope, $timeout, $state, substanceService, excipientService, substanceFnService, $ionicModal, $ionicPopup, $ionicSlideBoxDelegate, $ionicPopover,$ionicLoading,$ionicViewService) {
+.controller('excipientCtrl', ['$scope', '$timeout', '$state', 'substanceService', 'excipientService', 'substanceFnService', '$ionicModal', '$ionicPopup', '$ionicSlideBoxDelegate', '$ionicPopover', '$ionicLoading', '$ionicViewService',
+    function($scope, $timeout, $state, substanceService, excipientService, substanceFnService, $ionicModal, $ionicPopup, $ionicSlideBoxDelegate, $ionicPopover, $ionicLoading, $ionicViewService) {
 
         $scope.setkey = '';
         $scope.excipients = {};
@@ -38,13 +38,9 @@ angular.module('drugExpertSystem.excipientController', [])
             console.log($scope.substances);
         });
 
-        $scope.cancel = function(){
-            $scope.reset();
-            var history = $ionicViewService.getBackView();
-            history.go();
-        };
 
-/*
+
+        /*
         $scope.addExcipientToFormulation = function(currentExcipient) {
             excipientService.setExcipientToList(currentExcipient);
             console.log($scope.currentExcipient);
@@ -60,12 +56,12 @@ angular.module('drugExpertSystem.excipientController', [])
 
         }
 
-        $scope.goEditExcipient = function(){
+        $scope.goEditExcipient = function() {
             $scope.closePopover();
             $scope.reset();
             $scope.currentExcipient = $scope.excipientSelected;
             angular.forEach($scope.excipientSelected.substanceFunctions, function(value, key) {
-                    substanceFnService.setSunstanceFn(value);
+                substanceFnService.setSunstanceFn(value);
             })
             $ionicLoading.show({
                 template: '<i class="icon ion-loading-c"></i>',
@@ -83,7 +79,7 @@ angular.module('drugExpertSystem.excipientController', [])
             }, 500);
         }
 
-/*
+        /*
         //Excipient Modal//
         $ionicModal.fromTemplateUrl('excipientModal.html', {
             id: 5,
@@ -105,13 +101,13 @@ angular.module('drugExpertSystem.excipientController', [])
         }
 */
         // hide the model
-       // $scope.hideModal = function(index) {
-           // if (index == 5)
-             //   $scope.currentExcipient = angular.copy($scope.orig);
-            //$scope.oModal5.hide();
+        // $scope.hideModal = function(index) {
+        // if (index == 5)
+        //   $scope.currentExcipient = angular.copy($scope.orig);
+        //$scope.oModal5.hide();
 
-      //  }
-/*
+        //  }
+        /*
         $scope.filter = function(key) {
             var set = [];
             set = $scope.excipients[key];
@@ -140,7 +136,7 @@ angular.module('drugExpertSystem.excipientController', [])
             $scope.currentExcipient.substanceFunctions = substanceFnService.getCurrentSubstanceFnlist();
         };
 
-        
+
 
 
         //Substance Option such "edit" or "delete"//
@@ -151,6 +147,7 @@ angular.module('drugExpertSystem.excipientController', [])
         });
 
         $scope.openPopover = function($event) {
+            document.body.classList.add('platform-ios');
             $scope.popover.show($event);
         };
         $scope.closePopover = function() {
@@ -169,13 +166,27 @@ angular.module('drugExpertSystem.excipientController', [])
                     excipientService.addExcipient(excipient);
                     $scope.reset();
                     console.log($scope.currentSubstance);
+                    $ionicLoading.show({
+                        template: '<i class="icon ion-loading-c"></i>',
+                        showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+                    });
+
+                    // Hide the loadingIndicator 1500 ms later
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 1500);
+
+                    // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+                    $timeout(function() {
+                        $state.go('base.excipientContent.showAllExcipient');
+                    }, 500);
                 } else {
                     console.log('You are not sure');
                 }
             });
         };
 
-         // A confirm dialog for updating an exiting excipient
+        // A confirm dialog for updating an exiting excipient
         $scope.showConfirmForUpdate = function(excipient) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Update Excipient',
@@ -186,6 +197,20 @@ angular.module('drugExpertSystem.excipientController', [])
                     $scope.currentExcipient.substanceFunctions = substanceFnService.getCurrentSubstanceFnlist();
                     excipientService.updateExcipient(excipient);
                     $scope.reset();
+                    $ionicLoading.show({
+                        template: '<i class="icon ion-loading-c"></i>',
+                        showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+                    });
+
+                    // Hide the loadingIndicator 1500 ms later
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 1500);
+
+                    // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+                    $timeout(function() {
+                        $state.go('base.excipientContent.showAllExcipient');
+                    }, 500);
                     console.log($scope.currentSubstance);
                 } else {
                     console.log('You are not sure');
@@ -193,7 +218,7 @@ angular.module('drugExpertSystem.excipientController', [])
             });
         };
 
-         // Confrim Form for deleling substance in the database
+        // Confrim Form for deleling substance in the database
         $scope.showConfirmForDelete = function() {
             $scope.closePopover();
             var confirmPopup = $ionicPopup.confirm({
@@ -243,6 +268,17 @@ angular.module('drugExpertSystem.excipientController', [])
         $scope.clearfilter = function() {
             //$scope.searchSubstance = null;
             console.log("sddsd");
+        };
+
+        $scope.cancel = function() {
+            $scope.reset();
+            var history = $ionicViewService.getBackView();
+            history.go();
+        };
+
+        $scope.goback = function() {
+            var history = $ionicViewService.getBackView();
+            history.go();
         };
 
     }

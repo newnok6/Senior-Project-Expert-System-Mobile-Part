@@ -4,10 +4,11 @@
         </button>
     </ion-nav-buttons>
     <ion-header-bar class="bar-subheader item-input-inset">
-        <label class="item-input-wrapper" id="search-input">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
+        <label class="item-input-wrapper">
+            <i class="ion-search placeholder-icon"></i>
             <input type="text" placeholder="Search" ng-model="searchExcipient">
         </label>
+        <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
     </ion-header-bar>
     <ion-content>
         <ion-refresher on-refresh="doRefresh()">
@@ -19,8 +20,10 @@
                     There are no the substance in the database. Please create a new substance.
                 </div>
                 <div ng-show="excipients.length > 0">
+                
                     <h2>Excipient Name : {{value.substance.name}}</h2>
                     <p>Min Weight : {{value.minWeight}} , Max Weight : {{value.maxWeight}}</p>
+                    
                 </div>
             </ion-radio>
         </div>

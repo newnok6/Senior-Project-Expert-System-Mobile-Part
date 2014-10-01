@@ -62,6 +62,7 @@ angular.module('drugExpertSystem.substanceController', [])
         });
 
         $scope.openPopover = function($event) {
+            document.body.classList.add('platform-ios');
             $scope.popover.show($event);
         };
         $scope.closePopover = function() {
@@ -112,8 +113,9 @@ angular.module('drugExpertSystem.substanceController', [])
             });
             confirmPopup.then(function(res) {
                 if (res) {
-                    $scope.currentSubstance.stability = $scope.watchStability.getStabilities();
-                    substanceService.addSubstance(substance);
+                   $scope.currentSubstance.stability = stabilityService.getStabilities();
+                   substanceService.addSubstance(substance);
+                 console.log("test");
                     $scope.reset();
                     $ionicLoading.show({
                         template: '<i class="icon ion-loading-c"></i>',
@@ -145,10 +147,24 @@ angular.module('drugExpertSystem.substanceController', [])
                 // $scope.currentSubstance.stability = $scope.watchStability.getStabilities();
                 //console.log($scope.currentSubstance);
                 if (res) {
-                    $scope.currentSubstance.stability = $scope.watchStability.getStabilities();
+                    $scope.currentSubstance.stability = stabilityService.getStabilities();
                     substanceService.updateSubstance(substance);
                     $scope.reset();
-                    console.log($scope.currentSubstance);
+                     $ionicLoading.show({
+                        template: '<i class="icon ion-loading-c"></i>',
+                        showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+                    });
+
+                    // Hide the loadingIndicator 1500 ms later
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 1500);
+
+                    // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+                    $timeout(function() {
+                        $state.go('base.substanceContent.showAllSubstance');
+                    }, 500);
+                    
                 } else {
                     console.log('You are not sure');
                 }

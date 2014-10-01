@@ -13,7 +13,7 @@
 
         <ion-list show-delete="data.showDelete">
 
-            <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" item="substanceFn" href="#/item/{{substanceFn}}">
+            <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" item="substanceFn">
                 <h2>Substance Function Name :</h2> <p>{{substanceFn.functionName}}</p> <h2>Substance Function Type : </h2> <p>{{substanceFn.functionType}}</p>
                 <ion-delete-button class="ion-minus-circled" ng-click="deleteSubstanceFnInList(substanceFn)">
                 </ion-delete-button>
@@ -23,7 +23,7 @@
 
             </ion-item>
             <div class="padding" ng-show="currentSubstanceFnList.length > 0">
-                <button type="submit" ui-sref="base.excipientContent.updateExcipient" class="button button-block button-positive">Finish</button>
+                <button type="submit" ng-click="goback()" class="button button-block button-positive">Finish</button>
             </div>
         </ion-list>
 

@@ -230,18 +230,6 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceControll
 
     })
 
-    /*
-    .state('base.formulationContent.menu', {
-        url: '/menu',
-        views: {
-            'formulationContent-view': {
-                templateUrl: 'templates/formulation/formulationMenu.html'
-            }
-        }
-
-    })
-
-*/
 
     .state('base.formulationContent.showAllFormulation', {
         url: '/formulationlist',
@@ -252,16 +240,39 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceControll
         }
 
     })
-        .state('base.formulationContent.addFormulation', {
-            url: '/formulation',
-            views: {
-                'formulationContent-view': {
-                    templateUrl: 'templates/formulation/addFormulation.html',
 
-                }
+    .state('base.formulationContent.addFormulation', {
+        url: '/addformulation',
+        views: {
+            'formulationContent-view': {
+                templateUrl: 'templates/formulation/addFormulation.html',
+
             }
+        }
 
-        })
+    })
+
+     .state('base.formulationContent.updateFormulation', {
+        url: '/updateformulation',
+        views: {
+            'formulationContent-view': {
+                templateUrl: 'templates/formulation/updateFormulation.html',
+
+            }
+        }
+
+    })
+
+      .state('base.formulationContent.formulationdetail', {
+        url: '/formulationdetail',
+        views: {
+            'formulationContent-view': {
+                templateUrl: 'templates/formulation/formulationdetail.html',
+
+            }
+        }
+
+    })
         .state('base.formulationContent.selectExcipient', {
             url: '/addExcipient',
             views: {
