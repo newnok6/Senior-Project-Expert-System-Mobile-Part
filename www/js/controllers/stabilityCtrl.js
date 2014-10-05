@@ -32,6 +32,7 @@ angular.module('drugExpertSystem.stabilityController', [])
         //add stability to the list//
         $scope.addStability = function(stability) {
             stabilityService.setStabilities(stability);
+            console.log(stability);
             $scope.hideModal(2);
         };
 

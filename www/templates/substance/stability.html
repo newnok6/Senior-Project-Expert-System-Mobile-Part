@@ -29,22 +29,21 @@
 
 
         <script id="stabilityModal.html" type="text/ng-template">
-        < ion - modal - view >
-            < ion - header - bar class = "bar bar-header bar-positive" >
-            < h1 class = "title" > Craete the stability < /h1>
-    <button class="button button-clear button-primary" ng-click="hideModal(2)">Cancel</button >
-            < /ion-header-bar>
-    <ion-content class="padding">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Stability Name :</span >
-            < input ng - model = "stability"
-        type = "text" >
-            < /label>
-    <button class="button button-full button-positive" ng-click="addStability(stability)">Create Stability</button >
-            < /div>
-  </ion - content >
-            < /ion-modal-view>
+        <ion-modal-view>
+            <ion-header-bar class = "bar bar-header bar-positive">
+            <h1 class = "title"> Craete the stability </h1>
+              <button class="button button-clear button-primary" ng-click="hideModal(2)">Cancel</button >
+            </ion-header-bar>
+            <ion-content class="padding">
+              <div class="list">
+                <label class="item item-input">
+                  <span class="input-label">Stability Name :</span >
+                    <input ng-model = "stability" type = "text" >
+                </label>
+                <button class="button button-full button-positive" ng-click="addStability(stability)">Create Stability</button >
+              </div>
+            </ion-content>
+        </ion-modal-view>
         </script>
 
     </ion-content>

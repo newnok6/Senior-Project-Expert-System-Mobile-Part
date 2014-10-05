@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
+angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.reformulationController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -281,7 +281,34 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceControll
                 }
             }
 
-        });
+        })
+
+    //Reformulation State
+     .state('base.reformulationContent', {
+        url: '/reformulation',
+        abstract: true,
+        views: {
+            'side-view': {
+                templateUrl: 'templates/menu.html',
+                controller: 'MenuCtrl'
+            },
+            'content-view': {
+                templateUrl: 'templates/drugreformulation/reformulationContent.html',
+                controller: 'reformulationCtrl'
+            }
+        }
+
+    })
+
+     .state('base.reformulationContent.testJess', {
+        url: '/test',
+        views: {
+            'reformulationContent-view': {
+                templateUrl: 'templates/drugreformulation/callJess.html'
+            }
+        }
+
+    });
 
 
     // if none of the above states are matched, use this as the fallback

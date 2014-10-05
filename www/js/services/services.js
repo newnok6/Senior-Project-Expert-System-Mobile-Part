@@ -110,7 +110,7 @@ factory('solubilityService', ['$http',
 
     substance.getSubstanceList = function() {
         return $http({
-            url: 'http://localhost:8081/substance/substanceList.json'
+            url: 'http://localhost:8081/substance/substanceList.json?callback=JSON_CALLBACK'
         });
     }
     return substance;
@@ -280,5 +280,49 @@ factory('solubilityService', ['$http',
             });
         }
         return solutionformulation;
+    }
+])
+
+.factory('reformulationService', ['$http',
+    function($http) {
+
+        var reformulation = {};
+
+        reformulation.addFormulation = function(currentformulation) {
+            return $http({
+                method: "POST",
+                data: currentformulation,
+                url: 'http://localhost:8081/solution-formulation/add-solution-formulation'
+            });
+        }
+
+        reformulation.updateFormulation = function(currentformulation) {
+            return $http({
+                method: "PUT",
+                data: currentformulation,
+                url: 'http://localhost:8081/solution-formulation/update-solution-formulation'
+            });
+        }
+
+        reformulation.deleteFormulation = function(currentformulationId) {
+            return $http({
+                method: "DELETE",
+                url: 'http://localhost:8081/solution-formulation/remove-solution-formulation/' + currentformulationId
+            });
+        }
+
+        reformulation.getFormulationList = function() {
+            return $http({
+                url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
+            });
+        }
+
+         reformulation.testJess = function() {
+            return $http({
+                method: "POST",
+                url: 'http://localhost:8081/rule-base/testjess'
+            });
+        }
+        return reformulation;
     }
 ]);
