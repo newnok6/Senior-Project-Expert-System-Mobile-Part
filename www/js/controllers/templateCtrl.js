@@ -34,9 +34,9 @@ angular.module('drugExpertSystem.templateController', [])
 
     // Go to reFormulation Content and refresh existing data //
     $scope.goReFormulation = function() {
-        //solubilityService.resetCurrentSolubility();
-        //stabilityService.resetStability();
-        $state.go("base.reformulationContent.testJess");
+        solubilityService.resetCurrentSolubility();
+        stabilityService.resetStability();
+        $state.go("base.reformulationContent.formulationSelection");
     };
 
 

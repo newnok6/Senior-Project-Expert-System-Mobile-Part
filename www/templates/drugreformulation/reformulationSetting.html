@@ -1,0 +1,100 @@
+<ion-view title="Drug Reformulation Setting">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left" ng-click="goback()">
+            Formulation
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form ng-submit="makeReformulation()">
+
+            <ion-list list-inset>
+                <div class="padding-left">
+                    <h6>Formulation</h6>
+                </div>
+                <div class="item">
+                    Formulation Name : {{production.formulation.name}}
+                </div>
+                <!-- Formulation Weight -->
+                <label class="item item-input">
+                    <span class="input-label">Amount of Strenght:</span>
+                    <input type="text" placeholder="500.00" ng-model="production.formulationWeight" />
+                </label>
+
+                <style>
+                .padding-top {
+                    padding-top: 25px;
+                }
+                </style>
+                <div class="padding-top">
+                    <div class="padding-left">
+                        <h6>DF Property</h6>
+                    </div>
+                    <!-- Add DF Property -->
+                    <!-- Total Weight -->
+                    <label class="item item-input">
+                        <span class="input-label">Total Weight:</span>
+                        <input type="text" placeholder="650.87" ng-model = "dfProperty.totalweight"/>
+                    </label>
+
+                    <!-- Disintegration time -->
+                    <label class="item item-input">
+                        <span class="input-label">Disintegration time:</span>
+                        <input type="text" placeholder="28" ng-model = "dfProperty.disgradationtime"/>
+                    </label>
+
+                    <!-- Hardness-->
+                    <label class="item item-input">
+                        <span class="input-label">Hardness:</span>
+                        <input type="text" placeholder="16.87" ng-model = "dfProperty.hardness"/>
+                    </label>
+
+
+                    <!-- Dissolution Profile-->
+                    <a class="item" ng-click="openDissolutionProfileSetting(7)">
+                        Add the Dissolution Profile
+                        <span class="item-note" ng-repeat="(key, value) in dfProperty">
+                            <div ng-show = "value.at5mins">
+                                At 5 Mins : {{value.at5mins}} % ,
+                            </div>
+                             <div ng-show = "value.at10mins">
+                                At 10 Mins : {{value.at10mins}} % ,
+                                </div>
+                                 <div ng-show = "value.at15mins">
+                                 At 15 Mins : {{value.at15mins}} % ,
+                                 </div>
+                                  <div ng-show = "value.at20mins">
+                                  At 20 Mins : {{value.at20mins}} % ,
+                                  </div>
+                                   <div ng-show = "value.at25mins">
+                                   At 25 Mins : {{value.at25mins}} % ,
+                                   </div>
+                                    <div ng-show = "value.at30mins">
+                                    At 30 Mins : {{value.at30mins}} %
+                                    </div>
+                        
+                        </span>
+                    </a>
+                    <!---->
+                </div>
+                <!---->
+
+                <div class="padding-top">
+                    <div class="padding-left">
+                        <h6>Instraction</h6>
+                    </div>
+                    <label class="item item-input item-stacked-label">
+                        <textarea rows="10">
+
+                        </textarea>
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Start Reformulation</button>
+                </div>
+            </ion-list>
+
+        </form>
+
+
+    </ion-content>
+</ion-view>

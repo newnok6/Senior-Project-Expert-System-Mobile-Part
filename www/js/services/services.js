@@ -288,11 +288,11 @@ factory('solubilityService', ['$http',
 
         var reformulation = {};
 
-        reformulation.addFormulation = function(currentformulation) {
+        reformulation.makeReformulation = function(reformulateProduction) {
             return $http({
                 method: "POST",
-                data: currentformulation,
-                url: 'http://localhost:8081/solution-formulation/add-solution-formulation'
+                data: reformulateProduction,
+                url: 'http://localhost:8081/inference-engine/reformulate-production'
             });
         }
 

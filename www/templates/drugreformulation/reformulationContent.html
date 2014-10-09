@@ -5,3 +5,44 @@
 <ion-nav-view name="reformulationContent-view">
 
 </ion-nav-view>
+
+
+<!--Solubility Modal, I put it here because it can load -->
+<script id="dissolutionProfileModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Dissolution Profile Setting </h1>
+  <button class="button  button-icon " ng-click="cancelDissolutionProfileSetting()">Cancel</button>
+  <button class="button  button-icon " ng-click="createDisSolutionProfile()">Done</button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ 	<label class="item item-input">
+                    <span class="input-label">At 5 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[0]" />
+    </label>
+    <label class="item item-input">
+                    <span class="input-label">At 10 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[1]" />
+                </label>
+    <label class="item item-input">
+                    <span class="input-label">At 15 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[2]" />
+                </label>
+    <label class="item item-input">
+                    <span class="input-label">At 20 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[3]" />
+                </label>
+    <label class="item item-input">
+                    <span class="input-label">At 25 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[4]" />
+                </label>
+    <label class="item item-input">
+                    <span class="input-label">At 30 minute:</span>
+                    <input type="text" placeholder="500.00" ng-model="dissolutionProfile[5]" />
+                </label>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->	

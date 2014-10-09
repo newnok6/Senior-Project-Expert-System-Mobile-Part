@@ -1,0 +1,17 @@
+<ion-view title="Reformulation Result">
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <div class=" button-bar">
+            <button class="button button-light button-ios" ng-class="{ 'button\-positive': resultSection == 'ruleBase' }" ng-click="setReformulateResult('ruleBase')">
+                Rule Base
+            </button>
+            <button class="button button-light button-ios" ng-class="{ 'button\-positive': resultSection == 'caseBase' }" ng-click="setReformulateResult('caseBase')">
+                Case Base Reasoning
+            </button>
+            <button class="button button-light button-ios" ng-class="{ 'button\-positive': resultSection == 'hybrid' }" ng-click="setReformulateResult('hybrid')">
+                Hybrid Reasoning
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+    </ion-content>
+</ion-view>

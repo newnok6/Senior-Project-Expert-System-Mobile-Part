@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.reformulationController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
+angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.reformulationController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -300,11 +300,30 @@ angular.module('drugExpertSystem', ['ionic', 'drugExpertSystem.substanceControll
 
     })
 
-     .state('base.reformulationContent.testJess', {
-        url: '/test',
+     .state('base.reformulationContent.formulationSelection', {
+        url: '/formulation-selection',
         views: {
             'reformulationContent-view': {
-                templateUrl: 'templates/drugreformulation/callJess.html'
+                templateUrl: 'templates/drugreformulation/formulationSelection.html'
+            }
+        }
+
+    })
+
+     .state('base.reformulationContent.reformulationSetting', {
+        url: '/reformulation-setting',
+        views: {
+            'reformulationContent-view': {
+                templateUrl: 'templates/drugreformulation/reformulationSetting.html'
+            }
+        }
+
+    })
+     .state('base.reformulationContent.reformulationResult', {
+        url: '/reformulation-result',
+        views: {
+            'reformulationContent-view': {
+                templateUrl: 'templates/drugreformulation/reformulationResult.html'
             }
         }
 
