@@ -1,34 +1,23 @@
 angular.module('drugExpertSystem.services', [])
 
-.factory('substancePropservice', function($http) {
+.factory('substancePropService',['$http', function($http) {
 
     var substanceProp = {};
 
-    substanceProp.getSolubilityList = function() {
+    substanceProp.getSubstancePropList = function() {
         return $http({
-            url: 'http://localhost:8081/subprop/solubilityList.json'
-        });
-    }
-
-    substanceProp.getSolidstateList = function() {
-        return $http({
-            // url: 'http://localhost:8081/subprop/solidstateList.json'
+            url: 'json/substanceProp.json'
         });
     }
     return substanceProp;
-}).
+}
+])
 
-factory('solubilityService', ['$http',
+.factory('solubilityService', ['$http',
     function($http) {
 
         var solubility = {};
         var stringSolubility = '';
-
-        solubility.getSolubilityList = function() {
-            return $http({
-                url: 'json/solubility.json'
-            });
-        }
 
         solubility.setCurrentSolubility = function(solubility) {
             stringSolubility = solubility;
@@ -47,6 +36,167 @@ factory('solubilityService', ['$http',
         }
 
         return solubility;
+    }
+])
+
+.factory('flowablityService', ['$http',
+    function($http) {
+
+        var flowability = {};
+        var stringFlowability = '';
+
+    
+        flowability.setCurrentFlowability = function(flowability) {
+            stringFlowability = flowability;
+            console.log(stringFlowability);
+
+        }
+
+        flowability.resetCurrentFlowability = function() {
+            stringFlowability = '';
+
+        }
+
+        flowability.getCurrentFlowability = function() {
+            console.log(stringFlowability);
+            return stringFlowability;
+        }
+
+        return flowability;
+    }
+])
+
+.factory('solidstateService', ['$http',
+    function($http) {
+
+        var solidstate = {};
+        var stringSolidstate = '';
+
+    
+        solidstate.setCurrentSolidState = function(solidstate) {
+            stringSolidstate = solidstate;
+            console.log(stringSolidstate);
+
+        }
+
+        solidstate.resetCurrentSolidState = function() {
+            stringSolidstate = '';
+
+        }
+
+        solidstate.getCurrentSolidState = function() {
+            console.log(stringSolidstate);
+            return stringSolidstate;
+        }
+
+        return solidstate;
+    }
+])
+
+.factory('hygroscopityService', ['$http',
+    function($http) {
+
+        var hygroscopity = {};
+        var stringHygroscopity = '';
+
+        
+
+        hygroscopity.setCurrentHygroscopity = function(hygroscopity) {
+            stringHygroscopity = hygroscopity;
+            console.log(stringHygroscopity);
+
+        }
+
+        hygroscopity.resetCurrentHygroscopity = function() {
+            stringHygroscopity = '';
+
+        }
+
+        hygroscopity.getCurrentHygroscopity = function() {
+            console.log(stringHygroscopity);
+            return stringHygroscopity;
+        }
+
+        return hygroscopity;
+    }
+])
+
+.factory('particlesizeService', ['$http',
+    function($http) {
+
+        var particlesize = {};
+        var stringParticlesize = '';
+
+    
+        particlesize.setCurrentParticlesize = function(particlesize) {
+            stringParticlesize = particlesize;
+            console.log(stringParticlesize);
+
+        }
+
+        particlesize.resetCurrentParticlesize = function() {
+            stringParticlesize = '';
+
+        }
+
+        particlesize.getCurrentParticlesize = function() {
+            console.log(stringParticlesize);
+            return stringParticlesize;
+        }
+
+        return particlesize;
+    }
+])
+
+.factory('alcoholService', ['$http',
+    function($http) {
+
+        var alcohol = {};
+        var stringAlcohol = '';
+
+        alcohol.setCurrentAlcohol = function(alcohol) {
+            stringAlcohol = alcohol;
+            console.log(stringAlcohol);
+
+        }
+
+        alcohol.resetCurrentAlcohol = function() {
+            stringAlcohol = '';
+
+        }
+
+        alcohol.getCurrentAlcohol = function() {
+            console.log(stringAlcohol);
+            return stringAlcohol;
+        }
+
+        return alcohol;
+    }
+])
+
+.factory('saltFormService', ['$http',
+    function($http) {
+
+        var saltForm = {};
+        var stringSaltForm = '';
+
+        saltForm.setCurrentSaltForm = function(saltForm) {
+            stringSaltForm = saltForm;
+            console.log(stringSaltForm);
+
+        }
+
+        saltForm.resetCurrentSaltForm = function() {
+            stringSaltForm = '';
+
+        }
+
+        saltForm.getCurrentSaltForm = function() {
+            console.log(stringSaltForm);
+            return stringSaltForm;
+        }
+
+        return saltForm;
     }
 ])
 
@@ -186,6 +336,12 @@ factory('solubilityService', ['$http',
             });
         }
 
+        excipient.getSubstanceListForExcipient = function() {
+            return $http({
+                url: 'http://localhost:8081/excipient/substanceListForExcipient.json'
+            });
+        }
+
         excipient.setExcipientToList = function(currentExcipient) {
             currentExcipientlist.push(currentExcipient);
             console.log(currentExcipientlist);
@@ -209,77 +365,76 @@ factory('solubilityService', ['$http',
     }
 ])
 
-.factory('tabletFormulationService', ['$http',
+.factory('formulationService', ['$http',
     function($http) {
 
-        var tabletformulation = {};
+        var formulation = {};
 
-        tabletformulation.addFormulation = function(currentformulation) {
+        formulation.addFormulation = function(currentformulation) {
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://localhost:8081/tablet-formulation/add-tablet-formulation'
+                url: 'http://localhost:8081/formulation/add-formulation'
             });
         }
 
-        tabletformulation.updateFormulation = function(currentformulation) {
+        formulation.updateFormulation = function(currentformulation) {
             return $http({
                 method: "PUT",
                 data : currentformulation,
-                url: 'http://localhost:8081/tablet-formulation/update-tablet-formulation'
+                url: 'http://localhost:8081/formulation/update-formulation'
             });
         }
 
-        tabletformulation.deleteFormulation = function(currentformulationId) {
+        formulation.deleteFormulation = function(currentformulationId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/tablet-formulation/remove-tablet-formulation/'+ currentformulationId
+                url: 'http://localhost:8081/formulation/remove-formulation/'+ currentformulationId
             });
         }
 
-        tabletformulation.getFormulationList = function() {
+        formulation.getFormulationList = function() {
             return $http({
-                url: 'http://localhost:8081/tablet-formulation/tabletformulationList.json'
+                url: 'http://localhost:8081/formulation/formulationList.json'
             });
         }
-        return tabletformulation;
+        return formulation;
     }
 ])
-
-.factory('solutionFormulationService', ['$http',
+.factory('productionService', ['$http',
     function($http) {
 
-        var solutionformulation = {};
+        var production = {};
 
-        solutionformulation.addFormulation = function(currentformulation) {
+        production.addProduction = function(currentProduction) {
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://localhost:8081/solution-formulation/add-solution-formulation'
+                url: 'http://localhost:8081/production/create-production'
             });
         }
 
-        solutionformulation.updateFormulation = function(currentformulation) {
+        production.updateProduction = function(currentProduction) {
             return $http({
                 method: "PUT",
                 data: currentformulation,
-                url: 'http://localhost:8081/solution-formulation/update-solution-formulation'
+                url: 'http://localhost:8081/production/update-production'
             });
         }
 
-        solutionformulation.deleteFormulation = function(currentformulationId) {
+        production.deleteProduction = function(currentProductionId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/solution-formulation/remove-solution-formulation/' + currentformulationId
+                url: 'http://localhost:8081/production/remove-production/' + currentProductionId
             });
         }
 
-        solutionformulation.getFormulationList = function() {
+        production.getProductionList = function() {
             return $http({
-                url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
+                url: 'http://localhost:8081/production/productionlist.json'
             });
         }
-        return solutionformulation;
+        return production;
     }
 ])
 
@@ -324,5 +479,43 @@ factory('solubilityService', ['$http',
             });
         }
         return reformulation;
+    }
+])
+
+.factory('reformulationHistoryService', ['$http',
+    function($http) {
+
+        var reformulationHistory = {};
+
+        reformulationHistory.createReformulationHistory = function(reformulationHistory) {
+            return $http({
+                method: "POST",
+                data: reformulationHistory,
+                url: 'http://localhost:8081/reformulation-history/create-reformulation-history'
+            });
+        }
+
+        reformulationHistory.updateReformulationHistory = function(reformulationHistory) {
+            return $http({
+                method: "PUT",
+                data: reformulationHistory,
+                url: 'http://localhost:8081/reformulation-history/update-reformulation-history'
+            });
+        }
+
+        reformulationHistory.deleteReformulationHistory = function(reformulationHistoryId) {
+            return $http({
+                method: "DELETE",
+                url: 'http://localhost:8081/reformulation-history/remove-reformulation-history/' + reformulationHistoryId
+            });
+        }
+
+        reformulationHistory.getReformulationHistoryList = function() {
+            return $http({
+                url: 'http://localhost:8081/reformulation-history/reformulation-history-list.json'
+            });
+        }
+
+        return reformulationHistory;
     }
 ]);

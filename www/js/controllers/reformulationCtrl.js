@@ -5,17 +5,24 @@
  */
 angular.module('drugExpertSystem.reformulationController', [])
     // Reformulation Controller//
-    .controller('reformulationCtrl', function($scope, $timeout, $state, $ionicModal, $ionicPopup, $ionicSlideBoxDelegate, $ionicPopover, $ionicLoading, $ionicViewService, tabletFormulationService, solutionFormulationService, reformulationService) {
+    .controller('reformulationCtrl', function($scope, $timeout, $state, $ionicModal, $ionicPopup, $ionicSlideBoxDelegate, $ionicPopover, $ionicLoading, $ionicViewService,formulationService, reformulationService, reformulationHistoryService) {
 
         $scope.formulations = [];
         $scope.formulation = {};
-        $scope.production = {
-            //formulation: '',
-            //dfProperty : ''
-        };
-        $scope.dfProperty = {};
 
+        // Production
+        $scope.production = {};
+        $scope.originalProduction = angular.copy($scope.production);
+
+
+        // Df Property in the Production //
+        $scope.dfProperty = {};
+        $scope.originalDfProperty = angular.copy($scope.dfProperty);
+
+
+        // Dissolution Profile in the DF Property //
         $scope.dissolutionProfile = [];
+        $scope.originalDissolutionProfile = angular.copy($scope.dissolutionProfile);
 
         $scope.test = {};
 
@@ -23,33 +30,25 @@ angular.module('drugExpertSystem.reformulationController', [])
 
         $scope.reformulationResult = {};
 
-        $scope.currentReformulateResult = {};
+        $scope.currentReformulatedProduction = {};
 
-        $scope.reformulateProduction = {
-            //production : '',
+        $scope.reformulatedProductionList = [];
+
+        //Reformulation History that will be save after the user select "save reformulated production" //
+        $scope.reformulationHistory = {
             user: {
                 userName: 'Binn'
             },
-            accept: "false",
-            inferenceEngine: 'None'
-        };
-       
+            date: '',
+            reformulatedProductionList: ''
+        }
+
         //Get Formulationlist from database //
-        tabletFormulationService.getFormulationList().success(function(response) {
-            angular.forEach(response, function(value, key) {
-                $scope.formulations.push(value);
-            })
-
-            console.log($scope.formulations);
+        formulationService.getFormulationList().success(function(response) {
+            $scope.formulations = response;  
         });
 
-        solutionFormulationService.getFormulationList().success(function(response) {
-            angular.forEach(response, function(value, key) {
-                $scope.formulations.push(value);
-            });
-
-            console.log($scope.formulations);
-        });
+        
         $scope.testJess = function() {
             reformulationService.testJess();
         };
@@ -102,41 +101,126 @@ angular.module('drugExpertSystem.reformulationController', [])
         };
 
 
-        //Make Reformulation//
-        $scope.makeReformulation = function() {
+
+
+        //Start Reformulation//
+        $scope.startReformulation = function() {
 
             $scope.dfProperty.dissolutionProfile = $scope.dissolutionProfile;
             console.log($scope.dfProperty);
             $scope.production.dfProperty = $scope.dfProperty;
             console.log($scope.production.dfProperty);
-            $scope.reformulateProduction.production = $scope.production;
+            // $scope.reformulateProduction.production = $scope.production;
 
-            reformulationService.makeReformulation($scope.reformulateProduction).success(function(response) {
-            	$scope.reformulationResult = response;
-            	console.log($scope.reformulationResult);
+            reformulationService.makeReformulation($scope.production).success(function(response) {
+                $scope.reformulatedProductionList = response;
+                $scope.currentReformulatedProduction = $scope.reformulatedProductionList[0];
+                console.log($scope.reformulatedProductionList);
+                $ionicLoading.show({
+                        template: '<i class="icon ion-loading-c"></i>',
+                        showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+                    });
+
+                    // Hide the loadingIndicator 1500 ms later
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 3000);
+
+                    // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+                    $timeout(function() {
+                        $state.go('base.reformulationContent.reformulationResult');
+                    }, 1000);
+                
             });
-            console.log("God Like!!!!");
-            
-            $state.go('base.reformulationContent.reformulationResult');
-            //console.log($scope.formulations);
+
+
 
 
 
         };
 
 
+        // Set Current Reformulated Product follow the tab that user selected //
         $scope.resultSection = "ruleBase";
-        $scope.currentReformulateResult = $scope.reformulationResult[0];
+        
         //Set Reformulation Result that user selected//
         $scope.setReformulateResult = function(section) {
             $scope.resultSection = section;
             if (section == "ruleBase") {
-                $scope.currentReformulateResult = $scope.reformulationResult[0];
+                $scope.currentReformulatedProduction = $scope.reformulatedProductionList[0];
             } else if (section == "caseBase") {
-                $scope.currentReformulateResult = $scope.reformulationResult[1];
+                $scope.currentReformulatedProduction = $scope.reformulatedProductionList[1];
             } else if (section == "hybrid") {
-                $scope.currentReformulateResult = $scope.reformulationResult[2];
+                $scope.currentReformulatedProduction = $scope.reformulatedProductionList[2];
             }
 
         };
+
+
+        //Reformulation Result Option such as "save"//
+        $ionicPopover.fromTemplateUrl('reformulateResultOption.html', {
+            scope: $scope,
+        }).then(function(popover) {
+            $scope.popover = popover;
+        });
+
+        $scope.openPopover = function($event) {
+            document.body.classList.add('platform-ios');
+            $scope.popover.show($event);
+        };
+        $scope.closePopover = function() {
+            $scope.popover.hide();
+        };
+
+        // A confirm dialog for saveing the reformulate result to the database
+        $scope.showConfirmForCreateHistory = function() {
+        	$scope.closePopover();
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Save Reformulate Production',
+                template: 'Are you sure you want to save this reformulation to the history ?'
+            });
+            confirmPopup.then(function(res) {
+                if (res) {
+                    $scope.reformulationHistory.date = new Date();
+                    $scope.reformulationHistory.reformulatedProductionList = $scope.reformulatedProductionList;
+                    reformulationHistoryService.createReformulationHistory($scope.reformulationHistory);
+                    $scope.reset();
+                    $ionicLoading.show({
+                        template: '<i class="icon ion-loading-c"></i>',
+                        showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+                    });
+
+                    // Hide the loadingIndicator 1500 ms later
+                    $timeout(function() {
+                        $ionicLoading.hide();
+                    }, 1500);
+
+                    // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+                    $timeout(function() {
+                        $state.go('base.reformulationContent.formulationSelection');
+                    }, 500);
+                   
+                } else {
+                    console.log('You are not sure');
+                }
+            });
+        };
+
+        $scope.reset = function() {
+            $scope.production = angular.copy($scope.originalProduction);
+            $scope.dfProperty = angular.copy($scope.originalDfProperty);
+            $scope.dissolutionProfile = angular.copy($scope.originalDissolutionProfile);
+        }
+
+        $scope.cancel = function() {
+            $scope.reset();
+            var history = $ionicViewService.getBackView();
+            history.go();
+        };
+
+        $scope.back = function(){
+           var history = $ionicViewService.getBackView();
+           history.go();
+        }
+
     });

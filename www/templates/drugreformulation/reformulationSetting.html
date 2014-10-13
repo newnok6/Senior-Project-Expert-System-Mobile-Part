@@ -1,15 +1,15 @@
 <ion-view title="Drug Reformulation Setting">
     <ion-nav-buttons side="left">
-        <button class="button button-icon ion-chevron-left" ng-click="goback()">
-            Formulation
+        <button class="button button-icon" ng-click="cancel()">
+            Cancel
         </button>
     </ion-nav-buttons>
     <ion-content>
-        <form ng-submit="makeReformulation()">
+        <form ng-submit="startReformulation()">
 
             <ion-list list-inset>
-                <div class="padding-left">
-                    <h6>Formulation</h6>
+                <div class="item item-divider">
+                    Formulation
                 </div>
                 <div class="item">
                     Formulation Name : {{production.formulation.name}}
@@ -26,26 +26,26 @@
                 }
                 </style>
                 <div class="padding-top">
-                    <div class="padding-left">
-                        <h6>DF Property</h6>
+                    <div class="item item-divider">
+                        DF Property
                     </div>
                     <!-- Add DF Property -->
                     <!-- Total Weight -->
                     <label class="item item-input">
                         <span class="input-label">Total Weight:</span>
-                        <input type="text" placeholder="650.87" ng-model = "dfProperty.totalweight"/>
+                        <input type="text" placeholder="650.87" ng-model="dfProperty.totalweight" />
                     </label>
 
                     <!-- Disintegration time -->
                     <label class="item item-input">
                         <span class="input-label">Disintegration time:</span>
-                        <input type="text" placeholder="28" ng-model = "dfProperty.disgradationtime"/>
+                        <input type="text" placeholder="28" ng-model="dfProperty.disgradationtime" />
                     </label>
 
                     <!-- Hardness-->
                     <label class="item item-input">
                         <span class="input-label">Hardness:</span>
-                        <input type="text" placeholder="16.87" ng-model = "dfProperty.hardness"/>
+                        <input type="text" placeholder="16.87" ng-model="dfProperty.hardness" />
                     </label>
 
 
@@ -79,8 +79,8 @@
                 <!---->
 
                 <div class="padding-top">
-                    <div class="padding-left">
-                        <h6>Instraction</h6>
+                    <div class="item item-divider">
+                        Instraction
                     </div>
                     <label class="item item-input item-stacked-label">
                         <textarea rows="10">

@@ -8,15 +8,13 @@ angular.module('drugExpertSystem.formulationController', [])
 
 // Formulation Controller//
 .controller('formulationCtrl',
-    function($scope, $state, $timeout, $ionicPopover, $ionicModal, $ionicPopup, $ionicViewService, $ionicSlideBoxDelegate, $ionicLoading, excipientService, tabletFormulationService, solutionFormulationService) {
+    function($scope, $state, $timeout, $ionicPopover, $ionicModal, $ionicPopup, $ionicViewService, $ionicSlideBoxDelegate, $ionicLoading, excipientService, formulationService) {
 
         $scope.excipients = [];
         $scope.excipientInlist = excipientService.getCurrentExcipientlist();
         $scope.currentExcipient = {
             substanceFunctions: [],
-            usedWeight: '',
-            minWeight: '',
-            maxWeight: ''
+            usedWeight: ''
         };
         $scope.excipientOrig = angular.copy($scope.currentExcipient);
         $scope.setSubstanceFunctions = [];
@@ -38,21 +36,11 @@ angular.module('drugExpertSystem.formulationController', [])
 
 
         //Get Formulationlist from database //
-        tabletFormulationService.getFormulationList().success(function(response) {
-            angular.forEach(response, function(value, key) {
-                $scope.formulations.push(value);
-            })
-
-            console.log($scope.formulations);
+        formulationService.getFormulationList().success(function(response) {
+            $scope.formulations = response;
         });
 
-        solutionFormulationService.getFormulationList().success(function(response) {
-            angular.forEach(response, function(value, key) {
-                $scope.formulations.push(value);
-            })
-
-            console.log($scope.formulations);
-        });
+        
         ////////////////////////////////////////
 
         // Get Rxcipient list from the database //
@@ -162,9 +150,9 @@ angular.module('drugExpertSystem.formulationController', [])
         $scope.filter = function(key) {
             var set = [];
             set = $scope.excipients[key];
-            $scope.currentExcipient.minWeight = $scope.excipients[key].minWeight;
-            $scope.currentExcipient.maxWeight = set.maxWeight;
-            $scope.currentExcipient.usedWeight = set.usedWeight;
+            //$scope.currentExcipient.minWeight = $scope.excipients[key].minWeight;
+            //$scope.currentExcipient.maxWeight = set.maxWeight;
+            //$scope.currentExcipient.usedWeight = set.usedWeight;
             // $scope.currentExcipient.substanceFunctions = $scope.setSubstanceFunctions.substanceFunctions;
             console.log($scope.currentExcipient);
             console.log(set);
@@ -213,14 +201,8 @@ angular.module('drugExpertSystem.formulationController', [])
             //$scope.currentFormulation.api
             confirmPopup.then(function(res) {
                 if (res) {
-                    if (formulation.type == "Tablet Formulation") {
-                        console.log($scope.currentFormulation.type);
-                        tabletFormulationService.addFormulation(formulation);
-
-                    } else {
-                        console.log($scope.currentFormulation.type);
-                        solutionFormulationService.addFormulation(formulation);
-                    }
+                    console.log($scope.currentFormulation.api);
+                    formulationService.addFormulation(formulation);
                     $scope.reset();
                     $ionicLoading.show({
                         template: '<i class="icon ion-loading-c"></i>',
@@ -251,15 +233,7 @@ angular.module('drugExpertSystem.formulationController', [])
             });
             confirmPopup.then(function(res) {
                 if (res) {
-                    $scope.currentFormulation.api = excipientService.getCurrentExcipientlist();
-                    if (formulation.type == "Tablet Formulation") {
-                        console.log($scope.currentFormulation.type);
-                        tabletFormulationService.updateFormulation(formulation);
-
-                    } else {
-                        console.log($scope.currentFormulation.type);
-                        solutionFormulationService.updateFormulation(formulation);
-                    }
+                    formulationService.updateFormulation(formulation);
                     $scope.reset();
                     $ionicLoading.show({
                         template: '<i class="icon ion-loading-c"></i>',
@@ -291,14 +265,7 @@ angular.module('drugExpertSystem.formulationController', [])
             });
             confirmPopup.then(function(res) {
                 if (res) {
-                    if ($scope.formulationSelected.type == "Tablet Formulation") {
-                        console.log($scope.currentFormulation.type);
-                        tabletFormulationService.deleteFormulation($scope.formulationSelected.id);
-
-                    } else {
-                        console.log($scope.currentFormulation.type);
-                        solutionFormulationService.deleteFormulation($scope.formulationSelected.id);
-                    }
+                    formulationService.deleteFormulation($scope.formulationSelected.id);
                     $scope.reset();
                     $ionicLoading.show({
                         template: '<i class="icon ion-loading-c"></i>',
@@ -325,23 +292,10 @@ angular.module('drugExpertSystem.formulationController', [])
             $timeout(function() {
                 $scope.formulations = [];
                 //Get Formulationlist from database //
-                tabletFormulationService.getFormulationList().success(function(response) {
-                    angular.forEach(response, function(value, key) {
-                        $scope.formulations.push(value);
-                    })
 
-                    console.log($scope.formulations);
+                formulationService.getFormulationList().success(function(response) {
+                   $scope.formulations = response; 
                 });
-
-                solutionFormulationService.getFormulationList().success(function(response) {
-                    angular.forEach(response, function(value, key) {
-                        $scope.formulations.push(value);
-                    })
-
-                    console.log($scope.formulations);
-                });
-                ////////////////////////////////////////
-
                 //Stop the ion-refresher from spinning
                 $scope.$broadcast('scroll.refreshComplete');
 

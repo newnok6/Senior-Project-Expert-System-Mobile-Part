@@ -53,15 +53,32 @@
         </ion-radio>
         </div>
       </ion-slide>
+
+      <ion-slide class="has-header">
+        <div class="list list-inset">
+         <div class="item item-divider"> 
+              Excipient Used Weight
+          </div>
+            <label class="item item-input">
+                <span class="input-label">Used Weight :</span>
+                <input type="text" placeholder="2.43" ng-model="currentExcipient.usedWeight">
+            </label>
+            <button class="button button-block button-positive" ng-click="nextFormulationType()">Next</button>
+           </div>
+        </div>
+      </ion-slide>
       <ion-slide class="has-header">
       <div class="list list-inset">
         <div class="item item-divider">
               Detail
           </div>
+        <a class = "item">
           <h3> Substance : </h3> <p>{{currentExcipient.substance.name}}</p>
           <h3> SubstanceFunction Name : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionName}}</p>
           <h3> SubstanceFunction Type : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionType}}</p>
+          <h3> Used Weight : </h3> <p>{{currentExcipient.usedWeight}}</p>
            <button class="button button-block button-positive" ng-click="addExcipientToFormulation(currentExcipient)">Create SubstanceFunction</button>
+        </a>
            </div>
           </ion-slide>
   </ion-slide-box>
@@ -75,10 +92,10 @@
       <ion-popover-view>
           <div class="list">
             <a class="item" ng-click="goEditFormulation()">
-                Edit Excipient
+                Edit Formulation
            </a>
           <a class="item" ng-click = "showConfirmForDelete()">
-                 Delete Excipient
+                 Delete  Formulation
           </a>
           </div>
       </ion-popover-view>

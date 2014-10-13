@@ -1,0 +1,54 @@
+{
+	"solubility" : 
+	[
+		{"type" : "PracticallyInsoluble"},
+		{"type" : "VerySoluble"},
+		{"type" : "SlightlySoluble"},
+		{"type" : "SparinglySoluble"},
+		{"type" : "Soluble"},
+		{"type" : "VerySlightlySoluble"},
+		{"type" : "FreelySoluble"}
+	],
+
+	"flowability" : 
+	[
+		{"type" : "ExcellentFlowability"},
+		{"type" : "GoodFlowability"},
+		{"type" : "FairFlowability"},
+		{"type" : "PassibleFlowability"},
+		{"type" : "PoorFlowability"},
+		{"type" : "VeryPoorFlowability"},
+		{"type" : "Very,VeryPoorFlowability"}
+	],
+
+	"solidstate" : 
+	[
+		{"type" : "CrystallineMaterials"},
+		{"type" : "AmorphousMaterials"}
+	],
+
+	"hygroscopity" : 
+	[
+		{"type" : "Slightly hygroscopic"},
+		{"type" : "Hygroscopic"},
+		{"type" : "Very hygroscopic"},
+		{"type" : "Deliquecence"}
+	],
+
+	"particlesize" : 
+	[
+		{"type" : "PharmaceuticleNanoparticle"},
+		{"type" : "FineParticle"},
+		{"type" : "MicronizedParticle"},
+		{"type" : "NanosizeParticle"},
+		{"type" : "Ultra-micronizedParticle"},
+		{"type" : "VeryFineParticle"}
+	],
+
+	"saltform" : 
+	[
+		{"type" : "saltFormA"},
+		{"type" : "saltFormB"},
+		{"type" : "saltFormC"}
+	]
+}

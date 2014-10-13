@@ -1,12 +1,8 @@
-<ion-view title="All Substance ">
-    <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-plus-circled" ui-sref="base.substanceContent.addSubstance">
-        </button>
-    </ion-nav-buttons>
+<ion-view title="Drug Formulation List ">
     <ion-header-bar class="bar-subheader item-input-inset">
         <label class="item-input-wrapper">
             <i class="ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="searchSubstance">
+            <input type="text" placeholder="Search" ng-model="searchReformulationHistory">
         </label>
         <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
     </ion-header-bar>
@@ -15,7 +11,7 @@
 
         </ion-refresher>
         <div class="list list-inset">
-            <ion-radio ng-repeat=" (key,value) in substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
+            <ion-radio ng-repeat=" (key,value) in reformulationHistories | filter:searchReformulationHistory" ng-click="setSelectedSubstance(value)">
                 <div ng-show="substances.length == 0">
                     There are no the substance in the database. Please create a new substance.
                 </div>

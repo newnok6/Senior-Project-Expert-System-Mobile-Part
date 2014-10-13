@@ -32,11 +32,27 @@ angular.module('drugExpertSystem.templateController', [])
         $state.go("base.formulationContent.showAllFormulation");
     };
 
+    // Go to Production //
+    $scope.goProduction = function() {
+        solubilityService.resetCurrentSolubility();
+        stabilityService.resetStability();
+        $state.go("base.productionContent.showAllProduction");
+    };
+
     // Go to reFormulation Content and refresh existing data //
     $scope.goReFormulation = function() {
         solubilityService.resetCurrentSolubility();
         stabilityService.resetStability();
         $state.go("base.reformulationContent.formulationSelection");
+    };
+
+
+
+    // Go to Reformulation History //
+    $scope.goReFormulationHistory = function() {
+        solubilityService.resetCurrentSolubility();
+        stabilityService.resetStability();
+        $state.go("base.reformulationHistoryContent.reformulationHistorySelection");
     };
 
 

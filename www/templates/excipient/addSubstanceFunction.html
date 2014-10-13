@@ -14,7 +14,17 @@
         <ion-list show-delete="data.showDelete">
 
             <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" item="substanceFn">
-                <h2>Substance Function Name :</h2> <p>{{substanceFn.functionName}}</p> <h2>Substance Function Type : </h2> <p>{{substanceFn.functionType}}</p>
+                <h3>Substance Function Name :</h3> 
+                <p>{{substanceFn.functionName}}</p>
+
+                <h3>Substance Function Type : </h3>
+                <p>{{substanceFn.functionType}}</p>
+
+                <h3>Substance Function Min Weight :</h3> 
+                <p>{{substanceFn.maxWeight}}</p> 
+
+                <h3>Substance Function Max Weight : </h3>
+                <p>{{substanceFn.minWeight}}</p>
                 <ion-delete-button class="ion-minus-circled" ng-click="deleteSubstanceFnInList(substanceFn)">
                 </ion-delete-button>
                 <ion-option-button class="button-assertive" ng-click="edit(item)">
@@ -52,8 +62,23 @@
               {{value.type}}
         </ion-radio>
 
+        <div class="item item-divider"> 
+            Weight Setting
+        </div>
+
+
+        <label class="item item-input" ng-show = "currentSubstanceFn.functionType != null">
+                    <span class="input-label">Mininum Weight :</span>
+                    <input type="text" placeholder="3.45" ng-model = "currentSubstanceFn.minWeight">
+        </label>
+
+        <label class="item item-input" ng-show = " currentSubstanceFn.functionType != null">
+                    <span class="input-label">Max Weight :</span>
+                    <input type="text" placeholder="3.45" ng-model = "currentSubstanceFn.maxWeight">
+        </label>        
+
 		<button class="button button-full button-positive" ng-click="addSunstanceFn(currentSubstanceFn)">Create SubstanceFunction</button>
-			</div>
+	   </div>
 	</ion-content>
 	</ion-modal-view>
 </script>

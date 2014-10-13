@@ -13,10 +13,7 @@ angular.module('drugExpertSystem.excipientController', [])
         //$scope.excipientInlist = excipientService.getCurrentExcipientlist();
         $scope.setSubstanceFunctions = [];
         $scope.currentExcipient = {
-            substanceFunctions: '',
-            usedWeight: '',
-            minWeight: '',
-            maxWeight: ''
+            substanceFunctions: ''
         };
         $scope.orig = angular.copy($scope.currentExcipient);
         $scope.currentExcipient.substanceFunctions = substanceFnService.getCurrentSubstanceFnlist();
@@ -33,7 +30,7 @@ angular.module('drugExpertSystem.excipientController', [])
         });
 
         // Get the substance list from the service //
-        substanceService.getSubstanceList().success(function(response) {
+        excipientService.getSubstanceListForExcipient().success(function(response) {
             $scope.substances = response;
             console.log($scope.substances);
         });
@@ -163,9 +160,10 @@ angular.module('drugExpertSystem.excipientController', [])
             });
             confirmPopup.then(function(res) {
                 if (res) {
-                    excipientService.addExcipient(excipient);
+                    excipientService.addExcipient($scope.currentExcipient);
+                    console.log($scope.currentExcipient);
                     $scope.reset();
-                    console.log($scope.currentSubstance);
+                    console.log($scope.currentExcipient);
                     $ionicLoading.show({
                         template: '<i class="icon ion-loading-c"></i>',
                         showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.substanceController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.reformulationController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
+angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.substanceController','drugExpertSystem.substancePropController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.productionController','drugExpertSystem.reformulationController', 'drugExpertSystem.reformulationHistoryController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -70,7 +70,7 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
         views: {
             'substanceContent-view': {
                 templateUrl: 'templates/substance/addSubstance.html',
-                controller: 'solubilityCtrl'
+                controller: 'substancePropCtrl'
 
             }
         }
@@ -283,6 +283,76 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
 
         })
 
+    //Production State (Menu and Content)
+    .state('base.productionContent', {
+        url: '/production',
+        abstract: true,
+        views: {
+            'side-view': {
+                templateUrl: 'templates/menu.html',
+                controller: 'MenuCtrl'
+            },
+            'content-view': {
+                templateUrl: 'templates/production/productionContent.html',
+                controller: 'productionCtrl'
+            }
+        }
+
+    })
+
+
+    .state('base.productionContent.showAllProduction', {
+        url: '/productionlist',
+        views: {
+            'productionContent-view': {
+                templateUrl: 'templates/production/productionlist.html'
+            }
+        }
+
+    })
+
+    .state('base.productionContent.addProduction', {
+        url: '/addproduction',
+        views: {
+            'productionContent-view': {
+                templateUrl: 'templates/production/addProduction.html',
+
+            }
+        }
+
+    })
+
+     .state('base.productionContent.updateProduction', {
+        url: '/updateproduction',
+        views: {
+            'productionContent-view': {
+                templateUrl: 'templates/production/updateProduction.html',
+
+            }
+        }
+
+    })
+
+      .state('base.productionContent.productiondetail', {
+        url: '/productiondetail',
+        views: {
+            'productionContent-view': {
+                templateUrl: 'templates/production/productiondetail.html',
+
+            }
+        }
+
+    })
+        .state('base.productionContent.selectFormulation', {
+            url: '/selectFormulation',
+            views: {
+                'productionContent-view': {
+                    templateUrl: 'templates/production/selectFormulation.html'
+                }
+            }
+
+        })
+
     //Reformulation State
      .state('base.reformulationContent', {
         url: '/reformulation',
@@ -324,6 +394,41 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
         views: {
             'reformulationContent-view': {
                 templateUrl: 'templates/drugreformulation/reformulationResult.html'
+            }
+        }
+
+    })
+
+     //Reformulation History State
+     .state('base.reformulationHistoryContent', {
+        url: '/reformulation-history',
+        abstract: true,
+        views: {
+            'side-view': {
+                templateUrl: 'templates/menu.html',
+                controller: 'MenuCtrl'
+            },
+            'content-view': {
+                templateUrl: 'templates/reformulationHistory/reformulationHistoryContent.html',
+                controller: 'reformulationHisCtrl'
+            }
+        }
+
+    })
+     .state('base.reformulationHistoryContent.reformulationHistorySelection', {
+        url: '/reformulation-history-selection',
+        views: {
+            'reformulationHistoryContent-view': {
+                templateUrl: 'templates/reformulationHistory/reformulationhistoryList.html'
+            }
+        }
+
+    })
+     .state('base.reformulationHistoryContent.reformulationHistoryDetail', {
+        url: '/reformulation-history-detail',
+        views: {
+            'reformulationHistoryContent-view': {
+                templateUrl: 'templates/reformulationHistory/reformulationHistoryDetail.html'
             }
         }
 

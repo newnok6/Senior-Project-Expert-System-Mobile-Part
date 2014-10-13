@@ -1,0 +1,28 @@
+<ion-view title="Drug Formulation List ">
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchReformulationHistory">
+        </label>
+        <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled"></button>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()">
+
+        </ion-refresher>
+        <div class="list list-inset">
+            <div class="item item-divider">
+                Reformulate Production
+            </div>
+            <ion-radio ng-repeat=" (key,value) in reformulationHistoryList| filter:searchReformulationHistory" ng-click="setSelectedHistory(value)">
+                <div ng-show="reformulationHistoryList.length == 0">
+                    There are no the substance in the database. Please create a new substance.
+                </div>
+                <div ng-show="reformulationHistoryList.length > 0">
+                    <h2>{{value.reformulatedProductionList[1].production.formulation.name}}</h2>
+                    <p>Reformulate Production Date : {{value.date | date:"dd/MM/yyyy 'at' h:mma"}}</p>
+                </div>
+            </ion-radio>
+        </div>
+    </ion-content>
+</ion-view>

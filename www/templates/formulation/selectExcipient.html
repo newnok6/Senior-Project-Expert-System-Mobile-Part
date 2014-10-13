@@ -14,7 +14,10 @@
         <ion-list show-delete="data.showDelete">
 
             <ion-item ng-repeat="excipient in excipientInlist track by $index" item="excipient">
-                Excipient Name : {{excipient.substance.name}}
+                <h2>Excipient Name : {{excipient.substance.name}}</h2>
+                <p>Substance Function Name : {{excipient.substanceFunctions[0].functionName}}</p>
+                <p>Substance Function Type : {{excipient.substanceFunctions[0].functionType}}</p>
+                <p>Used Weight : {{excipient.usedWeight}}</p>
                 <ion-delete-button class="ion-minus-circled" ng-click="deleteExcipientFromList(excipient)">
                 </ion-delete-button>
                 <ion-option-button class="button-assertive" ng-click="edit(item)">

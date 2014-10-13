@@ -1,12 +1,12 @@
-<ion-view title="All Substance ">
+<ion-view title="All Production ">
     <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-plus-circled" ui-sref="base.substanceContent.addSubstance">
+        <button class="button button-icon icon ion-plus-circled" ui-sref="base.productionContent.selectFormulation">
         </button>
     </ion-nav-buttons>
     <ion-header-bar class="bar-subheader item-input-inset">
         <label class="item-input-wrapper">
             <i class="ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="searchSubstance">
+            <input type="text" placeholder="Search" ng-model="searchProduction">
         </label>
         <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
     </ion-header-bar>
@@ -15,13 +15,13 @@
 
         </ion-refresher>
         <div class="list list-inset">
-            <ion-radio ng-repeat=" (key,value) in substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
-                <div ng-show="substances.length == 0">
+            <ion-radio ng-repeat=" (key ,value) in productions| filter:searchProduction" ng-click="setSelectedProduction(value)">
+                <div ng-show="productions.length == 0">
                     There are no the substance in the database. Please create a new substance.
                 </div>
-                <div ng-show="substances.length > 0">
-                    <h2>{{value.name}}</h2>
-                    <p>{{value.waterSolubility}},{{value.pka}}</p>
+                <div ng-show="productions.length > 0">
+                    <h2>Production Name :</h2>
+                    <p>{{value.name}}</p>
                 </div>
             </ion-radio>
         </div>

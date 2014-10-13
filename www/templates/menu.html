@@ -16,14 +16,23 @@
                 <i class="icon ion-aperture"></i>
                 Formulation
             </ion-item>
+            <ion-item ng-click="goProduction()" item-icon-left nav-clear>
+                <i class="icon ion-cube"></i>
+                Production
+            </ion-item>
 
             <!-- Make a divider -->
             <div class="item item-divider">
                 Drug Reformulation Analysis
             </div>
             <ion-item ng-click="goReFormulation()" item-icon-left nav-clear>
-                <i class="icon ion-beaker"></i>
+                <i class="icon ion-ionic"></i>
                 Drug Reformulation
+            </ion-item>
+
+             <ion-item ng-click="goReFormulationHistory()" item-icon-left nav-clear>
+                <i class="icon ion-filing"></i>
+                    Reformulation History
             </ion-item>
         </ion-list>
     </ion-content>
