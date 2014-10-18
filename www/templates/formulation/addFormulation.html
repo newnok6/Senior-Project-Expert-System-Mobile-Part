@@ -8,22 +8,24 @@
 
     <ion-content>
 
-        <form ng-submit="showConfirm(currentFormulation)">
+        <form name = "createFormulation" ng-submit="showConfirm(currentFormulation)">
 
             <ion-list list-inset>
                 <!--The Formulation Name input form-->
-                <label class="item item-input">
+                <label class="item item-input item-stacked-label">
                     <span class="input-label">Formulation Name :</span>
-                    <input type="text" placeholder="Formulation A" ng-model="currentFormulation.name">
+                    <input name = "name" type="text" placeholder="Formulation A" ng-model="currentFormulation.name" required>
+                     <p class="badge badge-assertive" ng-show="createFormulation.name.$error.required">
+                        Required!</p>
                 </label>
                 <!---->
 
                 <!-- The Formulation type input form -->
                 <a class="item " ng-click="openModal(4)">
-                    Select the formulation type
-                  <span class="item-note">
+                    Formulation Type
+                    <p class="padding-top">
                       {{currentFormulation.type}}
-                  </span>
+                    </p>
                 </a>
                 <!---->
 

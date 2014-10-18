@@ -4,7 +4,7 @@
             <div class="item item-divider">
                 Manage Pharmacetical Value
             </div>
-            <ion-item ng-click="goSubstance()" item-icon-left nav-clear>
+            <ion-item ng-class="{ 'item\-positive': contentSection == 'substance' }" ng-click="goSubstance()" item-icon-left nav-clear>
                 <i class="icon ion-beaker"></i>
                 Substance
             </ion-item>
@@ -16,12 +16,16 @@
                 <i class="icon ion-aperture"></i>
                 Formulation
             </ion-item>
+            
+            <!--
             <ion-item ng-click="goProduction()" item-icon-left nav-clear>
                 <i class="icon ion-cube"></i>
                 Production
             </ion-item>
-
+            -->
             <!-- Make a divider -->
+            <div class="padding-top">
+            </div>
             <div class="item item-divider">
                 Drug Reformulation Analysis
             </div>

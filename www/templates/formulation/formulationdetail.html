@@ -27,7 +27,7 @@
 
             <a class="item">
                 <h2>Excipient List :</h2>
-                <p ng-repeat="(key, value) in formulationSelected.api">
+                <p ng-repeat="(key, value) in formulationSelected.excipient">
                     Name : {{value.substance.name}}  , Function Name : {{value.substanceFunctions[0].functionName}}  , Function Type : {{value.substanceFunctions[0].functionType}}
                 </p>
             </a>

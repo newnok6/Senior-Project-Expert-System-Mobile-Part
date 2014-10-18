@@ -209,6 +209,7 @@ angular.module('drugExpertSystem.substancePropController', [])
     $scope.openModal = function(index) {
         if (index == 1) {
             $scope.oModal1.show();
+            console.log("test");
         } else if (index == 2) {
             $scope.oModal2.show();
         } else if (index == 3) {

@@ -14,13 +14,22 @@ angular.module('drugExpertSystem.reformulationHistoryController', [])
         $scope.orginalSelectedHistory = angular.copy($scope.selectedHistory);
         $scope.currentReformulatedProduction = {};
 
-        //Get Reformulation History Lsit from the database //
+        //Get Reformulation History List from the database //
         reformulationHistoryService.getReformulationHistoryList().success(function(response) {
             $scope.reformulationHistoryList = response;
             console.log($scope.reformulationHistoryList);
         });
 
-        $scope.setSelectedHistory = function(history){
+        $scope.getReformulationHistory = function() {
+            reformulationHistoryService.getReformulationHistoryList().success(function(response) {
+                $scope.reformulationHistoryList = response;
+                console.log($scope.reformulationHistoryList);
+            });
+        }
+
+
+
+        $scope.setSelectedHistory = function(history) {
             $scope.selectedHistory = history;
             $scope.currentReformulatedProduction = $scope.selectedHistory.reformulatedProductionList[0];
             $state.go("base.reformulationHistoryContent.reformulationHistoryDetail");
@@ -30,7 +39,7 @@ angular.module('drugExpertSystem.reformulationHistoryController', [])
 
         // Set Current Reformulated Product follow the tab that user selected //
         $scope.resultSection = "ruleBase";
-        
+
         //Set Reformulation Result that user selected//
         $scope.setReformulateResult = function(section) {
             $scope.resultSection = section;
@@ -59,14 +68,14 @@ angular.module('drugExpertSystem.reformulationHistoryController', [])
             $scope.popover.hide();
         };
 
-        
+
         //Evaluate the reformulation history//
-        $scope.evaluation = function(){
+        $scope.evaluation = function() {
 
         }
 
         // Delete the selected reformulation history from the database //
-        $scope.deleteHistory = function(){
+        $scope.deleteHistory = function() {
             $scope.closePopover();
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete The Reformulation History',
@@ -99,10 +108,7 @@ angular.module('drugExpertSystem.reformulationHistoryController', [])
         // refresh the reformulation history data//
         $scope.doRefresh = function() {
             $timeout(function() {
-                reformulationHistoryService.getReformulationHistoryList().success(function(response) {
-                    $scope.reformulationHistoryList = response;
-
-                });
+                $scope.getReformulationHistory;
 
                 //Stop the ion-refresher from spinning
                 $scope.$broadcast('scroll.refreshComplete');
@@ -112,13 +118,13 @@ angular.module('drugExpertSystem.reformulationHistoryController', [])
         };
 
         // Reset the data that showm on page //
-            $scope.reset = function(){
+        $scope.reset = function() {
                 $scope.selectedHistory = angular.copy($scope.orginalSelectedHistory);
             }
-        // Back to previous page //
-        $scope.back = function(){
-           var history = $ionicViewService.getBackView();
-           history.go();
+            // Back to previous page //
+        $scope.back = function() {
+            var history = $ionicViewService.getBackView();
+            history.go();
         }
-       
+
     });

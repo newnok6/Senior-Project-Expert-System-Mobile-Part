@@ -6,10 +6,13 @@
 angular.module('drugExpertSystem.templateController', [])
 
 .controller('MenuCtrl', function($scope, $state, solubilityService, stabilityService, $ionicSideMenuDelegate) {
+    
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
         console.log("test");
     };
+
+
 
     // Go to Excipient Content and refresh existing data //
     $scope.goExcipient = function() {
@@ -20,9 +23,12 @@ angular.module('drugExpertSystem.templateController', [])
 
     // Go to substance Content and refresh existing data //
     $scope.goSubstance = function() {
+
         solubilityService.resetCurrentSolubility();
         stabilityService.resetStability();
+        $scope.contentSection = 'substance';
         $state.go("base.substanceContent.showAllSubstance");
+
     };
 
     // Go to Formulation Content and refresh existing data //

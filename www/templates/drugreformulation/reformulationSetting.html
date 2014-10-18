@@ -5,18 +5,18 @@
         </button>
     </ion-nav-buttons>
     <ion-content>
-        <form ng-submit="startReformulation()">
+        <form name = "reformulationSetting" ng-submit="startReformulation()">
 
             <ion-list list-inset>
                 <div class="item item-divider">
-                    Formulation
+                    Active Ingredient
                 </div>
                 <div class="item">
-                    Formulation Name : {{production.formulation.name}}
+                    Active Ingredient Name : {{production.formulationName}}
                 </div>
                 <!-- Formulation Weight -->
                 <label class="item item-input">
-                    <span class="input-label">Amount of Strenght:</span>
+                    <span class="input-label">Amount of Strenght (mg.) :</span>
                     <input type="text" placeholder="500.00" ng-model="production.formulationWeight" />
                 </label>
 
@@ -25,26 +25,150 @@
                     padding-top: 25px;
                 }
                 </style>
+
+                <!--active ingredient setting -->
+                <div class="padding-top">
+
+                <div class="item item-divider">
+                        Active Ingredient Properties
+                    </div>
+
+                    <!-- Add Water Solubility -->
+                    <a class="item " ng-click="openModal(1)">
+                         Water Solubility :
+                        <p class="padding-top">
+                            {{activeIngredient.waterSolubility}}
+                        </p>
+                    </a>
+                    <!---->
+
+                    <!-- Add the Flowability -->
+                    <a class="item " ng-click="openModal(2)">
+                        Flow Ability :
+                        <p class="padding-top">
+                            {{activeIngredient.flowability}}
+                        </p>
+                    </a>
+
+                    <!-- Add the Solid State -->
+                    <a class="item " required ng-click="openModal(3)">
+                        Solid State :
+                        <p class="padding-top" name = "solidstate" >
+                            {{activeIngredient.solidState}}
+                        </p>
+                        <p class="badge badge-assertive" ng-show="reformulationSetting.solidstate.$error.required">Required!</p>
+                    </a>
+
+                    <!-- Add the Hygroscopicity -->
+                    <a class="item " ng-click="openModal(4)">
+                         Hygroscopicity :
+                            <p class="padding-top">
+                                {{activeIngredient.hygroscopicity}}
+                            </p>
+                    </a>
+
+                    <!-- Add the Partticle Size -->
+                    <a class="item " ng-click="openModal(5)">
+                        Particle Size :
+                            <p class="padding-top">
+                                {{activeIngredient.particleSize}}
+                            </p>
+                    </a>
+
+                    <!-- Add the ALcohol Solubility -->
+                    <a class="item " ng-click="openModal(6)">
+                        Alcohol Solubility :
+                            <p class="padding-top">
+                                {{activeIngredient.alcoholSolubility}}
+                            </p>
+                     </a>
+
+                    <!-- Add the Salt Form -->
+                    <a class="item " ng-click="openModal(7)">
+                        Salt Form :
+                            <p class="padding-top">
+                                {{activeIngredient.saltForm}}
+                            </p>
+                    </a>
+
+                    <!-- Add the pka -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">pKa Value :</span>
+                        <input name="pKa" type="text" placeholder="2.34" ng-model="activeIngredient.pka" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" >
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.pKa.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.pKa.$error.pattern">
+                            Number Only!</span>
+                    </label>
+
+                    <!-- Add the Partition Coeffifient -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Partition Coefficient Value :</span>
+                        <input name="partitionCoefficaient" type="text" placeholder="6.00" ng-model="activeIngredient.partitionCoefficient" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" >
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.partitionCoefficaient.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.partitionCoefficaient.$error.pattern">
+                            Number Only!</span>
+                    </label>
+
+                    <!-- Add the Density -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Density Value :</span>
+                        <input name="density" type="text" placeholder="5.67" ng-model="activeIngredient.density" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" >
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.density.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.density.$error.pattern">
+                            Number Only!</span>
+                    </label>
+
+                    <!-- Add the Molecular Weight -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Molecular Weight Value :</span>
+                        <input name="molecularWeight" type="text" placeholder="8.34" ng-model="activeIngredient.mocularWeight" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" >
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.molecularWeight.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.molecularWeight.$error.pattern">
+                            Number Only!</span>
+                    </label>
+
+                    <!-- Add the ionicity-->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">ionicity Type :</span>
+                        <input name="ionicity" type="text" placeholder="Very Ionicity" ng-model="activeIngredient.ionicity" >
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.ionicity.$error.required">
+                            Required!</span>
+                    </label>
+
+                    <!-- Add Stability -->
+                    <a class="item item-icon-right " ui-sref="base.substanceContent.addStability">
+                        <i class="icon ion-chevron-right"></i>
+                        Select the Stability
+                    </a>
+                    <!---->    
+
+                  
+                </div>
+
                 <div class="padding-top">
                     <div class="item item-divider">
-                        DF Property
+                        Original Dosage Form Properties
                     </div>
                     <!-- Add DF Property -->
                     <!-- Total Weight -->
                     <label class="item item-input">
-                        <span class="input-label">Total Weight:</span>
+                        <span class="input-label">Total Weight (mg.) :</span>
                         <input type="text" placeholder="650.87" ng-model="dfProperty.totalweight" />
                     </label>
 
                     <!-- Disintegration time -->
                     <label class="item item-input">
-                        <span class="input-label">Disintegration time:</span>
+                        <span class="input-label">Disintegration time (second) :</span>
                         <input type="text" placeholder="28" ng-model="dfProperty.disgradationtime" />
                     </label>
 
                     <!-- Hardness-->
                     <label class="item item-input">
-                        <span class="input-label">Hardness:</span>
+                        <span class="input-label">Friability (%) :</span>
                         <input type="text" placeholder="16.87" ng-model="dfProperty.hardness" />
                     </label>
 
@@ -78,6 +202,7 @@
                 </div>
                 <!---->
 
+                <!--
                 <div class="padding-top">
                     <div class="item item-divider">
                         Instraction
@@ -88,13 +213,141 @@
                         </textarea>
                     </label>
                 </div>
+                -->
                 <div class="padding">
                     <button type="submit" class="button button-block button-positive">Start Reformulation</button>
                 </div>
+
             </ion-list>
 
         </form>
 
+<!--Solubility Modal, I put it here because it can load -->
+<script id="solubilityModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Water Solubility Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(1)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="solubility in solubilities" ng-value = "solubility.type" ng-model="currentSolubility.type" ng-click="setCurrentSolubility(currentSolubility)">
+ {{solubility.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
 
+
+
+<!--Flowability Modal, I put it here because it can load -->
+<script id="flowabilityModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Flowability Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(2)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+  <ion-radio ng-repeat="flowability in flowabilityList" ng-value = "flowability.type" ng-model="currentFlowability.type" ng-click="setCurrentFlowability(currentFlowability)">
+        {{flowability.type}}
+  </ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--SolidState Modal, I put it here because it can load -->
+<script id="solidstateModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Solid State Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(3)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="solidstate in solidstateList" ng-value = "solidstate.type" ng-model="currentSolidState.type" ng-click="setCurrentSolidState(currentSolidState)">
+    {{solidstate.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--Hygroscopity Modal, I put it here because it can load -->
+<script id="hygroscopityModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Hygroscopity Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(4)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="hygroscopity in hygroscopityList" ng-value = "hygroscopity.type" ng-model="currentHygroscopity.type" ng-click="setCurrentHygroscopity(currentHygroscopity)">
+    {{hygroscopity.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--Particle Modal, I put it here because it can load -->
+<script id="particleSizeModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Particle Size Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(5)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="particleSize in particleSizeList" ng-value = "particleSize.type" ng-model="currentParticleSize.type" ng-click="setCurrentPartcleSize(currentParticleSize)">
+      {{particleSize.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--Alcohol Modal, I put it here because it can load -->
+<script id="alcoholModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Alcohol Solution Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(6)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="alcohol in alcoholList" ng-value = "alcohol.type" ng-model="currentAlcohol.type" ng-click="setCurrentAlcohol(currentAlcohol)">
+      {{alcohol.type}}
+ </ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--SaltForm Modal, I put it here because it can load -->
+<script id="saltFormModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">SaltForm Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(7)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="saltform in saltformList" ng-value = "saltform.type" ng-model="currentSaltForm.type" ng-click="setCurrentSaltForm(currentSaltForm)">
+    {{saltform.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
     </ion-content>
 </ion-view>

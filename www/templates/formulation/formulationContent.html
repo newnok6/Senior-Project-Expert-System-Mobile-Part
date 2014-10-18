@@ -88,13 +88,13 @@
 
 <!-- Formulation Option Modal.The Option is "Edit Formulation" or "Delete Formulation" -->
 <script id="formulationoption.html" type="text/ng-template">
-<style>.popover { height:115px; width: 400px; }</style>
+<style>.popover { height:115px; width: 225px; }</style>
       <ion-popover-view>
           <div class="list">
-            <a class="item" ng-click="goEditFormulation()">
+            <a class="item icon ion-edit" ng-click="goEditFormulation()">
                 Edit Formulation
            </a>
-          <a class="item" ng-click = "showConfirmForDelete()">
+          <a class="item icon ion-trash-b" ng-click = "showConfirmForDelete()">
                  Delete  Formulation
           </a>
           </div>

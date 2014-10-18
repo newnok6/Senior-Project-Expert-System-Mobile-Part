@@ -451,6 +451,7 @@ angular.module('drugExpertSystem.services', [])
             });
         }
 
+/*
         reformulation.updateFormulation = function(currentformulation) {
             return $http({
                 method: "PUT",
@@ -471,7 +472,7 @@ angular.module('drugExpertSystem.services', [])
                 url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
             });
         }
-
+*/
          reformulation.testJess = function() {
             return $http({
                 method: "POST",

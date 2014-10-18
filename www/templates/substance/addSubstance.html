@@ -7,102 +7,126 @@
     </ion-nav-buttons>
 <ion-content>
 
-  <form ng-submit="showConfirm(currentSubstance)">
+  <form name = "substanceadding" ng-submit="showConfirm(currentSubstance)">
   
     <ion-list list-inset>
     <!--The Substance input form-->
-    <label class="item item-input">
+    <label class="item item-input item-stacked-label">
       <span class="input-label">Substance Name :</span>
-      <input type="text" placeholder="Substance A" ng-model="currentSubstance.name">
+      <input type="text"name = "substanceName" placeholder="Substance A" ng-model="currentSubstance.name" required>
+      <p class="badge badge-assertive" ng-show="substanceadding.substanceName.$error.required">
+        Required!</p>
     </label>
     <!---->
-    <!-- The Solubility input form -->
+    
+
+    <!-- Add Water Solubility -->
     <a class="item " ng-click="openModal(1)">
-      Select The Water Solubility :
-      <span class="item-note">
+      
+       Water Solubility :
+       <p class="padding-top">
        {{currentSubstance.waterSolubility}}
-      </span>
+       </p>
     </a>
     <!---->
 
     <!-- Add the Flowability -->
      <a class="item " ng-click="openModal(2)">
       Flow Ability :
-      <span class="item-note">
+       <p class="padding-top">
        {{currentSubstance.flowability}}
-      </span>
+       </p>
     </a>
 
     <!-- Add the Solid State -->
-     <a class="item " ng-click="openModal(3)">
+     <a class="item " required ng-click="openModal(3)" >
       Solid State :
-      <span class="item-note">
+       <p class="padding-top" name = "solidstate" >
        {{currentSubstance.solidState}}
-      </span>
+       </p>
+        <p class="badge badge-assertive" ng-show="substanceadding.solidstate.$error.required">
+        Required!</p>
     </a>
 
     <!-- Add the Hygroscopicity -->
      <a class="item " ng-click="openModal(4)">
       Hygroscopicity :
-      <span class="item-note">
+       <p class="padding-top">
        {{currentSubstance.hygroscopicity}}
-      </span>
+       </p>
+      
     </a>
 
     <!-- Add the Partticle Size -->
      <a class="item " ng-click="openModal(5)">
       Particle Size :
-      <span class="item-note">
+      <p class="padding-top">
        {{currentSubstance.particleSize}}
-      </span>
+       </p>
     </a>
 
     <!-- Add the ALcohol Solubility -->
      <a class="item " ng-click="openModal(6)">
       Alcohol Solubility :
-      <span class="item-note">
+      <p class="padding-top">
        {{currentSubstance.alcoholSolubility}}
-      </span>
+      </p>
     </a>
 
     <!-- Add the Salt Form -->
      <a class="item " ng-click="openModal(7)">
       Salt Form :
-      <span class="item-note">
-      <div>
+      <p class="padding-top">
        {{currentSubstance.saltForm}}
-       </div>
-      </span>
+      </p>
     </a>
 
      <!-- Add the pka -->
-     <label class="item item-input">
+     <label class="item item-input item-stacked-label">
       <span class="input-label">pKa Value : </span>
-      <input type="text" placeholder="2.34" ng-model="currentSubstance.pka">
+      <input name = "pKa" type="text" placeholder="2.34" ng-model="currentSubstance.pka" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/" required>
+      <span class="badge badge-assertive" ng-show="substanceadding.pKa.$error.required">
+          Required!</span>
+      <span class="badge badge-assertive" ng-show="substanceadding.pKa.$error.pattern">
+    Number Only!</span>
     </label>
 
     <!-- Add the Partition Coeffifient -->
-     <label class="item item-input">
+     <label class="item item-input item-stacked-label">
       <span class="input-label">Partition Coefficient Value : </span>
-      <input type="text" placeholder="6.00" ng-model="currentSubstance.partitionCoefficient">
+      <input name = "partitionCoefficaient" type="text" placeholder="6.00" ng-model="currentSubstance.partitionCoefficient" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/" required>
+      <span class="badge badge-assertive" ng-show="substanceadding.partitionCoefficaient.$error.required">
+          Required!</span>
+      <span class="badge badge-assertive" ng-show="substanceadding.partitionCoefficaient.$error.pattern">
+    Number Only!</span>
     </label>
 
     <!-- Add the Density -->
-     <label class="item item-input">
-      <span class="input-label">Desity Value :</span>
-      <input type="text" placeholder="5.67" ng-model="currentSubstance.density">
+     <label class="item item-input item-stacked-label">
+      <span class="input-label">Density Value :</span>
+      <input name = "density" type="text" placeholder="5.67" ng-model="currentSubstance.density" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/" required>
+      <span class="badge badge-assertive" ng-show="substanceadding.density.$error.required">
+          Required!</span>
+      <span class="badge badge-assertive" ng-show="substanceadding.density.$error.pattern">
+    Number Only!</span>
     </label>
 
     <!-- Add the Molecular Weight -->
-     <label class="item item-input">
+     <label class="item item-input item-stacked-label">
       <span class="input-label">Molecular Weight Value :</span>
-      <input type="text" placeholder="8.34"  ng-model="currentSubstance.mocularWeight">
+      <input name = "molecularWeight" type="text" placeholder="8.34"  ng-model="currentSubstance.mocularWeight" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/" required>
+      <span class="badge badge-assertive" ng-show="substanceadding.molecularWeight.$error.required">
+          Required!</span>
+      <span class="badge badge-assertive" ng-show="substanceadding.molecularWeight.$error.pattern">
+    Number Only!</span>
     </label>
 
     <!-- Add the ionicity-->
-     <label class="item item-input">
+     <label class="item item-input item-stacked-label">
       <span class="input-label">ionicity Type :</span>
-      <input type="text" placeholder="Very Ionicity" ng-model="currentSubstance.ionicity">
+      <input name = "ionicity" type="text" placeholder="Very Ionicity" ng-model="currentSubstance.ionicity" required>
+      <span class="badge badge-assertive" ng-show="substanceadding.ionicity.$error.required">
+          Required!</span>
     </label>
 
     <!-- Add Stability -->

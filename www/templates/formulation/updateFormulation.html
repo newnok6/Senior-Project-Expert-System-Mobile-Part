@@ -12,18 +12,20 @@
 
             <ion-list list-inset>
                 <!--The Formulation Name input form-->
-                <label class="item item-input">
-                    <span class="input-label">Formulation Name :</span>
-                    <input type="text" placeholder="Formulation A" ng-model="currentFormulation.name">
+                <label class="item item-input item-stacked-label">
+                    Formulation Name :
+                    <p class= "padding-top">
+                    {{currentFormulation.name}}
+                    </p>
                 </label>
                 <!---->
 
                 <!-- The Formulation type input form -->
                 <a class="item " ng-click="openModal(4)">
                     Select the formulation type
-                  <span class="item-note">
+                  <p class= "padding-top">
                       {{currentFormulation.type}}
-                  </span>
+                  </p>
                 </a>
                 <!---->
 

@@ -12,12 +12,13 @@ angular.module('drugExpertSystem.solubilityController', [])
         $scope.solubilities = [];
         $scope.currentSolubility = {};
 
+/*
         //Get Solubilities data from the service 
         solubilityService.getSolubilityList().success(function(response) {
             $scope.solubilities = response;
             console.log($scope.currentSolubility);
         });
-
+*/
         //Set Solubility data to the service
         $scope.setCurrentSolubility = function(currentSolubility) {
             solubilityService.setCurrentSolubility(currentSolubility.type);

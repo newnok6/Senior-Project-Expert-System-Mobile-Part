@@ -15,13 +15,12 @@
 
         </ion-refresher>
         <div class="list list-inset">
-            <ion-radio ng-repeat=" (key,value) in substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
-                <div ng-show="substances.length == 0">
-                    There are no the substance in the database. Please create a new substance.
-                </div>
+            <ion-radio ng-repeat=" (key,value) in  substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
+                    <p ng-show = "!substances.length">There are no the substance in the database. Please create a new substance.</p>
+                
                 <div ng-show="substances.length > 0">
                     <h2>{{value.name}}</h2>
-                    <p>{{value.waterSolubility}},{{value.pka}}</p>
+                    <p>Water Solubility : {{value.waterSolubility}}, pKa Value : {{value.pka}}</p>
                 </div>
             </ion-radio>
         </div>

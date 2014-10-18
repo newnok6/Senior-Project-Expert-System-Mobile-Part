@@ -8,7 +8,7 @@ angular.module('drugExpertSystem.substanceController', [])
 // Substance Controller //
 .controller('substanceCtrl', function($scope, $state, $rootScope, $timeout, solubilityService, flowablityService, solidstateService, hygroscopityService, particlesizeService, alcoholService, saltFormService, stabilityService, substanceService, $ionicModal, $ionicPopup, $ionicPopover, $ionicLoading, $ionicViewService) {
     var scope = $rootScope;
-    $scope.substances = [];
+    $scope.substances = $scope.getSubstanceList;
     $scope.substanceSelected = {};
     $scope.currentSubstance = {
         waterSolubility: '',
@@ -85,26 +85,37 @@ angular.module('drugExpertSystem.substanceController', [])
         }
     });
 
-    //Show SubstanceList// 
+    // get Substance Data from the data base //
+    $scope.getSubstanceList = function(){
+        substanceService.getSubstanceList().success(function(response) {
+         $scope.substances = response;
+        });
+     
+    }
+
+    // Add A new substance function//
+    $scope.addNewSubstance = function(substance){
+        substanceService.addSubstance(substance);
+    }
+
+    // Update the exsiting substance//
+    $scope.updateSubstance = function(substance){
+        substanceService.updateSubstance(substance);
+    }
+
+    // Delete the exsiting substance //
+    $scope.deleteSubstance = function(substance){
+        substanceService.deleteSubstance($scope.substanceSelected.id);
+    }
+
+    //Get Substance List at the first time// 
     substanceService.getSubstanceList().success(function(response) {
-        //Digging into the response to get the relevant data
-        $scope.substances = response;
+        //igging into the response to get the relevant data
+           $scope.substances = response;
     });
 
-    // Get Current Solubility form Solubility Service//
-    $scope.reset = function() {
-        solubilityService.resetCurrentSolubility();
-        flowablityService.resetCurrentFlowability();
-        solidstateService.resetCurrentSolidState();
-        hygroscopityService.resetCurrentHygroscopity();
-        particlesizeService.resetCurrentParticlesize();
-        alcoholService.resetCurrentAlcohol();
-        saltFormService.resetCurrentSaltForm;
-        stabilityService.resetStability();
 
-        $scope.currentSubstance = angular.copy($scope.orig);
-        $scope.currentSubstance.stability = stabilityService.getStabilities();
-    }
+   
 
 
     // Set the current substance that user selected //
@@ -115,56 +126,7 @@ angular.module('drugExpertSystem.substanceController', [])
 
     }
 
-    //Substance Option window such as  "edit" or "delete"//
-    $ionicPopover.fromTemplateUrl('substanceoption.html', {
-        scope: $scope,
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-
-    $scope.openPopover = function($event) {
-        document.body.classList.add('platform-ios');
-        $scope.popover.show($event);
-    };
-    $scope.closePopover = function() {
-        $scope.popover.hide();
-    };
-
-    $scope.goback = function() {
-        $scope.reset();
-        // $scope.substanceSelected = null;
-        // $scope.substanceSelected = $scope.origSelectedSubstance;
-
-        var history = $ionicViewService.getBackView();
-        console.log(history);
-        history.go();
-    };
-
-    // Go to edit substance that user selected //
-    $scope.gotoEdit = function() {
-        $scope.closePopover();
-        $scope.reset();
-        $scope.currentSubstance = $scope.substanceSelected;
-        solubilityService.setCurrentSolubility($scope.substanceSelected.waterSolubility);
-        angular.forEach($scope.substanceSelected.stability, function(value, key) {
-            stabilityService.setStabilities(value);
-        })
-        $ionicLoading.show({
-            template: '<i class="icon ion-loading-c"></i>',
-            showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
-        });
-
-        // Hide the loadingIndicator 1500 ms later
-        $timeout(function() {
-            $ionicLoading.hide();
-        }, 1500);
-
-        // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
-        $timeout(function() {
-            $state.go('base.substanceContent.editSubstance');
-        }, 500);
-    }
-
+   
 
     // A confirm dialog for adding a new substance
     $scope.showConfirm = function(substance) {
@@ -175,7 +137,7 @@ angular.module('drugExpertSystem.substanceController', [])
         confirmPopup.then(function(res) {
             if (res) {
                 $scope.currentSubstance.stability = stabilityService.getStabilities();
-                substanceService.addSubstance(substance);
+                $scope.addNewSubstance(substance);
                 console.log("test");
                 $scope.reset();
                 $ionicLoading.show({
@@ -209,7 +171,7 @@ angular.module('drugExpertSystem.substanceController', [])
             //console.log($scope.currentSubstance);
             if (res) {
                 $scope.currentSubstance.stability = stabilityService.getStabilities();
-                substanceService.updateSubstance(substance);
+                $scope.updateSubstance(substance);
                 $scope.reset();
                 $ionicLoading.show({
                     template: '<i class="icon ion-loading-c"></i>',
@@ -241,7 +203,7 @@ angular.module('drugExpertSystem.substanceController', [])
         });
         confirmPopup.then(function(res) {
             if (res) {
-                substanceService.deleteSubstance($scope.substanceSelected.id);
+                $scope.deleteSubstance($scope.substanceSelected);
                 $scope.reset();
                 $ionicLoading.show({
                     template: '<i class="icon ion-loading-c"></i>',
@@ -264,15 +226,79 @@ angular.module('drugExpertSystem.substanceController', [])
     };
 
 
+     //Substance Option window such as  "edit" or "delete"//
+    $ionicPopover.fromTemplateUrl('substanceoption.html', {
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    $scope.openPopover = function($event) {
+        document.body.classList.add('platform-ios');
+        $scope.popover.show($event);
+    };
+    $scope.closePopover = function() {
+        $scope.popover.hide();
+    };
+
+    // Go back to previous page //
+    $scope.goback = function() {
+        $scope.reset();
+        // $scope.substanceSelected = null;
+        // $scope.substanceSelected = $scope.origSelectedSubstance;
+
+        var history = $ionicViewService.getBackView();
+        console.log(history);
+        history.go();
+    };
+
+    // Go to edit substance that user selected //
+    $scope.gotoEdit = function() {
+        $scope.closePopover();
+        //$scope.reset();
+        $scope.currentSubstance = $scope.substanceSelected;
+        solubilityService.setCurrentSolubility($scope.substanceSelected.waterSolubility);
+        console.log($scope.currentSubstance);
+        angular.forEach($scope.substanceSelected.stability, function(value, key) {
+            stabilityService.setStabilities(value);
+        })
+        $ionicLoading.show({
+            template: '<i class="icon ion-loading-c"></i>',
+            showDelay: 5 // If the delay is too fast and you also change states, while the loader is showing, you can get flashing behavior
+        });
+
+        // Hide the loadingIndicator 1500 ms later
+        $timeout(function() {
+            $ionicLoading.hide();
+        }, 1500);
+
+        // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
+        $timeout(function() {
+            $state.go('base.substanceContent.editSubstance');
+        }, 500);
+    }
+
+
+     // Get Current Solubility form Solubility Service//
+    $scope.reset = function() {
+        solubilityService.resetCurrentSolubility();
+        flowablityService.resetCurrentFlowability();
+        solidstateService.resetCurrentSolidState();
+        hygroscopityService.resetCurrentHygroscopity();
+        particlesizeService.resetCurrentParticlesize();
+        alcoholService.resetCurrentAlcohol();
+        saltFormService.resetCurrentSaltForm;
+        stabilityService.resetStability();
+
+        $scope.currentSubstance = angular.copy($scope.orig);
+        $scope.currentSubstance.stability = stabilityService.getStabilities();
+    }
+
     //Refresh Substance data in the list, the refresh will call data from db //
     $scope.doRefresh = function() {
         console.log('Refreshing!');
         $timeout(function() {
-
-            substanceService.getSubstanceList().success(function(response) {
-                $scope.substances = response;
-            });
-
+                $scope.getSubstanceList();
             //Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
 

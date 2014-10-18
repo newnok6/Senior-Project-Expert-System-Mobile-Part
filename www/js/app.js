@@ -120,7 +120,7 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
         views: {
             'substanceContent-view': {
                 templateUrl: 'templates/substance/editSubstance.html',
-                controller: 'solubilityCtrl'
+                controller: 'substancePropCtrl'
 
             }
         }
@@ -282,6 +282,7 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
             }
 
         })
+/*
 
     //Production State (Menu and Content)
     .state('base.productionContent', {
@@ -352,7 +353,7 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
             }
 
         })
-
+*/
     //Reformulation State
      .state('base.reformulationContent', {
         url: '/reformulation',
@@ -384,7 +385,8 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
         url: '/reformulation-setting',
         views: {
             'reformulationContent-view': {
-                templateUrl: 'templates/drugreformulation/reformulationSetting.html'
+                templateUrl: 'templates/drugreformulation/reformulationSetting.html',
+                controller : 'substancePropCtrl'
             }
         }
 
