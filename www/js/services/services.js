@@ -1,3 +1,5 @@
+'use-strict'; 
+
 angular.module('drugExpertSystem.services', [])
 
 .factory('substancePropService',['$http', function($http) {
@@ -239,7 +241,7 @@ angular.module('drugExpertSystem.services', [])
         return $http({
             method: "POST",
             data: substance,
-            url: 'http://localhost:8081/substance/add-substance'
+            url: 'http://54.169.76.170:8080/oegp/substance/add-substance'
         });
     }
 
@@ -247,20 +249,20 @@ angular.module('drugExpertSystem.services', [])
         return $http({
             method: "PUT",
             data: substance,
-            url: 'http://localhost:8081/substance/update-substance'
+            url: 'http://54.169.76.170:8080/oegp/substance/update-substance'
         });
     }
 
     substance.deleteSubstance = function(substanceId) {
         return $http({
             method: "DELETE",
-            url: 'http://localhost:8081/substance/remove-substance/' + substanceId
+            url: 'http://54.169.76.170:8080/oegp/substance/remove-substance/' + substanceId
         });
     }
 
     substance.getSubstanceList = function() {
         return $http({
-            url: 'http://localhost:8081/substance/substanceList.json?callback=JSON_CALLBACK'
+            url: 'http://54.169.76.170:8080/oegp/substance/substanceList.json?callback=JSON_CALLBACK'
         });
     }
     return substance;
@@ -311,7 +313,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: excipient,
-                url: 'http://localhost:8081/excipient/add-excipient'
+                url: 'http://54.169.76.170:8080/oegp/excipient/add-excipient'
             });
         }
 
@@ -319,26 +321,26 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data: excipient,
-                url: 'http://localhost:8081/excipient/update-excipient'
+                url: 'http://54.169.76.170:8080/oegp/excipient/update-excipient'
             });
         }
 
         excipient.deleteExcipient = function(excipientId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/excipient/remove-excipient/' + excipientId
+                url: 'http://54.169.76.170:8080/oegp/excipient/remove-excipient/' + excipientId
             });
         }
 
         excipient.getExcipientList = function() {
             return $http({
-                url: 'http://localhost:8081/excipient/excipientList.json'
+                url: 'http://54.169.76.170:8080/oegp/excipient/excipientList.json'
             });
         }
 
         excipient.getSubstanceListForExcipient = function() {
             return $http({
-                url: 'http://localhost:8081/excipient/substanceListForExcipient.json'
+                url: 'http://54.169.76.170:8080/oegp/excipient/substanceListForExcipient.json'
             });
         }
 
@@ -374,7 +376,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://localhost:8081/formulation/add-formulation'
+                url: 'http://54.169.76.170:8080/oegp/formulation/add-formulation'
             });
         }
 
@@ -382,20 +384,20 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data : currentformulation,
-                url: 'http://localhost:8081/formulation/update-formulation'
+                url: 'http://54.169.76.170:8080/oegp/formulation/update-formulation'
             });
         }
 
         formulation.deleteFormulation = function(currentformulationId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/formulation/remove-formulation/'+ currentformulationId
+                url: 'http://54.169.76.170:8080/oegp/formulation/remove-formulation/'+ currentformulationId
             });
         }
 
         formulation.getFormulationList = function() {
             return $http({
-                url: 'http://localhost:8081/formulation/formulationList.json'
+                url: 'http://54.169.76.170:8080/oegp/formulation/formulationList.json'
             });
         }
         return formulation;
@@ -410,7 +412,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://localhost:8081/production/create-production'
+                url: 'http://54.169.76.170:8080/oegp/production/create-production'
             });
         }
 
@@ -418,20 +420,20 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data: currentformulation,
-                url: 'http://localhost:8081/production/update-production'
+                url: 'http://54.169.76.170:8080/oegp/production/update-production'
             });
         }
 
         production.deleteProduction = function(currentProductionId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/production/remove-production/' + currentProductionId
+                url: 'http://54.169.76.170:8080/oegp/production/remove-production/' + currentProductionId
             });
         }
 
         production.getProductionList = function() {
             return $http({
-                url: 'http://localhost:8081/production/productionlist.json'
+                url: 'http://54.169.76.170:8080/oegp/production/productionlist.json'
             });
         }
         return production;
@@ -447,7 +449,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: reformulateProduction,
-                url: 'http://localhost:8081/inference-engine/reformulate-production'
+                url: 'http://54.169.76.170:8080/oegp/inference-engine/reformulate-production'
             });
         }
 
@@ -492,7 +494,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: reformulationHistory,
-                url: 'http://localhost:8081/reformulation-history/create-reformulation-history'
+                url: 'http://54.169.76.170:8080/oegp/reformulation-history/create-reformulation-history'
             });
         }
 
@@ -500,20 +502,20 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data: reformulationHistory,
-                url: 'http://localhost:8081/reformulation-history/update-reformulation-history'
+                url: 'http://54.169.76.170:8080/oegp/reformulation-history/update-reformulation-history'
             });
         }
 
         reformulationHistory.deleteReformulationHistory = function(reformulationHistoryId) {
             return $http({
                 method: "DELETE",
-                url: 'http://localhost:8081/reformulation-history/remove-reformulation-history/' + reformulationHistoryId
+                url: 'http://54.169.76.170:8080/oegp/reformulation-history/remove-reformulation-history/' + reformulationHistoryId
             });
         }
 
         reformulationHistory.getReformulationHistoryList = function() {
             return $http({
-                url: 'http://localhost:8081/reformulation-history/reformulation-history-list.json'
+                url: 'http://54.169.76.170:8080/oegp/reformulation-history/reformulation-history-list.json'
             });
         }
 

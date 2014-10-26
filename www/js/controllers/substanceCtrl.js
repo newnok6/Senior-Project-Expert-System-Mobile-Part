@@ -6,8 +6,8 @@
 angular.module('drugExpertSystem.substanceController', [])
 
 // Substance Controller //
-.controller('substanceCtrl', function($scope, $state, $rootScope, $timeout, solubilityService, flowablityService, solidstateService, hygroscopityService, particlesizeService, alcoholService, saltFormService, stabilityService, substanceService, $ionicModal, $ionicPopup, $ionicPopover, $ionicLoading, $ionicViewService) {
-    var scope = $rootScope;
+.controller('substanceCtrl', ['$scope', '$state', '$timeout', 'solubilityService', 'flowablityService', 'solidstateService', 'hygroscopityService', 'particlesizeService', 'alcoholService', 'saltFormService', 'stabilityService', 'substanceService', '$ionicModal', '$ionicPopup', '$ionicPopover', '$ionicLoading', '$ionicViewService', function($scope, $state, $timeout, solubilityService, flowablityService, solidstateService, hygroscopityService, particlesizeService, alcoholService, saltFormService, stabilityService, substanceService, $ionicModal, $ionicPopup, $ionicPopover, $ionicLoading, $ionicViewService) {
+
     $scope.substances = $scope.getSubstanceList;
     $scope.substanceSelected = {};
     $scope.currentSubstance = {
@@ -86,36 +86,36 @@ angular.module('drugExpertSystem.substanceController', [])
     });
 
     // get Substance Data from the data base //
-    $scope.getSubstanceList = function(){
+    $scope.getSubstanceList = function() {
         substanceService.getSubstanceList().success(function(response) {
-         $scope.substances = response;
+            $scope.substances = response;
         });
-     
+
     }
 
     // Add A new substance function//
-    $scope.addNewSubstance = function(substance){
+    $scope.addNewSubstance = function(substance) {
         substanceService.addSubstance(substance);
     }
 
     // Update the exsiting substance//
-    $scope.updateSubstance = function(substance){
+    $scope.updateSubstance = function(substance) {
         substanceService.updateSubstance(substance);
     }
 
     // Delete the exsiting substance //
-    $scope.deleteSubstance = function(substance){
+    $scope.deleteSubstance = function(substance) {
         substanceService.deleteSubstance($scope.substanceSelected.id);
     }
 
     //Get Substance List at the first time// 
     substanceService.getSubstanceList().success(function(response) {
         //igging into the response to get the relevant data
-           $scope.substances = response;
+        $scope.substances = response;
     });
 
 
-   
+
 
 
     // Set the current substance that user selected //
@@ -126,7 +126,7 @@ angular.module('drugExpertSystem.substanceController', [])
 
     }
 
-   
+
 
     // A confirm dialog for adding a new substance
     $scope.showConfirm = function(substance) {
@@ -226,7 +226,7 @@ angular.module('drugExpertSystem.substanceController', [])
     };
 
 
-     //Substance Option window such as  "edit" or "delete"//
+    //Substance Option window such as  "edit" or "delete"//
     $ionicPopover.fromTemplateUrl('substanceoption.html', {
         scope: $scope,
     }).then(function(popover) {
@@ -279,7 +279,7 @@ angular.module('drugExpertSystem.substanceController', [])
     }
 
 
-     // Get Current Solubility form Solubility Service//
+    // Get Current Solubility form Solubility Service//
     $scope.reset = function() {
         solubilityService.resetCurrentSolubility();
         flowablityService.resetCurrentFlowability();
@@ -298,7 +298,7 @@ angular.module('drugExpertSystem.substanceController', [])
     $scope.doRefresh = function() {
         console.log('Refreshing!');
         $timeout(function() {
-                $scope.getSubstanceList();
+            $scope.getSubstanceList();
             //Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
 
@@ -311,4 +311,4 @@ angular.module('drugExpertSystem.substanceController', [])
 
     }
 
-})
+}]);
