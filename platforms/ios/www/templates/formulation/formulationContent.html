@@ -1,0 +1,105 @@
+<ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
+
+  </ion-nav-bar>
+
+	<ion-nav-view name="formulationContent-view">
+
+	</ion-nav-view>
+
+	<!--Solubility Modal, I put it here because it can load -->
+<script id="formulationTypeModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title"> Formulation Type Selection</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(4)"></button>
+</ion-header-bar>
+<ion-content class="padding">
+<div class="list">
+ <ion-radio ng-repeat="formulationType in formulationTypes" ng-value = "formulationType.type" ng-model="currentFormulation.type" ng-click="hideModal(4)" >
+      {{formulationType.type}}
+</ion-radio>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->	
+
+
+<script id="excipientModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title"></h1>
+    <button class="button button-clear button-primary" ng-click="hideModal(5)">Cancel</button>
+  </ion-header-bar>
+      <ion-slide-box class = "content" on-slide-changed="slideHasChanged($index)">
+        <ion-slide class="has-header">
+        <div class="list list-inset">
+          <div class="item item-divider"> 
+            SubstanceFunction Name
+        </div>
+        <ion-radio ng-repeat=" (key,value) in excipients " ng-value = "value.substance" ng-model = "currentExcipient.substance" name = "substance-name" ng-click = "nextFormulationType(key)">
+              {{value.substance.name}}
+        </ion-radio>
+        </div>
+      </ion-slide>
+       <ion-slide class="has-header">
+        <div class="list list-inset">
+         <div class="item item-divider"> 
+            SubstanceFunction Name
+          </div>
+         <ion-radio ng-repeat=" (key,value) in  filter(setkey).substanceFunctions track by $index" ng-value = "value" ng-model = "setSubstanceFunctions.substanceFunctions" name = "excipient-type" ng-click = "nextFormulationType()">
+                <h3>FunctionName :{{value.functionName}} </h3>
+                <h3>FunctionType :{{value.functionType}} </h3>
+        </ion-radio>
+        </div>
+      </ion-slide>
+
+      <ion-slide class="has-header">
+        <div class="list list-inset">
+         <div class="item item-divider"> 
+              Excipient Used Weight
+          </div>
+            <label class="item item-input">
+                <span class="input-label">Used Weight :</span>
+                <input type="text" placeholder="2.43" ng-model="currentExcipient.usedWeight">
+            </label>
+            <button class="button button-block button-positive" ng-click="nextFormulationType()">Next</button>
+           </div>
+        </div>
+      </ion-slide>
+      <ion-slide class="has-header">
+      <div class="list list-inset">
+        <div class="item item-divider">
+              Detail
+          </div>
+        <a class = "item">
+          <h3> Substance : </h3> <p>{{currentExcipient.substance.name}}</p>
+          <h3> SubstanceFunction Name : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionName}}</p>
+          <h3> SubstanceFunction Type : </h3> <p>{{setSubstanceFunctions.substanceFunctions.functionType}}</p>
+          <h3> Used Weight : </h3> <p>{{currentExcipient.usedWeight}}</p>
+           <button class="button button-block button-positive" ng-click="addExcipientToFormulation(currentExcipient)">Create SubstanceFunction</button>
+        </a>
+           </div>
+          </ion-slide>
+  </ion-slide-box>
+  </ion-modal-view>
+</script>
+
+
+<!-- Formulation Option Modal.The Option is "Edit Formulation" or "Delete Formulation" -->
+<script id="formulationoption.html" type="text/ng-template">
+<style>.popover { height:115px; width: 225px; }</style>
+      <ion-popover-view>
+          <div class="list">
+            <a class="item icon ion-edit" ng-click="goEditFormulation()">
+                Edit Formulation
+           </a>
+          <a class="item icon ion-trash-b" ng-click = "showConfirmForDelete()">
+                 Delete  Formulation
+          </a>
+          </div>
+      </ion-popover-view>
+    </script>
+
+
+

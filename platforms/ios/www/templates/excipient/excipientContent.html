@@ -1,0 +1,26 @@
+<ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
+
+  </ion-nav-bar>
+
+	<ion-nav-view name="excipientContent-view">
+
+	</ion-nav-view>
+
+
+<!-- Excipient Option Modal.The Option is "Update Excipient" or "Delete Excipient" -->
+<script id="excipientoption.html" type="text/ng-template">
+<style>.popover { height:110px; width: 225px; }</style>
+      <ion-popover-view>
+          <div class="list">
+           <a class="item icon ion-edit" ng-click="goEditExcipient()">
+                Update Excipient
+           </a>
+           <a class="item icon ion-trash-b" ng-click = "showConfirmForDelete()">
+                 Delete Excipient
+          </a>
+          </div>
+      </ion-popover-view>
+    </script>
+
+
+ 

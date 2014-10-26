@@ -1,0 +1,28 @@
+<ion-view title="All Substance ">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-plus-circled" ui-sref="base.substanceContent.addSubstance">
+        </button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchSubstance">
+        </label>
+        <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()">
+
+        </ion-refresher>
+        <div class="list list-inset">
+            <ion-radio ng-repeat=" (key,value) in  substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
+                    <p ng-show = "!substances.length">There are no the substance in the database. Please create a new substance.</p>
+                
+                <div ng-show="substances.length > 0">
+                    <h2>{{value.name}}</h2>
+                    <p>Water Solubility : {{value.waterSolubility}}, pKa Value : {{value.pka}}</p>
+                </div>
+            </ion-radio>
+        </div>
+    </ion-content>
+</ion-view>

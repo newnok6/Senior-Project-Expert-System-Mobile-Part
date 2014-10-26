@@ -1,0 +1,29 @@
+<ion-view title="Excipient Detail">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left " ui-sref="base.excipientContent.showAllExcipient">
+            All Excipients
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-more" ng-click="openPopover($event)">
+        </button>
+    </ion-nav-buttons>
+
+
+    <ion-content>
+
+        <div class="list card">
+            <a class="item">
+                <h2>Excipient Name :</h2>
+                <p>{{excipientSelected.substance.name}}</p>
+            </a>
+
+            <a class="item">
+                <h2>Substance Function :</h2>
+                <p ng-repeat="(key, value) in excipientSelected.substanceFunctions">
+                Function Name : {{value.functionName}} ,  Function Type : {{value.functionType}}  , Min Weight : {{value.minWeight}} , Max Weight : {{value.maxWeight}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

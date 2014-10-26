@@ -1,0 +1,27 @@
+<ion-view title="Select Formulation">
+<ion-header-bar class="bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="searchFormulation">
+        </label>
+        <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled"></button>
+    </ion-header-bar>
+    <ion-content>
+     <ion-refresher on-refresh="doRefresh()">
+
+        </ion-refresher>
+        <div class="list list-inset">
+
+            <ion-radio ng-repeat=" formulation in formulations | filter:searchFormulation" ui-sref="base.reformulationContent.reformulationSetting" ng-value="formulation.name" ng-model="production.formulationName">
+                <div ng-show="formulations.length == 0">
+                    There are no the substance in the database. Please create a new substance.
+                </div>
+                <div ng-show="formulations.length > 0">
+                    <h2>{{formulation.name}}</h2>
+                </div>
+            </ion-radio>
+
+
+        </div>
+    </ion-content>
+</ion-view>

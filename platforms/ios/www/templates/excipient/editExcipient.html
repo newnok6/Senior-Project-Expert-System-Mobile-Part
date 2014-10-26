@@ -1,0 +1,23 @@
+<ion-view title="Update Excipient">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon" ng-click ="cancel()">
+            Cancel
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form ng-submit="showConfirmForUpdate(currentExcipient)">
+            <div class="list list-inset">
+                <div class="item">
+                    Excipient Name : {{currentExcipient.substance.name}}
+                </div>
+                <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
+                    Select Substance Function
+                </a>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-assertive">Update Excipient</button>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>

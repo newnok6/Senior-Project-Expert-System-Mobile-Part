@@ -1,0 +1,48 @@
+<ion-view title="Update Formulation">
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon " ng-click="cancel()">
+            Cancel
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <form ng-submit="showConfirmForUpdate(currentFormulation)">
+
+            <ion-list list-inset>
+                <!--The Formulation Name input form-->
+                <label class="item item-input item-stacked-label">
+                    Formulation Name :
+                    <p class= "padding-top">
+                    {{currentFormulation.name}}
+                    </p>
+                </label>
+                <!---->
+
+                <!-- The Formulation type input form -->
+                <a class="item " ng-click="openModal(4)">
+                    Select the formulation type
+                  <p class= "padding-top">
+                      {{currentFormulation.type}}
+                  </p>
+                </a>
+                <!---->
+
+                <!-- Add Excipient -->
+                <a class="item" ui-sref="base.formulationContent.selectExcipient">
+                  Select the excipient
+                </a>
+                <!---->
+
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Update Formulation</button>
+                </div>
+            </ion-list>
+
+        </form>
+
+
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,23 @@
+<ion-view title="Create a new Excipient">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-chevron-left" ui-sref="base.excipientContent.selectSubstance">
+            Substance Selection
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form ng-submit="showConfirm(currentExcipient)">
+            <div class="list list-inset">
+                <div class="item">
+                    Excipient Name : {{currentExcipient.substance.name}}
+                </div>
+                <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
+                    Select Substance Function
+                </a>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Create Excipient</button>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>

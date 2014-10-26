@@ -1,0 +1,36 @@
+<ion-view title="Formulation Detail">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left " ui-sref="base.formulationContent.showAllFormulation">
+            All Formulation
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-more" ng-click="openPopover($event)">
+        </button>
+    </ion-nav-buttons>
+
+
+    <ion-content>
+
+        <div class="list card">
+            <a class="item">
+                <h2>Formulation Name :</h2>
+                <p>{{formulationSelected.name}}</p>
+            </a>
+
+            <a class="item">
+                <h2>Formulation Type:</h2>
+                <p>{{formulationSelected.type}}</p>
+            </a>
+
+
+            <a class="item">
+                <h2>Excipient List :</h2>
+                <p ng-repeat="(key, value) in formulationSelected.excipient">
+                    Name : {{value.substance.name}}  , Function Name : {{value.substanceFunctions[0].functionName}}  , Function Type : {{value.substanceFunctions[0].functionType}}
+                </p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-view>
+    <ion-content>
+        <ion-list>
+            <div class="item item-divider">
+                Manage Pharmacetical Value
+            </div>
+            <ion-item ng-class="{ 'item\-positive': contentSection == 'substance' }" ng-click="goSubstance()" item-icon-left nav-clear>
+                <i class="icon ion-beaker"></i>
+                Substance
+            </ion-item>
+            <ion-item ng-click="goExcipient()" item-icon-left nav-clear>
+                <i class="icon ion-flask"></i>
+                Excipient
+            </ion-item>
+            <ion-item ng-click="goFormulation()" item-icon-left nav-clear>
+                <i class="icon ion-aperture"></i>
+                Formulation
+            </ion-item>
+            <!-- Make a divider -->
+       
+            <div class="item item-divider">
+                Drug Reformulation Analysis
+            </div>
+            <ion-item ng-click="goReFormulation()" item-icon-left nav-clear>
+                <i class="icon ion-ionic"></i>
+                Drug Reformulation
+            </ion-item>
+
+             <ion-item ng-click="goReFormulationHistory()" item-icon-left nav-clear>
+                <i class="icon ion-filing"></i>
+                    Reformulation History
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

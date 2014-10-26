@@ -1,0 +1,26 @@
+{
+	"funtionName" : 
+	[
+		{"name" : "binder"},
+		{"name" : "disintegrant"}
+	],
+
+	"functionType" : 
+		{
+			"binder" :
+					[
+						{"type" : "binderA"},
+						{"type" : "binderB"},
+						{"type" : "binderC"}
+					],
+			"disintegrant" :
+					[
+						{"type" : "disintegrantA"},
+						{"type" : "disintegrantB"},
+						{"type" : "disintegrantC"}
+					]
+
+		}
+			
+	
+}

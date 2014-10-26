@@ -1,0 +1,37 @@
+<ion-view title="Add Excipient">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete; data.showReorder = false">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-ios7-plus-outline" ng-click="openModal(5)">
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+
+        <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+        <ion-list show-delete="data.showDelete">
+
+            <ion-item ng-repeat="excipient in excipientInlist track by $index" item="excipient">
+                <h2>Excipient Name : {{excipient.substance.name}}</h2>
+                <p>Substance Function Name : {{excipient.substanceFunctions[0].functionName}}</p>
+                <p>Substance Function Type : {{excipient.substanceFunctions[0].functionType}}</p>
+                <p>Used Weight : {{excipient.usedWeight}}</p>
+                <ion-delete-button class="ion-minus-circled" ng-click="deleteExcipientFromList(excipient)">
+                </ion-delete-button>
+                <ion-option-button class="button-assertive" ng-click="edit(item)">
+                    Edit
+                </ion-option-button>
+
+            </ion-item>
+            <div class="padding" ng-show="excipientInlist.length > 0">
+                <button type="submit" ng-click="goback()" class="button button-block button-positive">Finish</button>
+            </div>
+        </ion-list>
+
+ 
+</ion-content>
+
+</ion-view>
+ 
