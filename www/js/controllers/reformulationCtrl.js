@@ -148,9 +148,11 @@ angular.module('drugExpertSystem.reformulationController', [])
         // Show the Formulation Type list //
         $ionicModal.fromTemplateUrl('dissolutionProfileModal.html', {
             id: 7,
-            scope: $scope
+            scope: $scope,
+            animation: 'slide-in-up'
         }).then(function(modal) {
             $scope.oModal7 = modal;
+            
         });
 
         $scope.openModal = function(index) {
