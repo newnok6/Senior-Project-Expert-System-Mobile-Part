@@ -12,10 +12,13 @@
                     Active Ingredient
                 </div>
                 <div class="item">
-                    Active Ingredient Name : {{production.formulationName}}
+                    Active Ingredient Name :
+                     <p class="padding-top"> 
+                    {{production.formulationName}}
+                    </p>
                 </div>
                 <!-- Formulation Weight -->
-                <label class="item item-input">
+                <label class="item item-input item-stacked-label">
                     <span class="input-label">Amount of Strenght (mg.) :</span>
                     <input type="text" placeholder="500.00" ng-model="production.formulationWeight" />
                 </label>
@@ -147,19 +150,19 @@
                     </div>
                     <!-- Add DF Property -->
                     <!-- Total Weight -->
-                    <label class="item item-input">
+                    <label class="item item-input item-stacked-label">
                         <span class="input-label">Total Weight (mg.) :</span>
                         <input type="text" placeholder="650.87" ng-model="dfProperty.totalweight" />
                     </label>
 
                     <!-- Disintegration time -->
-                    <label class="item item-input">
+                    <label class="item item-input item-stacked-label">
                         <span class="input-label">Disintegration time (second) :</span>
                         <input type="text" placeholder="28" ng-model="dfProperty.disgradationtime" />
                     </label>
 
                     <!-- Hardness-->
-                    <label class="item item-input">
+                    <label class="item item-input item-stacked-label">
                         <span class="input-label">Friability (%) :</span>
                         <input type="text" placeholder="16.87" ng-model="dfProperty.hardness" />
                     </label>
@@ -193,19 +196,6 @@
                     <!---->
                 </div>
                 <!---->
-
-                <!--
-                <div class="padding-top">
-                    <div class="item item-divider">
-                        Instraction
-                    </div>
-                    <label class="item item-input item-stacked-label">
-                        <textarea rows="10">
-
-                        </textarea>
-                    </label>
-                </div>
-                -->
                 <div class="padding">
                     <button type="submit" class="button button-block button-positive">Start Reformulation</button>
                 </div>
