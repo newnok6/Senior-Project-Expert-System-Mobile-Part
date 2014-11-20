@@ -5,7 +5,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.substanceController','drugExpertSystem.substancePropController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.productionController','drugExpertSystem.reformulationController', 'drugExpertSystem.reformulationHistoryController', 'drugExpertSystem.services', 'drugExpertSystem.directives'])
+angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.substanceController','drugExpertSystem.substancePropController', 'drugExpertSystem.excipientController', 'drugExpertSystem.formulationController', 'drugExpertSystem.solubilityController', 'drugExpertSystem.stabilityController', 'drugExpertSystem.templateController', 'drugExpertSystem.substanceFnController','drugExpertSystem.productionController','drugExpertSystem.reformulationController', 'drugExpertSystem.reformulationHistoryController', 'drugExpertSystem.services', 'drugExpertSystem.directives', 'drugExpertSystem.filter'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -392,11 +392,31 @@ angular.module('drugExpertSystem', ['ionic','ngCordova', 'drugExpertSystem.subst
         }
 
     })
+
+      .state('base.reformulationContent.reformulationResultList', {
+        url: '/reformulation-resultList',
+        views: {
+            'reformulationContent-view': {
+                templateUrl: 'templates/drugreformulation/reformulationResultList.html'
+            }
+        }
+
+    })
      .state('base.reformulationContent.reformulationResult', {
         url: '/reformulation-result',
         views: {
             'reformulationContent-view': {
                 templateUrl: 'templates/drugreformulation/reformulationResult.html'
+            }
+        }
+
+    })
+
+     .state('base.reformulationContent.reformulationResult2', {
+        url: '/reformulation-result2',
+        views: {
+            'reformulationContent-view': {
+                templateUrl: 'templates/drugreformulation/reformulationResult2.html'
             }
         }
 

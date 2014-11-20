@@ -1,0 +1,59 @@
+<ion-view title="Reformulation Result">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left" ng-click="back()">
+            Select Result
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-more" ng-click="openPopover($event)">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader item-input-inset">
+        <div class=" button-bar">
+            <button class="button button-positive button-ios">
+                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'ruleBase'">
+                    Rule Base
+                </div>
+                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'caseBase'">
+                    Case Base Reasoning
+                </div>
+                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'hybrid'">
+                    Hybrid Reasoning
+                </div>
+
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list list-inset">
+
+            <div class="padding-buttom">
+                <div class="item item-divider">
+                    Formulation
+                </div>
+                <div class="item">
+                    Formulation Name : {{currentReformulatedProduction.production.formulationName}}
+                </div>
+
+                <div class="item">
+                    Weight : {{currentReformulatedProduction.production.formulationWeight}}
+                </div>
+            </div>
+            <div class="padding-top">
+                <div class="item item-divider">
+                    Instarction
+                </div>
+                <div class="item" ng-repeat=" instruction in ( currentReformulatedProduction.production.instraction | newlines) track by $index">
+                        <p>{{instruction}}</p>
+                </div>
+                <!--
+                <textarea readonly class="item" rows="7" cols="50">
+                    {{currentReformulatedProduction.production.instraction}}
+                </textarea>
+                -->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

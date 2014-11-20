@@ -445,11 +445,12 @@ angular.module('drugExpertSystem.services', [])
 
         var reformulation = {};
 
-        reformulation.makeReformulation = function(reformulateProduction) {
+        reformulation.makeReformulation = function(reformulationSetting) {
             return $http({
                 method: "POST",
-                data: reformulateProduction,
+                data: reformulationSetting,
                 url: 'http://54.169.76.170:8080/oegp/inference-engine/reformulate-production'
+               // url: 'http://localhost:8081/inference-engine/reformulate-production'
             });
         }
 

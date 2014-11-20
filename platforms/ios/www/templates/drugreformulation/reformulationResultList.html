@@ -1,0 +1,22 @@
+<ion-view title="Drug Reformulation Setting">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left" ng-click="back()">
+            Setting
+        </button>
+    </ion-nav-buttons>
+	
+	<ion-content>
+		 <div class="list list-inset">
+			<div class="item"  ng-repeat="  reformulatedProduction in reformulatedProductionList" ng-click="showResult(reformulatedProduction)">
+                <div ng-show="reformulatedProduction.inferenceEngine == 'ruleBase'">
+                    <h2> Rule Base : </h2>
+                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulationName}} , Amount of Strenght : {{reformulatedProduction.production.formulationWeight}}</p>
+                </div>
+                <div ng-show= "reformulatedProduction.inferenceEngine == 'caseBase'">
+                    <h2> Case Base Reasoning : </h2>
+                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulationName}} , Amount of Strenght : {{reformulatedProduction.production.formulationWeight}}</p>
+                </div>
+			</div>
+		</div>
+	</ion-content>
+ </ion-view>

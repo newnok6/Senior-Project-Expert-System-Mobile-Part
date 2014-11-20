@@ -144,6 +144,8 @@
 
                 </div>
 
+
+              <!-- Original Dosage Form Properties Part -->
                 <div class="padding-top">
                     <div class="item item-divider">
                         Original Dosage Form Properties
@@ -196,6 +198,36 @@
                     <!---->
                 </div>
                 <!---->
+
+
+                <!-- Case Base Reasoning Similarlity weighting -->
+                 <div class="padding-top">
+                    <div class="item item-divider">
+                        Similarity Weighting (Case Base Reasoning)
+                    </div>
+                  
+                   <div class="item range range-positive">
+                        <span class="input-label">Active Ingredient Name:  </span>
+                        <input type="range" name="volume" min="0" max="100" value="50" ng-model = "similarlityWeight.activeIngredientName">
+                        <p> Weight : {{similarlityWeight.activeIngredientName}}</p>
+                    </div>
+
+                      <div class="item range range-positive">
+                        <span class="input-label">Molecular Weight :</span>
+                        <input type="range" name="volume" min="0" max="100" value="50" ng-model = "similarlityWeight.totalWeight">
+                        <p>Weight : {{similarlityWeight.totalWeight}}</p>
+                      </div>  
+                    
+
+                   
+                      <div class="item range range-positive">
+                        <span class="input-label">Disgradation Time :</span>
+                        <input type="range" name="volume" min="0" max="100" value="50" ng-model = "similarlityWeight.distime">
+                        <p>Weight : {{similarlityWeight.distime}}</p>
+                      </div>
+                  
+                  </div>
+
                 <div class="padding">
                     <button type="submit" class="button button-block button-positive">Start Reformulation</button>
                 </div>

@@ -35,6 +35,48 @@ angular.module('drugExpertSystem.reformulationController', [])
         $scope.activeIngredient.stability = stabilityService.getStabilities();
         $scope.activeIngredientOrginal = angular.copy($scope.activeIngredient);
 
+        // Reformulation Setting consist of Production Object and Case Base Reasoning Weighting //
+        $scope.reformulationSetting = {};
+
+        //Case Base Reasoning Weighting //
+
+        // Field Name //
+        $scope.fieldName = {
+            activeIngredientName: '',
+            totalWeight : '',
+            distime : '' 
+        };
+
+        $scope.similarlityWeight = {
+            activeIngredientName: '',
+            totalWeight : '',
+            distime : ''
+        };
+
+    
+        // Case Base Reasoing fieldName //
+       $scope.$watch('production.formulationName', function(){
+            if($scope.fieldName.activeIngredientName != $scope.production.formulationName){
+                 $scope.fieldName.activeIngredientName = $scope.production.formulationName;
+            }
+        });
+
+       $scope.$watch('dfProperty.totalweight', function(){
+            if($scope.fieldName.totalWeight != $scope.dfProperty.totalweight){
+                $scope.fieldName.totalWeight = $scope.dfProperty.totalweight;
+            }
+       });
+
+       $scope.$watch('dfProperty.disgradationtime', function(){
+            if($scope.fieldName.distime != $scope.dfProperty.disgradationtime){
+                $scope.fieldName.distime = $scope.dfProperty.disgradationtime;
+            }
+       });
+
+       
+
+
+       
         //Bind the Substance Property for watching//
         $scope.waterSolubility = solubilityService;
         $scope.flowability = flowablityService;
@@ -203,14 +245,18 @@ angular.module('drugExpertSystem.reformulationController', [])
             $scope.dfProperty.dissolutionProfile = $scope.dissolutionProfile;
             console.log($scope.dfProperty);
             $scope.production.dfProperty = $scope.dfProperty;
-            $scope.production.activeIngredient = $scope.activeIngredient;
             $scope.activeIngredient.stability = stabilityService.getStabilities();
+            $scope.production.activeIngredient = $scope.activeIngredient;
             console.log($scope.production.dfProperty);
-            // $scope.reformulateProduction.production = $scope.production;
 
-            reformulationService.makeReformulation($scope.production).success(function(response) {
+            $scope.reformulationSetting.production = $scope.production;
+            $scope.reformulationSetting.fieldName = $scope.fieldName;
+            $scope.reformulationSetting.similarlityWeight = $scope.similarlityWeight;
+
+            // $scope.reformulateProduction.production = $scope.production;
+            reformulationService.makeReformulation($scope.reformulationSetting).success(function(response) {
                 $scope.reformulatedProductionList = response;
-                $scope.currentReformulatedProduction = $scope.reformulatedProductionList[0];
+                //$scope.currentReformulatedProduction = $scope.reformulatedProductionList[0];
                 console.log($scope.reformulatedProductionList);
                 $ionicLoading.show({
                     template: '<i class="icon ion-loading-c"></i>',
@@ -224,7 +270,8 @@ angular.module('drugExpertSystem.reformulationController', [])
 
                 // 500 ms after showing the loadingIndicator, do a state change.  The idea is that when the loader is hidden, you will be in the new state.  But as you'll see there is flashing.
                 $timeout(function() {
-                    $state.go('base.reformulationContent.reformulationResult');
+                    //$state.go('base.reformulationContent.reformulationResult');
+                    $state.go('base.reformulationContent.reformulationResultList');
                 }, 1000);
 
             });
@@ -341,5 +388,11 @@ angular.module('drugExpertSystem.reformulationController', [])
             var history = $ionicViewService.getBackView();
             history.go();
         }
+
+        $scope.showResult = function(reformulatedProduction){
+            $scope.currentReformulatedProduction = reformulatedProduction;
+            console.log($scope.currentReformulatedProduction);
+            $state.go('base.reformulationContent.reformulationResult2');
+        };
 
     });
