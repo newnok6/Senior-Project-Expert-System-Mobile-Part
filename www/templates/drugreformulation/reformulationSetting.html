@@ -20,7 +20,11 @@
                 <!-- Formulation Weight -->
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Amount of Strenght (mg.) :</span>
-                    <input type="text" placeholder="500.00" ng-model="inferenceProduction.amountOfStength" />
+                    <input type="text" name = "strength" placeholder="500.00" ng-model="inferenceProduction.amountOfStength" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required />
+                    <span class="badge badge-assertive" ng-show="reformulationSetting.strength.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.strength.$error.pattern">
+                            Number Only!</span>
                 </label>
 
                 <style>
@@ -153,13 +157,21 @@
                     <!-- Total Weight -->
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Total Weight (mg.) :</span>
-                        <input type="text" placeholder="650.87" ng-model="inferenceProduction.totalWeight" />
+                        <input type="text" name="totalWeight" placeholder="650.87" ng-model="inferenceProduction.totalWeight" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required />
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.totalWeight.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.totalWeight.$error.pattern">
+                            Number Only!</span>
                     </label>
 
                     <!-- Disintegration time -->
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Disintegration time (second) :</span>
-                        <input type="text" placeholder="28" ng-model="inferenceProduction.disintegrationTime" />
+                        <input type="text" name = "distime" placeholder="28" ng-model="inferenceProduction.disintegrationTime" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required />
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.distime.$error.required">
+                            Required!</span>
+                        <span class="badge badge-assertive" ng-show="reformulationSetting.distime.$error.pattern">
+                            Number Only!</span>
                     </label>
 
                     <!-- Hardness-->
@@ -212,7 +224,7 @@
                     </div> -->
 
                       <div class="item range range-positive">
-                        <span class="input-label">Molecular Weight :</span>
+                        <span class="input-label">Strength :</span>
                         <input type="range" name="volume" min="0" max="100" value="50" ng-model = "similarlityWeight.totalWeight">
                         <p>Weight : {{similarlityWeight.totalWeight}}</p>
                       </div>  
@@ -220,7 +232,7 @@
 
                    
                       <div class="item range range-positive">
-                        <span class="input-label">Disgradation Time :</span>
+                        <span class="input-label">Disintegration Time :</span>
                         <input type="range" name="volume" min="0" max="100" value="50" ng-model = "similarlityWeight.distime">
                         <p>Weight : {{similarlityWeight.distime}}</p>
                       </div>
@@ -228,7 +240,7 @@
                   </div>
 
                 <div class="padding">
-                    <button type="submit" class="button button-block button-positive">Start Reformulation</button>
+                    <button type="submit" ng-disabled="reformulationSetting.$invalid" class="button button-block button-positive">Start Reformulation</button>
                 </div>
 
             </ion-list>
