@@ -2,11 +2,11 @@
     <ion-content>
         <ion-list>
             <div ng-if="userType!='General Pharmacist'" class="item item-divider">
-                Manage Pharmacetical Value {{userType}}
+                Manage Pharmacetical Value
             </div>
 
             <ion-item ng-if="userType!='General Pharmacist'" ng-click="goSubstance()" item-icon-left nav-clear>
-                <i class="icon ion-beaker"></i> Substance {{userType}}
+                <i class="icon ion-beaker"></i> Substance
             </ion-item>
 
             <ion-item ng-if="userType!='General Pharmacist'" ng-click="goExcipient()" item-icon-left nav-clear>
