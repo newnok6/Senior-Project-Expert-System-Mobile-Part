@@ -8,13 +8,18 @@
 	<ion-content>
 		 <div class="list list-inset">
 			<div class="item"  ng-repeat="  reformulatedProduction in reformulatedProductionList" ng-click="showResult(reformulatedProduction)">
-                <div ng-show="reformulatedProduction.inferenceEngine == 'ruleBase'">
+                <div ng-if="reformulatedProduction.inferenceEngine == 'ruleBase'">
                     <h2> Rule Base : </h2>
-                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulationName}} , Amount of Strenght : {{reformulatedProduction.production.formulationWeight}}</p>
+                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulation.name}} , Total Weight : {{reformulatedProduction.production.totalWeight}}</p>
                 </div>
-                <div ng-show= "reformulatedProduction.inferenceEngine == 'caseBase'">
+                <div ng-if= "reformulatedProduction.inferenceEngine == 'caseBase'">
                     <h2> Case Base Reasoning : </h2>
-                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulationName}} , Amount of Strenght : {{reformulatedProduction.production.formulationWeight}}</p>
+                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulation.name}} , Total Weight: {{reformulatedProduction.production.totalWeight}}</p>
+                </div>
+
+                 <div ng-if= "reformulatedProduction.inferenceEngine == 'hybrid'">
+                    <h2> Hybrid Reasoning : </h2>
+                    <p> Active Ingredient Name : {{reformulatedProduction.production.formulation.name}} , Total Weight : {{reformulatedProduction.production.totalWeight}}</p>
                 </div>
 			</div>
 		</div>

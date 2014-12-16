@@ -1,0 +1,10 @@
+[
+		{"type" : "Drying", "checked" : false},
+		{"type" : "Compression" , "checked" : false},
+		{"type" : "Polishing" , "checked" : false},
+		{"type" : "Compression", "checked" : false},
+		{"type" : "Grossing", "checked" : false},
+		{"type" : "SubCoat", "checked" : false},
+		{"type" : "ColorCoat", "checked" : false}
+
+]

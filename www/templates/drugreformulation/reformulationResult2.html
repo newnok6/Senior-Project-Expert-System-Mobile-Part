@@ -13,13 +13,13 @@
     <ion-header-bar class="bar-subheader item-input-inset">
         <div class=" button-bar">
             <button class="button button-positive button-ios">
-                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'ruleBase'">
+                <div ng-show="currentReformulatedProduction.inferenceEngine == 'ruleBase'">
                     Rule Base
                 </div>
-                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'caseBase'">
+                <div ng-show="currentReformulatedProduction.inferenceEngine == 'caseBase'">
                     Case Base Reasoning
                 </div>
-                <div ng-show= "currentReformulatedProduction.inferenceEngine == 'hybrid'">
+                <div ng-show="currentReformulatedProduction.inferenceEngine == 'hybrid'">
                     Hybrid Reasoning
                 </div>
 
@@ -31,22 +31,43 @@
 
             <div class="padding-buttom">
                 <div class="item item-divider">
-                    Formulation
+                    Production
                 </div>
                 <div class="item">
-                    Formulation Name : {{currentReformulatedProduction.production.formulationName}}
+                    Production Name : {{currentReformulatedProduction.production.formulation.name}}
                 </div>
 
                 <div class="item">
-                    Weight : {{currentReformulatedProduction.production.formulationWeight}}
+                    Production Weight : {{currentReformulatedProduction.production.totalWeight}}
                 </div>
             </div>
+
+            <div class="padding-buttom">
+                <div class="item item-divider">
+                    Excipient
+                </div>
+                <div class="item" ng-if= "excipient.usedWeight != 0" ng-repeat="excipient in currentReformulatedProduction.production.formulation.excipient">
+                    <p>Name : {{excipient.substance.name}} Weight : {{excipient.usedWeight}}</p>
+                </div>
+
+                <div class="item" ng-if= "excipient.usedWeight == 0 && ecipient.minWeight == 0 && ecipient.maxWeight == 0" ng-repeat="excipient in currentReformulatedProduction.production.formulation.excipient">
+                    <p>Name : {{excipient.substance.name}} Weight : {{excipient.usedWeight}}</p>
+                </div>
+
+                <div class="item" ng-if= "excipient.usedWeight == 0 "ng-repeat="excipient in currentReformulatedProduction.production.formulation.excipient">
+                    <p>Name : {{excipient.substance.name}} Min-Weight : {{excipient.minWeight}} Max-Weight : {{excipient.minWeight}}</p>
+                </div>
+            </div>
+
             <div class="padding-top">
                 <div class="item item-divider">
                     Instarction
                 </div>
-                <div class="item" ng-repeat=" instruction in ( currentReformulatedProduction.production.instraction | newlines) track by $index">
-                        <p>{{instruction}}</p>
+                <!-- <div class="item" ng-repeat="instraction in currentReformulatedProduction.production.instraction">
+                 {{instraction}}   
+                </div> -->
+                <div class="item" ng-repeat=" instruction in (currentReformulatedProduction.production.instraction | newlines) track by $index">
+                    <p>{{instruction}}</p>
                 </div>
                 <!--
                 <textarea readonly class="item" rows="7" cols="50">

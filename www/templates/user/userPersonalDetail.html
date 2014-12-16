@@ -1,0 +1,21 @@
+<ion-view title="My Account">
+    <ion-content>
+        <div class="list card">
+            <a class="item">
+                <h2>Email :</h2>
+                <p>{{currentUser.email}}</p>
+            </a>
+
+            <a class="item">
+                <h2>Autherzied Status :</h2>
+                <p>{{currentUser.type}}</p>
+            </a>
+                <button class="button button-block button-positive" ng-click="openModal(3)">
+                        Change My Password
+                </button>
+
+                <button class="button button-block button-assertive" ng-click="logout()">
+                        Log out
+                </button>
+    </ion-content>
+</ion-view>

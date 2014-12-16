@@ -28,28 +28,30 @@
 <script id="excipientModal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title"></h1>
-    <button class="button button-clear button-primary" ng-click="hideModal(5)">Cancel</button>
-  </ion-header-bar>
-      <ion-slide-box class = "content" on-slide-changed="slideHasChanged($index)">
-        <ion-slide class="has-header">
-        <div class="list list-inset">
-          <div class="item item-divider"> 
-            SubstanceFunction Name
-        </div>
-        <ion-radio ng-repeat=" (key,value) in excipients " ng-value = "value.substance" ng-model = "currentExcipient.substance" name = "substance-name" ng-click = "nextFormulationType(key)">
+      <h1 class="title"></h1>
+      <button class="button button-clear button-primary" ng-click="hideModal(5)">Cancel</button>
+    </ion-header-bar>
+      <ion-slide-box class = "content" on-slide-changed="slideHasChanged($index)" slide-interval="8000">
+        <ion-slide>
+        <ion-content class="content-stable">
+          <ion-list>
+            <div class="item item-divider"> 
+              Excipient Name
+            </div>
+            <ion-radio ng-repeat=" (key,value) in excipients " ng-value = "value.substance" ng-model = "currentExcipient.substance" name = "substance-name" ng-click = "nextFormulationType(key)">
               {{value.substance.name}}
-        </ion-radio>
-        </div>
-      </ion-slide>
+            </ion-radio>
+          </ion-list>
+         </ion-content> 
+        </ion-slide>
+
        <ion-slide class="has-header">
         <div class="list list-inset">
          <div class="item item-divider"> 
             SubstanceFunction Name
           </div>
          <ion-radio ng-repeat=" (key,value) in  filter(setkey).substanceFunctions track by $index" ng-value = "value" ng-model = "setSubstanceFunctions.substanceFunctions" name = "excipient-type" ng-click = "nextFormulationType()">
-                <h3>FunctionName :{{value.functionName}} </h3>
-                <h3>FunctionType :{{value.functionType}} </h3>
+                <h2>FunctionName :{{value.functionName}} </h2>
         </ion-radio>
         </div>
       </ion-slide>

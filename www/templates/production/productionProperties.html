@@ -1,0 +1,44 @@
+<ion-view title="Set Production Properties">
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left " ng-click="goBack()">
+            Select Formulation
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-chevron-right icon-right" ng-click="goUnitOperationSetting()">
+            Next
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <form name = "productionPropSetting">
+
+            <ion-list list-inset>
+                <!--The Disintegration time value-->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Disintegration time :</span>
+                    <input name = "disTime" type="text" placeholder="25" ng-model="currentProduction.distegretionTime" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/">
+                     <p class="badge badge-assertive" ng-show="productionPropSetting.disTime.$error.pattern">
+                        Number Only!</p>
+                </label>
+                <!---->
+
+                <!--The friability value-->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">friability(mg.) :</span>
+                    <input name = "friability" type="text" placeholder="34.56" ng-model="currentProduction.friability" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/">
+                     <p class="badge badge-assertive" ng-show="productionPropSetting.friability.$error.pattern">
+                        Number Only!</p>
+                </label>
+                <!---->
+            </ion-list>
+
+        </form>
+
+
+    </ion-content>
+
+</ion-view>

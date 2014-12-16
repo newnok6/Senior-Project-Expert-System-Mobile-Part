@@ -20,6 +20,17 @@
                 </label>
                 <!---->
 
+                <!--The total weight value-->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Total Weight (mg.) :</span>
+                    <input name = "totalWeight" type="text" placeholder="500.00" ng-model="currentFormulation.totalWeight" ng-pattern = "/^\d{0,9}(\.\d{1,9})?$/" required>
+                     <p class="badge badge-assertive" ng-show="createFormulation.totalWeight.$error.required">
+                        Required!</p>
+                     <p class="badge badge-assertive" ng-show="createFormulation.totalWeight.$error.pattern">
+                        Number Only!</p>
+                </label>
+                <!---->
+
                 <!-- The Formulation type input form -->
                 <a class="item " ng-click="openModal(4)">
                     Formulation Type

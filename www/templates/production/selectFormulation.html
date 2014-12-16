@@ -12,7 +12,7 @@
         <button ng-click="clearfilter()" class="button button-clear icon ion-close-circled" ></button>
     </ion-header-bar>
     <ion-content>
-            <ion-radio ng-repeat=" formulation in formulations  | filter:searchFormulation" ui-sref="base.excipientContent.addExcipient" ng-value="formulation" ng-model="currentProduction.formulation">
+            <ion-radio ng-repeat=" formulation in formulations  | filter:searchFormulation" ui-sref="base.productionContent.productionProperties" ng-value="formulation" ng-model="currentProduction.formulation">
                 <div ng-show="formulations.length == 0">
                     There are no the substance in the database. Please create a new substance.
                 </div>
@@ -20,8 +20,6 @@
                     {{formulation.name}}
                 </div>
             </ion-radio>
-
-
         </div>
     </ion-content>
 </ion-view>

@@ -12,13 +12,14 @@
 
 	"flowability" : 
 	[
-		{"type" : "ExcellentFlowability"},
-		{"type" : "GoodFlowability"},
-		{"type" : "FairFlowability"},
-		{"type" : "PassibleFlowability"},
-		{"type" : "PoorFlowability"},
-		{"type" : "VeryPoorFlowability"},
-		{"type" : "Very,VeryPoorFlowability"}
+		{"type" : "excellent"},
+		{"type" : "good"},
+		{"type" : "fair"},
+		{"type" : "poor"},
+		{"type" : "posible"},
+		{"type" : "veryPoor"},
+		{"type" : "veryveryPoor"}
+		
 	],
 
 	"solidstate" : 

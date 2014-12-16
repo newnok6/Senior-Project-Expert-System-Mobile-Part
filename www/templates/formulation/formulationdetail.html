@@ -14,23 +14,21 @@
     <ion-content>
 
         <div class="list card">
-            <a class="item">
+            <ion-item>
                 <h2>Formulation Name :</h2>
                 <p>{{formulationSelected.name}}</p>
-            </a>
-
-            <a class="item">
+           
                 <h2>Formulation Type:</h2>
                 <p>{{formulationSelected.type}}</p>
-            </a>
-
-
-            <a class="item">
+            
+                <h2>Total Weight:</h2>
+                <p>{{formulationSelected.totalWeight}} mg.</p>
+            
                 <h2>Excipient List :</h2>
                 <p ng-repeat="(key, value) in formulationSelected.excipient">
-                    Name : {{value.substance.name}}  , Function Name : {{value.substanceFunctions[0].functionName}}  , Function Type : {{value.substanceFunctions[0].functionType}}
+                    Name : {{value.substance.name}}  , Function Name : {{value.substanceFunctions[0].functionName}} , Used Weight : {{value.usedWeight}}
                 </p>
-            </a>
+            </ion-item>
         </div>
     </ion-content>
 </ion-view>

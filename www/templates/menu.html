@@ -1,35 +1,49 @@
 <ion-view>
     <ion-content>
         <ion-list>
-            <div class="item item-divider">
+            <div ng-if="userType!='General Pharmacist'" class="item item-divider">
                 Manage Pharmacetical Value
             </div>
-            <ion-item ng-click="goSubstance()" item-icon-left nav-clear>
-                <i class="icon ion-beaker"></i>
-                Substance
+
+            <ion-item ng-if="userType!='General Pharmacist'" ng-click="goSubstance()" item-icon-left nav-clear>
+                <i class="icon ion-beaker"></i> Substance
             </ion-item>
-            <ion-item ng-click="goExcipient()" item-icon-left nav-clear>
-                <i class="icon ion-flask"></i>
-                Excipient
+
+            <ion-item ng-if="userType!='General Pharmacist'" ng-click="goExcipient()" item-icon-left nav-clear>
+                <i class="icon ion-flask"></i> Excipient
             </ion-item>
-            <ion-item ng-click="goFormulation()" item-icon-left nav-clear>
-                <i class="icon ion-aperture"></i>
-                Formulation
+            <ion-item ng-if="userType!='General Pharmacist'" ng-click="goFormulation()" item-icon-left nav-clear>
+                <i class="icon ion-aperture"></i> Formulation
             </ion-item>
+            <ion-item ng-if="userType!='General Pharmacist'" ng-click="goProduction()" item-icon-left nav-clear>
+                <i class="icon ion-nuclear"></i> Production
+            </ion-item>
+
             <!-- Make a divider -->
-       
+
             <div class="item item-divider">
                 Drug Reformulation Analysis
             </div>
             <ion-item ng-click="goReFormulation()" item-icon-left nav-clear>
-                <i class="icon ion-ionic"></i>
-                Drug Reformulation
+                <i class="icon ion-ionic"></i> Drug Reformulation
             </ion-item>
 
-             <ion-item ng-click="goReFormulationHistory()" item-icon-left nav-clear>
-                <i class="icon ion-filing"></i>
-                    Reformulation History
+            <ion-item ng-click="goReFormulationHistory()" item-icon-left nav-clear>
+                <i class="icon ion-filing"></i> Reformulation History
             </ion-item>
+
+            <!--Other -->
+            <div class="item item-divider">
+                Other
+            </div>
+            <ion-item ng-click="goMyAccount()" item-icon-left nav-clear>
+                <i class="icon ion-home"></i> My Account
+            </ion-item>
+
+            <ion-item ng-if="userType!='General Pharmacist'&& userType!='Expert Pharmacist'" ng-click="goUserAccount()" item-icon-left nav-clear>
+                <i class="icon ion-filing"></i> Member Management
+            </ion-item>
+
 
         </ion-list>
     </ion-content>

@@ -1,8 +1,190 @@
-'use-strict'; 
+'use-strict';
 
-angular.module('drugExpertSystem.services', [])
+angular.module('drugExpertSystem.services', ['ngCookies', 'ngCordova.plugins.localStorage'])
 
-.factory('substancePropService',['$http', function($http) {
+.factory('userService', ['$http', '$rootScope', '$timeout', '$q', '$cookieStore', '$cordovaLocalStorage',
+    function($http, $rootScope, $timeout, $q, $cookieStore, $cordovaLocalStorage) {
+
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var self = this
+        var serverPath = 'http://localhost:8081';
+        var deferred = $q.defer();
+        var user = {};
+        var currentUser = {};
+
+        user.init = function() {
+            //set the session token in the http header
+            // $http.defaults.headers.common['X-Access-Token'] = $cookieStore.get('sessionToken') || "";
+            // $cookieStore.put('app_user','newnok6');
+            var userData = $cookieStore.get('app_user') || {
+                email: '',
+                password: '',
+                type: ''
+            };
+
+            //quick check to make sure it's a string ()
+            if (typeof(userData) === "string") {
+                userData = JSON.parse(userData);
+            }
+            // // setting currentUser
+            // console.log(userData);
+            self.currentUser = userData;
+            console.log(self.currentUser);
+
+        }
+
+        user.updateCurrentUser = function(user, options) {
+
+            var opts = {
+                remove: false,
+                set: false
+            }
+
+            angular.extend(opts, options);
+            //angular.extend(self.currentUser, user);
+
+            if (opts.remove === true) {
+                $cookieStore.remove('app_user');
+            }
+
+            if (opts.set === true) {
+                $cookieStore.put('app_user',user);
+            }
+        }
+
+        user.isLoggedIn = function() {
+
+            var output = false;
+            console.log(self.currentUser);
+            if (self.currentUser.id) {
+                output = true;
+            }
+
+
+
+            return output;
+        }
+
+        user.createAccount = function(user) {
+            return $http({
+                method: "POST",
+                data: user,
+                url: serverPath + '/user/register-as-member'
+            });
+        }
+
+        user.login = function(data) {
+
+            var success = function(response, status, headers, config) {
+                var user = response.user;
+                var token = response.token;
+
+
+                var opts = {
+                    remove: false,
+                    set: true
+                }
+
+                //angular.extend(opts);
+                angular.extend(self.currentUser, user);
+
+                if (opts.remove === true) {
+                    $cookieStore.remove('app_user');
+                }
+
+                if (opts.set === true) {
+                    console.log(user);
+                    $cookieStore.put('app_user', user);
+
+                }
+
+                //set token on success
+                $http.defaults.headers.common['X-Access-Token'] = token;
+                $cookieStore.get('sessionToken', token);
+
+                console.log($cookieStore.get('app_user'));
+
+                deferred.resolve(self.currentUser);
+            }
+
+            var error = function(error, status, headers, config) {
+
+                console.log("AuthService.error callback function ");
+                console.log(error);
+
+
+                deferred.reject(error);
+            }
+
+            $http.post(serverPath + '/user/login', data).success(success).error(error);
+            return deferred.promise;
+        }
+
+        user.logout = function() {
+
+        }
+
+        user.resetCookie = function() {
+
+            //$cookieStore.remove('sessionToken');
+            // $http.defaults.headers.common['X-Access-Token'] = "";
+
+            var opts = {
+                remove: true,
+                set: false
+            }
+
+            var user = {
+                email: '',
+                password: '',
+                type: ''
+            };
+            angular.extend(self.currentUser, user);
+
+            if (opts.remove === true) {
+                $cookieStore.remove('app_user');
+            }
+        }
+
+        user.getCurrentUser = function() {
+            return self.currentUser;
+        }
+
+        user.updatePassword = function(userData) {
+            var deferred = $q.defer();
+
+            // success callback
+            var success = function(response, status, headers, config) {
+                    console.log("AuthService.register success callback");
+                    console.log(response);
+                deferred.resolve(response);
+
+                $cookieStore.put('app_user',userData);
+            }
+
+            // error callback
+            var error = function(error, status, headers, config) {
+                
+                    console.log("AuthService.error callback function ");
+                    console.log(error);
+                deferred.reject(error);
+            }
+
+            $http.put(serverPath + '/user/update-password', 
+                userData
+            ).success(success).error(error);
+
+            return deferred.promise;
+        }
+
+
+        return user;
+
+    }
+])
+
+.factory('substancePropService', ['$http', function($http) {
 
     var substanceProp = {};
 
@@ -12,8 +194,7 @@ angular.module('drugExpertSystem.services', [])
         });
     }
     return substanceProp;
-}
-])
+}])
 
 .factory('solubilityService', ['$http',
     function($http) {
@@ -47,7 +228,7 @@ angular.module('drugExpertSystem.services', [])
         var flowability = {};
         var stringFlowability = '';
 
-    
+
         flowability.setCurrentFlowability = function(flowability) {
             stringFlowability = flowability;
             console.log(stringFlowability);
@@ -74,7 +255,7 @@ angular.module('drugExpertSystem.services', [])
         var solidstate = {};
         var stringSolidstate = '';
 
-    
+
         solidstate.setCurrentSolidState = function(solidstate) {
             stringSolidstate = solidstate;
             console.log(stringSolidstate);
@@ -101,7 +282,7 @@ angular.module('drugExpertSystem.services', [])
         var hygroscopity = {};
         var stringHygroscopity = '';
 
-        
+
 
         hygroscopity.setCurrentHygroscopity = function(hygroscopity) {
             stringHygroscopity = hygroscopity;
@@ -129,7 +310,7 @@ angular.module('drugExpertSystem.services', [])
         var particlesize = {};
         var stringParticlesize = '';
 
-    
+
         particlesize.setCurrentParticlesize = function(particlesize) {
             stringParticlesize = particlesize;
             console.log(stringParticlesize);
@@ -211,7 +392,7 @@ angular.module('drugExpertSystem.services', [])
         stabilities.setStabilities = function(stability) {
             currentStabilities.push(stability);
             console.log(currentStabilities);
-            
+
         }
 
         stabilities.deleteStabilityOnlist = function(stability) {
@@ -235,13 +416,16 @@ angular.module('drugExpertSystem.services', [])
 
 .factory('substanceService', function($http) {
 
+    // CAMT Server Path = http://54.169.76.170:8080/oegp
+    // Local Host Path = http://localhost:8081
+    var serverPath = 'http://54.169.76.170:8080/oegp';
     var substance = {};
 
     substance.addSubstance = function(substance) {
         return $http({
             method: "POST",
             data: substance,
-            url: 'http://54.169.76.170:8080/oegp/substance/add-substance'
+            url: serverPath + '/substance/add-substance'
         });
     }
 
@@ -249,20 +433,20 @@ angular.module('drugExpertSystem.services', [])
         return $http({
             method: "PUT",
             data: substance,
-            url: 'http://54.169.76.170:8080/oegp/substance/update-substance'
+            url: serverPath + '/substance/update-substance'
         });
     }
 
     substance.deleteSubstance = function(substanceId) {
         return $http({
             method: "DELETE",
-            url: 'http://54.169.76.170:8080/oegp/substance/remove-substance/' + substanceId
+            url: serverPath + '/substance/remove-substance/' + substanceId
         });
     }
 
     substance.getSubstanceList = function() {
         return $http({
-            url: 'http://54.169.76.170:8080/oegp/substance/substanceList.json?callback=JSON_CALLBACK'
+            url: serverPath + '/substance/substanceList.json?callback=JSON_CALLBACK'
         });
     }
     return substance;
@@ -276,7 +460,7 @@ angular.module('drugExpertSystem.services', [])
 
         substanceFn.setSunstanceFn = function(currentSubstanceFn) {
             currentsubstanceFnlist.push(currentSubstanceFn);
-            console.log(currentsubstanceFnlist);
+            console.log("This is a list " + currentsubstanceFnlist);
         }
 
         substanceFn.deleteSubstanceFnOnlist = function(currentSubstanceFn) {
@@ -306,6 +490,9 @@ angular.module('drugExpertSystem.services', [])
 .factory('excipientService', ['$http',
     function($http) {
 
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var serverPath = 'http://localhost:8081';
         var excipient = {};
         var currentExcipientlist = [];
 
@@ -313,7 +500,7 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "POST",
                 data: excipient,
-                url: 'http://54.169.76.170:8080/oegp/excipient/add-excipient'
+                url: serverPath + '/excipient/add-excipient'
             });
         }
 
@@ -321,26 +508,26 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data: excipient,
-                url: 'http://54.169.76.170:8080/oegp/excipient/update-excipient'
+                url: serverPath + '/excipient/update-excipient'
             });
         }
 
         excipient.deleteExcipient = function(excipientId) {
             return $http({
                 method: "DELETE",
-                url: 'http://54.169.76.170:8080/oegp/excipient/remove-excipient/' + excipientId
+                url: serverPath + '/excipient/remove-excipient/' + excipientId
             });
         }
 
         excipient.getExcipientList = function() {
             return $http({
-                url: 'http://54.169.76.170:8080/oegp/excipient/excipientList.json'
+                url: serverPath + '/excipient/excipientList.json'
             });
         }
 
         excipient.getSubstanceListForExcipient = function() {
             return $http({
-                url: 'http://54.169.76.170:8080/oegp/excipient/substanceListForExcipient.json'
+                url: serverPath + '/excipient/substanceListForExcipient.json'
             });
         }
 
@@ -370,70 +557,105 @@ angular.module('drugExpertSystem.services', [])
 .factory('formulationService', ['$http',
     function($http) {
 
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var serverPath = 'http://localhost:8081';
         var formulation = {};
 
         formulation.addFormulation = function(currentformulation) {
             return $http({
                 method: "POST",
                 data: currentformulation,
-                url: 'http://54.169.76.170:8080/oegp/formulation/add-formulation'
+                url: serverPath + '/formulation/add-formulation'
             });
         }
 
         formulation.updateFormulation = function(currentformulation) {
             return $http({
                 method: "PUT",
-                data : currentformulation,
-                url: 'http://54.169.76.170:8080/oegp/formulation/update-formulation'
+                data: currentformulation,
+                url: serverPath + '/formulation/update-formulation'
             });
         }
 
         formulation.deleteFormulation = function(currentformulationId) {
             return $http({
                 method: "DELETE",
-                url: 'http://54.169.76.170:8080/oegp/formulation/remove-formulation/'+ currentformulationId
+                url: serverPath + '/formulation/remove-formulation/' + currentformulationId
             });
         }
 
         formulation.getFormulationList = function() {
             return $http({
-                url: 'http://54.169.76.170:8080/oegp/formulation/formulationList.json'
+                url: serverPath + '/formulation/formulationList.json'
             });
         }
         return formulation;
     }
 ])
+
+.factory('unitOperationService', ['$http', function($http) {
+
+    var unitOpreation = {};
+
+    unitOpreation.getUnitOpreationList = function() {
+        return $http({
+            url: 'json/unitOperation.json'
+        });
+    }
+    return unitOpreation;
+}])
+
+.factory('unitOperationServiceV2', ['$http', function($http) {
+
+    var unitOpreation = {};
+
+    unitOpreation.getUnitOpreationList = function() {
+        return $http({
+            url: 'json/unitOperationsV2.json'
+        });
+    }
+    return unitOpreation;
+}])
+
 .factory('productionService', ['$http',
     function($http) {
 
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var serverPath = 'http://localhost:8081';
         var production = {};
 
         production.addProduction = function(currentProduction) {
             return $http({
                 method: "POST",
-                data: currentformulation,
-                url: 'http://54.169.76.170:8080/oegp/production/create-production'
+                data: currentProduction,
+                url: serverPath + '/production/add-production'
+
             });
         }
 
         production.updateProduction = function(currentProduction) {
             return $http({
                 method: "PUT",
-                data: currentformulation,
-                url: 'http://54.169.76.170:8080/oegp/production/update-production'
+                data: currentProduction,
+                url: serverPath + '/production/update-production'
+
             });
         }
 
         production.deleteProduction = function(currentProductionId) {
             return $http({
                 method: "DELETE",
-                url: 'http://54.169.76.170:8080/oegp/production/remove-production/' + currentProductionId
+                url: serverPath + '/production/delete-production/' + currentProductionId
+
             });
         }
 
         production.getProductionList = function() {
             return $http({
-                url: 'http://54.169.76.170:8080/oegp/production/productionlist.json'
+                url: serverPath + '/production/productionList.json?callback=JSON_CALLBACK'
+
             });
         }
         return production;
@@ -443,40 +665,42 @@ angular.module('drugExpertSystem.services', [])
 .factory('reformulationService', ['$http',
     function($http) {
 
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var serverPath = 'http://localhost:8081';
         var reformulation = {};
 
         reformulation.makeReformulation = function(reformulationSetting) {
             return $http({
                 method: "POST",
                 data: reformulationSetting,
-                url: 'http://54.169.76.170:8080/oegp/inference-engine/reformulate-production'
-               // url: 'http://localhost:8081/inference-engine/reformulate-production'
+                url: serverPath + '/inference-engine/reformulate-production'
             });
         }
 
-/*
-        reformulation.updateFormulation = function(currentformulation) {
-            return $http({
-                method: "PUT",
-                data: currentformulation,
-                url: 'http://localhost:8081/solution-formulation/update-solution-formulation'
-            });
-        }
+        /*
+                reformulation.updateFormulation = function(currentformulation) {
+                    return $http({
+                        method: "PUT",
+                        data: currentformulation,
+                        url: 'http://localhost:8081/solution-formulation/update-solution-formulation'
+                    });
+                }
 
-        reformulation.deleteFormulation = function(currentformulationId) {
-            return $http({
-                method: "DELETE",
-                url: 'http://localhost:8081/solution-formulation/remove-solution-formulation/' + currentformulationId
-            });
-        }
+                reformulation.deleteFormulation = function(currentformulationId) {
+                    return $http({
+                        method: "DELETE",
+                        url: 'http://localhost:8081/solution-formulation/remove-solution-formulation/' + currentformulationId
+                    });
+                }
 
-        reformulation.getFormulationList = function() {
-            return $http({
-                url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
-            });
-        }
-*/
-         reformulation.testJess = function() {
+                reformulation.getFormulationList = function() {
+                    return $http({
+                        url: 'http://localhost:8081/solution-formulation/solutionformulationList.json'
+                    });
+                }
+        */
+        reformulation.testJess = function() {
             return $http({
                 method: "POST",
                 url: 'http://localhost:8081/rule-base/testjess'
@@ -489,13 +713,16 @@ angular.module('drugExpertSystem.services', [])
 .factory('reformulationHistoryService', ['$http',
     function($http) {
 
+        // CAMT Server Path = http://54.169.76.170:8080/oegp
+        // Local Host Path = http://localhost:8081
+        var serverPath = 'http://54.169.76.170:8080/oegp';
         var reformulationHistory = {};
 
         reformulationHistory.createReformulationHistory = function(reformulationHistory) {
             return $http({
                 method: "POST",
                 data: reformulationHistory,
-                url: 'http://54.169.76.170:8080/oegp/reformulation-history/create-reformulation-history'
+                url: serverPath + '/reformulation-history/create-reformulation-history'
             });
         }
 
@@ -503,20 +730,20 @@ angular.module('drugExpertSystem.services', [])
             return $http({
                 method: "PUT",
                 data: reformulationHistory,
-                url: 'http://54.169.76.170:8080/oegp/reformulation-history/update-reformulation-history'
+                url: serverPath + '/reformulation-history/update-reformulation-history'
             });
         }
 
         reformulationHistory.deleteReformulationHistory = function(reformulationHistoryId) {
             return $http({
                 method: "DELETE",
-                url: 'http://54.169.76.170:8080/oegp/reformulation-history/remove-reformulation-history/' + reformulationHistoryId
+                url: serverPath + '/reformulation-history/remove-reformulation-history/' + reformulationHistoryId
             });
         }
 
         reformulationHistory.getReformulationHistoryList = function() {
             return $http({
-                url: 'http://54.169.76.170:8080/oegp/reformulation-history/reformulation-history-list.json'
+                url: serverPath + '/reformulation-history/reformulation-history-list.json'
             });
         }
 

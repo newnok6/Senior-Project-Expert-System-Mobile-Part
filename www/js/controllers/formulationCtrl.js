@@ -14,8 +14,11 @@ angular.module('drugExpertSystem.formulationController', [])
         $scope.excipientInlist = excipientService.getCurrentExcipientlist();
         $scope.currentExcipient = {
             substanceFunctions: [],
-            usedWeight: ''
+            usedWeight: '',
+            minWeight:'',
+            maxWeight:''
         };
+
         $scope.excipientOrig = angular.copy($scope.currentExcipient);
         $scope.setSubstanceFunctions = [];
         $scope.formulationTypes = [{
@@ -114,11 +117,14 @@ angular.module('drugExpertSystem.formulationController', [])
 
 
 
-        // Set key for find the formulation type that relate with formulation name
+        // Set key for find the Function type that relate with Function name
         $scope.nextFormulationType = function(getkey) {
-            console.log($scope.currentExcipient);
+            console.log("This my Excipient"+ $scope.currentExcipient);
+           
             $scope.setkey = getkey;
+            console.log(getkey);
             $ionicSlideBoxDelegate.next();
+
         };
 
 
@@ -126,6 +132,10 @@ angular.module('drugExpertSystem.formulationController', [])
         $scope.filter = function(key) {
             var set = [];
             set = $scope.excipients[key];
+            $scope.currentExcipient.minWeight = $scope.excipients[key].minWeight;
+            $scope.currentExcipient.maxWeight = $scope.excipients[key].maxWeight;
+           // $scope.currentExcipient.minWeight = set.minWeight;
+            //$scope.currentExcipient.maxWeight = set.maxWeight;
             //$scope.currentExcipient.minWeight = $scope.excipients[key].minWeight;
             //$scope.currentExcipient.maxWeight = set.maxWeight;
             //$scope.currentExcipient.usedWeight = set.usedWeight;
@@ -139,8 +149,11 @@ angular.module('drugExpertSystem.formulationController', [])
 
         // add Excipient to formulation
         $scope.addExcipientToFormulation = function(currentExcipient) {
+            
             $scope.currentExcipient.substanceFunctions.push($scope.setSubstanceFunctions.substanceFunctions);
+            
             excipientService.setExcipientToList(currentExcipient);
+            console.log("This is my min Weight" + $scope.setkey);
 
             //currentStabilities.splice(currentStabilities.indexOf(stability), 1);
             $scope.currentExcipient = angular.copy($scope.excipientOrig);
@@ -223,8 +236,8 @@ angular.module('drugExpertSystem.formulationController', [])
         $scope.showConfirmForDelete = function() {
             $scope.closePopover();
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Formulation',
-                template: 'Are you sure you want to delete this excipient ?'
+                title: 'Delete Production',
+                template: 'Are you sure you want to delete this production ?'
             });
             confirmPopup.then(function(res) {
                 if (res) {
@@ -283,7 +296,7 @@ angular.module('drugExpertSystem.formulationController', [])
                 //  $scope.currentSubstanceFn = angular.copy($scope.orig);
                 $scope.oModal4.hide();
             } else {
-                $scope.currentExcipient = angular.copy($scope.excipientOrig);
+                //$scope.currentExcipient = angular.copy($scope.excipientOrig);
                 $scope.oModal5.hide();
             }
         }

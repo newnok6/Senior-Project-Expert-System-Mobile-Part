@@ -5,14 +5,17 @@
  */
 angular.module('drugExpertSystem.templateController', [])
 
-.controller('MenuCtrl', function($scope, $state, solubilityService, stabilityService, $ionicSideMenuDelegate) {
+.controller('MenuCtrl', function($scope, $state,userService,solubilityService, stabilityService, $ionicSideMenuDelegate) {
     
+    //$scope.userType = 'admin';
+
+
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
         console.log("test");
     };
 
-
+    $scope.userType = userService.getCurrentUser().type;
 
     // Go to Excipient Content and refresh existing data //
     $scope.goExcipient = function() {
@@ -59,6 +62,20 @@ angular.module('drugExpertSystem.templateController', [])
         solubilityService.resetCurrentSolubility();
         stabilityService.resetStability();
         $state.go("base.reformulationHistoryContent.reformulationHistorySelection");
+    };
+
+     // Go to Reformulation History //
+    $scope.goMyAccount = function() {
+        solubilityService.resetCurrentSolubility();
+        stabilityService.resetStability();
+        $state.go("base.userContent.personalUserDetail");
+    };
+
+     // Go to Reformulation History //
+    $scope.goUserAccount = function() {
+        solubilityService.resetCurrentSolubility();
+        stabilityService.resetStability();
+        $state.go("base.userContent.userDetail");
     };
 
 

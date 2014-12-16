@@ -1,0 +1,58 @@
+<ion-nav-bar class="bar-positive" animation="nav-title-slide-ios7">
+
+</ion-nav-bar>
+
+<ion-nav-view name="userContent-view">
+
+</ion-nav-view>
+
+
+<!--Change User Password , I put it here because it can load -->
+<script id="changeUserPasswodModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+   <h1 class="title">Changing Password</h1>
+        <button class="button  button-icon icon ion-close-round" ng-click="hideModal(3)"></button>
+  </ion-header-bar>
+
+  <ion-content>
+		<div class="list">
+		
+ 			<label class="item item-input">
+                <span class="input-label">Old Password : </span>
+                <input name = "oldPass" id = "oldPass" type="password" placeholder = "Input your old password here" ng-model="oldPass">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">New Password : </span>
+                <input name = "newPass" id = "newPass" type="password" placeholder = "Input your new password here" ng-model="newPass">
+            </label>
+
+            <button class="button button-block button-positive" ng-click="showConfirmToChangePass(oldPass,newPass)">
+                        Change My Password
+            </button>
+           
+		</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->
+
+<!--Change User Status I put it here because it can load -->
+<script id="changeUserStatus.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+   <h1 class="title">Status</h1>
+        <button class="button  button-icon icon ion-close-round" ng-click="hideModal(2)"></button>
+  </ion-header-bar>
+
+  <ion-content>
+<div class="list">
+ 
+  <ion-radio>General Pharmacist</ion-radio>
+  <ion-radio>Expert Pharmacist</ion-radio>
+  
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->

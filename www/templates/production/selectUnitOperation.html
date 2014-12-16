@@ -1,0 +1,49 @@
+<ion-view title="Select Unit Operation">
+
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left " ng-click="goBack()">
+            Properties
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+            
+        <button class="button button-icon ion-chevron-right icon-right" ng-click="addUnitOperationSelected()">
+                Next
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+
+        <ion-list list-inset>
+            <form name="productionAdding" ng-submit="showConfirm(currentProduction)">
+
+                <!-- Show Formulation Name that user selected -->
+                <div class="item item-divider">
+                    Formulation Name : {{currentProduction.formulation.name}}
+                </div>
+
+                <!---->
+
+                <!-- The List of Unit Operation -->
+                <div class="item item-divider">
+                    
+                        <h2><ion-checkbox
+                                 ng-repeat="unitOperation in unitOperations track by $index"
+                                 ng-model="unitOperation.checked"
+                                 ng-checked="unitOperation.checked">Unit Opration Name : {{unitOperation.type}}
+                                
+                                 </ion-checkbox></h2>
+                    
+                    <div class="padding" ng-show="excipientInlist.length > 0">
+                        <button type="submit" ng-click="goback()" class="button button-block button-positive">Finish</button>
+                    </div>
+                </div>
+
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

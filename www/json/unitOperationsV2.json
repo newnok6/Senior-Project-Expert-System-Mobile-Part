@@ -1,0 +1,28 @@
+{
+	"directCompression" : 
+	[
+		{"type" : "mixing"},
+		{"type" : "compression"}
+	],
+
+	"dryGranulation" : 
+	[
+		{"type" : "mixing"},
+		{"type" : "compression"},
+		{"type" : "resizing"},
+		{"type" : "mixing"},
+		{"type" : "compression"}
+	],
+
+	"wetGranulation" : 
+	[
+		{"type" : "mixing"},
+		{"type" : "wet mixing"},
+		{"type" : "drying"},
+		{"type" : "resizing"},
+		{"type" : "mixing"},
+		{"type" : "compression"}
+	]
+
+	
+}

@@ -1,8 +1,14 @@
 {
 	"funtionName" : 
 	[
+		{"name" : "api"},
 		{"name" : "binder"},
-		{"name" : "disintegrant"}
+		{"name" : "disintegrant"},
+		{"name" : "buffering agent"}, 
+		{"name" : "lubricant"},
+		{"name" : "diluent"}
+		
+
 	],
 
 	"functionType" : 

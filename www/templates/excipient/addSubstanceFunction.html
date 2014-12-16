@@ -4,27 +4,20 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-ios7-plus-outline" ng-click="openModal(3)">
+        <button class="button button-icon icon ion-ios7-plus-outline" ng-click="openModal(1)">
         </button>
     </ion-nav-buttons>
     <ion-content>
 
-        <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
-
+        
+    <!-- Show All Substance Function data -->
         <ion-list show-delete="data.showDelete">
 
             <ion-item ng-repeat="substanceFn in currentSubstanceFnList track by $index" item="substanceFn">
                 <h3>Substance Function Name :</h3> 
                 <p>{{substanceFn.functionName}}</p>
 
-                <h3>Substance Function Type : </h3>
-                <p>{{substanceFn.functionType}}</p>
-
-                <h3>Substance Function Min Weight :</h3> 
-                <p>{{substanceFn.maxWeight}}</p> 
-
-                <h3>Substance Function Max Weight : </h3>
-                <p>{{substanceFn.minWeight}}</p>
+                
                 <ion-delete-button class="ion-minus-circled" ng-click="deleteSubstanceFnInList(substanceFn)">
                 </ion-delete-button>
                 <ion-option-button class="button-assertive" ng-click="edit(item)">
@@ -37,15 +30,68 @@
             </div>
         </ion-list>
 
+<!-- Substance Function Modal. The user must select substance function name and type.This modal shows as the silde box-->
+<script id="substanceFunctionModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title"></h1>
+      <button class="button button-clear button-primary" ng-click="hideModal(2)">Cancel</button>
+    </ion-header-bar>
+      <ion-slide-box class = "content" on-slide-changed="slideHasChanged($index)" slide-interval="8000">
+        <ion-slide>
+        <ion-content class="content-stable">
+          <ion-list>
+            <div class="item item-divider"> 
+              SubstanceFunction Type
+            </div>
+            <ion-radio ng-repeat="functionName in functionNameList track by $index" ng-value = "functionName.name" ng-model = "currentSubstanceFn.functionName" name = "substance-name" ng-click = "nextDialogSilde(functionName)">
+                {{functionName.name}}
+            </ion-radio>
+          </ion-list>
+        </ion-content> 
+      </ion-slide>
 
-  <script id="substanceFnModal.html" type="text/ng-template">
+       <ion-slide>
+          <ion-content>
+              <ion-list>
+              <div class="item item-divider">
+                  SubstanceFunction Name
+              </div>
+              <ion-radio ng-repeat=" (key, value) in filterFunctionType(setKey.name) track by $index " ng-value = "value.type" ng-model = "currentSubstanceFn.functionType" name = "substance-type" ng-click = "nextDialogSilde()" >
+                {{value.type}}
+              </ion-radio>
+              
+              </ion-list>
+          </ion-content>
+      </ion-slide>
+
+      <ion-slide>
+          <ion-content>
+              <ion-list>
+              <div class="item item-divider">
+                  SubstanceFunction Detail
+              </div>
+             <a class = "item">
+                <h2> Substance Function Name : </h2> <p>{{currentSubstanceFn.functionName}}</p>
+                <h2> Substance Function Type : </h2> <p>{{currentSubstanceFn.functionType}}</p>
+                <button class="button button-block button-positive" ng-click="addSunstanceFn(currentSubstanceFn)">Create SubstanceFunction</button>
+             </a>
+              </ion-list>
+          </ion-content>
+      </ion-slide>
+  </ion-slide-box>
+  </ion-modal-view>
+</script>
+
+
+<script id="substanceFnModal.html" type="text/ng-template">
   <ion-modal-view>
   	<ion-header-bar class="bar bar-header bar-positive">
   	<h1 class="title">Create the substanceFunction</h1>
-  	<button class="button button-clear button-primary" ng-click="hideModal(3)">Cancel</button>
+  	<button class="button button-clear button-primary" ng-click="hideModal(1)">Cancel</button>
 	</ion-header-bar>
 		<ion-content class="padding">
-			<div class="list">
+			 <ion-list>
         <div class="item item-divider"> 
             SubstanceFunction Name
         </div>
@@ -54,33 +100,39 @@
               {{functionName.name}}
         </ion-radio>
 
-        <div class="item item-divider"> 
-            SubstanceFunction Type
-        </div>
-
+        <ion-item class= "item-divider">
+          SubstanceFunction Type
+        </ion-item>
+    
         <ion-radio ng-repeat=" (key, value) in filterFunctionType(currentSubstanceFn.functionName) " ng-value = "value.type" ng-model = "currentSubstanceFn.functionType" name="substance-type">
               {{value.type}}
         </ion-radio>
 
-        <div class="item item-divider"> 
-            Weight Setting
-        </div>
-
-
-        <label class="item item-input" ng-show = "currentSubstanceFn.functionType != null">
-                    <span class="input-label">Mininum Weight :</span>
-                    <input type="text" placeholder="3.45" ng-model = "currentSubstanceFn.minWeight">
-        </label>
-
-        <label class="item item-input" ng-show = " currentSubstanceFn.functionType != null">
-                    <span class="input-label">Max Weight :</span>
-                    <input type="text" placeholder="3.45" ng-model = "currentSubstanceFn.maxWeight">
-        </label>        
+  
 
 		<button class="button button-full button-positive" ng-click="addSunstanceFn(currentSubstanceFn)">Create SubstanceFunction</button>
-	   </div>
+	    </ion-list>
 	</ion-content>
 	</ion-modal-view>
+</script>
+
+<script id="substanceFnModalV2.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">Select Substance Function</h1>
+    <button class="button button-clear button-primary" ng-click="hideModal(1)">Cancel</button>
+  </ion-header-bar>
+    <ion-content class="padding">
+       <ion-list>
+        <ion-radio ng-repeat=" functionName in functionNameList | filter:searchSubstanceFn" ng-value = "functionName.name" ng-model = "currentSubstanceFn.functionName" name = "substance-name">
+              {{functionName.name}}
+        </ion-radio>
+
+      
+    <button class="button button-full button-positive" ng-click="addSunstanceFn(currentSubstanceFn)">Create SubstanceFunction</button>
+      </ion-list>
+  </ion-content>
+  </ion-modal-view>
 </script>
 
 </ion-content>

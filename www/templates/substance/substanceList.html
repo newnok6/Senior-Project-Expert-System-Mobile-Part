@@ -15,7 +15,7 @@
 
         </ion-refresher>
         <div class="list list-inset">
-            <ion-radio ng-repeat=" (key,value) in  substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
+            <ion-radio id= "showsubstancedetail" ng-repeat=" (key,value) in  substances | filter:searchSubstance" ng-click="setSelectedSubstance(value)">
                     <p ng-show = "!substances.length">There are no the substance in the database. Please create a new substance.</p>
                 
                 <div ng-show="substances.length > 0">

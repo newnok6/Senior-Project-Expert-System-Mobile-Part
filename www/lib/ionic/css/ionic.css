@@ -7696,6 +7696,11 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
 .dark-border {
   border-color: #111; }
 
+.current{
+	background: blue;
+	color: white!important;
+}
+
 /**
  * Platform
  * --------------------------------------------------

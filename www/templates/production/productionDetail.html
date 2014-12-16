@@ -1,0 +1,36 @@
+<ion-view title="Formulation Detail">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-chevron-left " ui-sref="base.productionContent.showAllProduction">
+            All Production
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-more" ng-click="openPopover($event)">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="list card">
+            <ion-item>
+                <h2>Production Name :</h2>
+                <p>{{productionSelected.formulation.name}}</p>
+
+                <h2>Disintegration Time:</h2>
+                <p>{{productionSelected.distegretionTime}}</p>
+
+                <h2>Friability:</h2>
+                <p>{{productionSelected.friability}}</p>
+
+                <h2>Total Weight:</h2>
+                <p>{{productionSelected.formulation.totalWeight}}</p>
+
+                <h2>Dissolution Profile:</h2>
+
+                <p ng-repeat="dissolutionProfile in productionSelected.dissolutionProfile">{{dissolutionProfile}} s.</p>
+
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>

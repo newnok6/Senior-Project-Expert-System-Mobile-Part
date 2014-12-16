@@ -12,7 +12,7 @@
         </ion-refresher>
         <div class="list list-inset">
 
-            <ion-radio ng-repeat=" formulation in formulations | filter:searchFormulation" ui-sref="base.reformulationContent.reformulationSetting" ng-value="formulation.name" ng-model="production.formulationName">
+            <ion-radio ng-repeat=" formulation in formulations | filter:searchFormulation" ui-sref="base.reformulationContent.reformulationSetting" ng-value="formulation.name" ng-model="substance.name">
                 <div ng-show="formulations.length == 0">
                     There are no the substance in the database. Please create a new substance.
                 </div>

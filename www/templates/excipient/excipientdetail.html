@@ -22,7 +22,12 @@
             <a class="item">
                 <h2>Substance Function :</h2>
                 <p ng-repeat="(key, value) in excipientSelected.substanceFunctions">
-                Function Name : {{value.functionName}} ,  Function Type : {{value.functionType}}  , Min Weight : {{value.minWeight}} , Max Weight : {{value.maxWeight}}</p>
+                Function Name : {{value.functionName}}</p>
+            </a>
+            <a class="item">
+            <h2> Weight </h2>
+             <p>Mininum Weight : {{excipientSelected.minWeight}}</p>
+             <p>Maxinum Weight : {{excipientSelected.maxWeight}}</p>
             </a>
         </div>
     </ion-content>

@@ -8,10 +8,20 @@
         <form ng-submit="showConfirm(currentExcipient)">
             <div class="list list-inset">
                 <div class="item">
-                    Excipient Name : {{currentExcipient.substance.name}}
+                    <h2>Excipient Name :</h2> 
+                    <p>{{currentExcipient.substance.name}}</p>
                 </div>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Mininum Weight :</span>
+                    <input type="text" placeholder="1.45" ng-model="currentExcipient.minWeight">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Maxinum Weight  :</span>
+                    <input type="text" placeholder="6.78" ng-model="currentExcipient.maxWeight">
+                </label>
                 <a class="item" ui-sref="base.excipientContent.addSubstanceFunction">
-                    Select Substance Function
+                    Add Substance Function 
                 </a>
             </div>
             <div class="padding">

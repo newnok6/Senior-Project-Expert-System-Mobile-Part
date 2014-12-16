@@ -20,25 +20,36 @@ angular.module('drugExpertSystem.reformulationController', [])
         $scope.originalDfProperty = angular.copy($scope.dfProperty);
 
 
+
         //Active Ingredient Properties in production //
-        $scope.activeIngredient = {
+        $scope.substance = {
+            name: '',
             waterSolubility: '',
             flowability: '',
             solidState: '',
             hygroscopicity: '',
             particleSize: '',
             alcoholSolubility: '',
-            saltForm: '',
-            stability: ''
+            saltForm: ''
         };
 
-        $scope.activeIngredient.stability = stabilityService.getStabilities();
-        $scope.activeIngredientOrginal = angular.copy($scope.activeIngredient);
+        //Inference Production attibute //
+        $scope.inferenceProduction = {
+            amountOfStength: '',
+            totalWeight:'',
+            disintegrationTime:'',
+            friability:'',
+            dissolutionProfile: []
+        }
+
+       // $scope.activeIngredient.stability = stabilityService.getStabilities();
+        //$scope.activeIngredientOrginal = angular.copy($scope.activeIngredient);
 
         // Reformulation Setting consist of Production Object and Case Base Reasoning Weighting //
         $scope.reformulationSetting = {};
 
         //Case Base Reasoning Weighting //
+
 
         // Field Name //
         $scope.fieldName = {
@@ -47,6 +58,7 @@ angular.module('drugExpertSystem.reformulationController', [])
             distime : '' 
         };
 
+        // Similarlity Filed // 
         $scope.similarlityWeight = {
             activeIngredientName: '',
             totalWeight : '',
@@ -56,20 +68,20 @@ angular.module('drugExpertSystem.reformulationController', [])
     
         // Case Base Reasoing fieldName //
        $scope.$watch('production.formulationName', function(){
-            if($scope.fieldName.activeIngredientName != $scope.production.formulationName){
-                 $scope.fieldName.activeIngredientName = $scope.production.formulationName;
+            if($scope.fieldName.activeIngredientName != $scope.substance.name){
+                 $scope.fieldName.activeIngredientName = $scope.substance.name;
             }
         });
 
        $scope.$watch('dfProperty.totalweight', function(){
-            if($scope.fieldName.totalWeight != $scope.dfProperty.totalweight){
-                $scope.fieldName.totalWeight = $scope.dfProperty.totalweight;
+            if($scope.fieldName.totalWeight != $scope.inferenceProduction.totalweight){
+                $scope.fieldName.totalWeight = $scope.inferenceProduction.totalweight;
             }
        });
 
        $scope.$watch('dfProperty.disgradationtime', function(){
-            if($scope.fieldName.distime != $scope.dfProperty.disgradationtime){
-                $scope.fieldName.distime = $scope.dfProperty.disgradationtime;
+            if($scope.fieldName.distime != $scope.inferenceProduction.disintegrationTime){
+                $scope.fieldName.distime = $scope.inferenceProduction.disintegrationTime;
             }
        });
 
@@ -88,52 +100,53 @@ angular.module('drugExpertSystem.reformulationController', [])
 
         // Watch Substance water solubility change or not /
         $scope.$watch('waterSolubility.getCurrentSolubility()', function() {
-            if ($scope.activeIngredient.waterSolubility != $scope.waterSolubility.getCurrentSolubility()) {
-                $scope.activeIngredient.waterSolubility = $scope.waterSolubility.getCurrentSolubility();
+            if ($scope.substance.waterSolubility != $scope.waterSolubility.getCurrentSolubility()) {
+                $scope.substance.waterSolubility = $scope.waterSolubility.getCurrentSolubility();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('flowability.getCurrentFlowability()', function() {
-            if ($scope.activeIngredient.flowability != $scope.flowability.getCurrentFlowability()) {
-                $scope.activeIngredient.flowability = $scope.flowability.getCurrentFlowability();
+            if ($scope.substance.flowability != $scope.flowability.getCurrentFlowability()) {
+                $scope.substance.flowability = $scope.flowability.getCurrentFlowability();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('solidState.getCurrentSolidState()', function() {
-            if ($scope.activeIngredient.solidState != $scope.solidState.getCurrentSolidState()) {
-                $scope.activeIngredient.solidState = $scope.solidState.getCurrentSolidState();
+            if ($scope.substance.solidState != $scope.solidState.getCurrentSolidState()) {
+                $scope.substance.solidState = $scope.solidState.getCurrentSolidState();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('hygroscopicity.getCurrentHygroscopity()', function() {
-            if ($scope.activeIngredient.hygroscopicity != $scope.hygroscopicity.getCurrentHygroscopity()) {
-                $scope.activeIngredient.hygroscopicity = $scope.hygroscopicity.getCurrentHygroscopity();
+            if ($scope.substance.hygroscopicity != $scope.hygroscopicity.getCurrentHygroscopity()) {
+                $scope.substance.hygroscopicity = $scope.hygroscopicity.getCurrentHygroscopity();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('particleSize.getCurrentParticlesize()', function() {
-            if ($scope.activeIngredient.particleSize != $scope.particleSize.getCurrentParticlesize()) {
-                $scope.activeIngredient.particleSize = $scope.particleSize.getCurrentParticlesize();
+            if ($scope.substance.particleSize != $scope.particleSize.getCurrentParticlesize()) {
+                $scope.substance.particleSize = $scope.particleSize.getCurrentParticlesize();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('alcohol.getCurrentAlcohol()', function() {
-            if ($scope.activeIngredient.alcoholSolubility != $scope.alcohol.getCurrentAlcohol()) {
-                $scope.activeIngredient.alcoholSolubility = $scope.alcohol.getCurrentAlcohol();
+            if ($scope.substance.alcoholSolubility != $scope.alcohol.getCurrentAlcohol()) {
+                $scope.substance.alcoholSolubility = $scope.alcohol.getCurrentAlcohol();
             }
         });
 
         // Watch Substance water solubility change or not /
         $scope.$watch('saltForm.getCurrentSaltForm()', function() {
-            if ($scope.activeIngredient.saltForm != $scope.saltForm.getCurrentSaltForm()) {
-                $scope.activeIngredient.saltForm = $scope.saltForm.getCurrentSaltForm();
+            if ($scope.substance.saltForm != $scope.saltForm.getCurrentSaltForm()) {
+                $scope.substance.saltForm = $scope.saltForm.getCurrentSaltForm();
             }
         });
+
         // Dissolution Profile in the DF Property //
         $scope.dissolutionProfile = [];
         $scope.originalDissolutionProfile = angular.copy($scope.dissolutionProfile);
@@ -189,23 +202,23 @@ angular.module('drugExpertSystem.reformulationController', [])
 
         // Show the Formulation Type list //
         $ionicModal.fromTemplateUrl('dissolutionProfileModal.html', {
-            id: 7,
+            id: 8,
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal) {
-            $scope.oModal7 = modal;
+            $scope.oModal8 = modal;
             
         });
 
         $scope.openModal = function(index) {
-            if (index == 7) {
-                $scope.oModal7.show();
+            if (index == 8) {
+                $scope.oModal8.show();
             }
         };
         // hide the model
         $scope.hideModal = function(index) {
-            if (index == 7)
-                $scope.oModal7.hide();
+            if (index == 8)
+                $scope.oModal8.hide();
         };
 
 
@@ -223,17 +236,17 @@ angular.module('drugExpertSystem.reformulationController', [])
         $scope.openDissolutionProfileSetting = function() {
             //$scope.origonalDissolutionProfile = angular.copy($scope.dissolutionProfile);
             console.log($scope.dfProperty.dissolutionProfile);
-            $scope.openModal(7);
+            $scope.openModal(8);
         };
 
         $scope.createDisSolutionProfile = function() {
             console.log($scope.dissolutionProfile);
             console.log($scope.dfProperty.dissolutionProfile);
-            $scope.hideModal(7);
+            $scope.hideModal(8);
         };
         $scope.cancelDissolutionProfileSetting = function() {
             //$scope.dissolutionProfile = $scope.origonalDissolutionProfile;
-            $scope.hideModal(7);
+            $scope.hideModal(8);
         };
 
 
@@ -242,14 +255,15 @@ angular.module('drugExpertSystem.reformulationController', [])
         //Start Reformulation//
         $scope.startReformulation = function() {
 
-            $scope.dfProperty.dissolutionProfile = $scope.dissolutionProfile;
-            console.log($scope.dfProperty);
-            $scope.production.dfProperty = $scope.dfProperty;
-            $scope.activeIngredient.stability = stabilityService.getStabilities();
-            $scope.production.activeIngredient = $scope.activeIngredient;
-            console.log($scope.production.dfProperty);
+            //$scope.dfProperty.dissolutionProfile = $scope.dissolutionProfile;
+            //console.log($scope.dfProperty);
+            //$scope.production.dfProperty = $scope.dfProperty;
+            //$scope.activeIngredient.stability = stabilityService.getStabilities();
+            //$scope.production.activeIngredient = $scope.activeIngredient;
+            //console.log($scope.production.dfProperty);
 
-            $scope.reformulationSetting.production = $scope.production;
+            $scope.inferenceProduction.substance = $scope.substance;
+            $scope.reformulationSetting.inferenceProduction = $scope.inferenceProduction;
             $scope.reformulationSetting.fieldName = $scope.fieldName;
             $scope.reformulationSetting.similarlityWeight = $scope.similarlityWeight;
 
@@ -372,7 +386,7 @@ angular.module('drugExpertSystem.reformulationController', [])
             stabilityService.resetStability();
 
             $scope.activeIngredient = angular.copy($scope.activeIngredientOrginal);
-            $scope.activeIngredientOrginal.stability = stabilityService.getStabilities();
+           // $scope.activeIngredientOrginal.stability = stabilityService.getStabilities();
             $scope.production = angular.copy($scope.originalProduction);
             $scope.dfProperty = angular.copy($scope.originalDfProperty);
             $scope.dissolutionProfile = angular.copy($scope.originalDissolutionProfile);

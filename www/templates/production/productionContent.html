@@ -5,3 +5,24 @@
 <ion-nav-view name="productionContent-view">
 
 </ion-nav-view>
+
+<!--Excipient, I put it here because it can load -->
+<script id="excipientInUnitOperationModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+  <h1 class="title">Select Excipient</h1>
+  <button class="button  button-icon icon ion-close-round" ng-click="hideModal(1)"></button>
+</ion-header-bar>
+<ion-content>
+<div class="list">
+  <h2><ion-checkbox ng-repeat="(key,value) in setKey.excipients track by $index" 
+  					ng-model="value.checked"
+                    ng-checked="value.checked">
+        {{value.excipient.substance.name}}
+        {{value.checked}}
+  </ion-checkbox></h2>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->

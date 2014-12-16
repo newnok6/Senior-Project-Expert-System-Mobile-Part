@@ -1,0 +1,59 @@
+
+<ion-view title="User login" class = "padding">
+    <ion-content>
+      <form name = "login-form" ng-submit="login()" role ="form">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Email : </span>
+                <input type="text" ng-model="loginUser.email">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password : </span>
+                <input type="password" ng-model="loginUser.password">
+            </label>
+        </div>
+        <div class="padding">
+
+            <button class="button button-block button-assertive">
+                Sign In
+            </button>
+          
+        </div>
+      </form>
+      <button class="button button-block button-positive" ng-click="openModal(1)">
+                Create Account
+        </button>
+    </ion-content>
+</ion-view>
+
+<!--Registration, I put it here because it can load -->
+<script id="registrationModal.html" type="text/ng-template">
+  <ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+   <h1 class="title">Registration</h1>
+        <button class="button  button-icon icon ion-close-round" ng-click="hideModal(1)"></button>
+  </ion-header-bar>
+
+  <ion-content>
+<div class="list">
+ 
+  <label class="item item-input">
+                <span class="input-label">Email :</span>
+                <input type="text" placeholder="newnok6@gmail.com" ng-model="user.email">
+  </label>
+  <label class="item item-input">
+                <span class="input-label">Password :</span>
+                <input type="password" ng-model="user.password">
+  </label>
+
+  <label class="item item-input">
+                <span class="input-label">Re-Type Password :</span>
+                <input type="password">
+  </label>
+            <button class="button button-block button-positive" ng-click="createAccount()">Sign Up</button>
+           </div>
+</div>
+</ion-content>
+</ion-modal-view>
+</script>
+<!---->

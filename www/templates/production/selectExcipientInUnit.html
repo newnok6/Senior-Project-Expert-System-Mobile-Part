@@ -1,0 +1,41 @@
+<ion-view title="Select Excipient">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon " ng-click="cancel()">
+            Cancel
+        </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" ng-click="addUnitOperationinList()">
+            Next
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <div class="list">
+            <!-- Show Formulation the Unit Operation that user selected -->
+            <form name="settingUnitOperation" ng-submit="showConfirmForAdding()">
+            <div class="item item-divider">
+                    Formulation Name : {{currentProduction.formulation.name}}
+                </div>
+
+                <div class="item item-divider ">
+                    <div class="item item-icon-right item-icon-right" ng-repeat="unitOperation in unitOperationsSelected track by $index" ng-click="selectExcipientInUnitOperation(unitOperation)">
+                    <i class = "icon ion-flask"></i>
+                     <span class="badge badge-assertive" ng-show="showAmount.length != 0">{{showAmount(unitOperation)}}</span>
+                        <h2>Unit Operation :</h2>
+                        <p>{{unitOperation.name}} </p>
+                    </div>
+
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-positive">Create Production</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+    </ion-content>
+    <!---->
+</ion-view>
